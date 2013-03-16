@@ -1,0 +1,105 @@
+package utils;
+
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import controllers.GamescreenController;
+import model.Ball;
+
+public class WorldRenderer {
+    SpriteBatch batch;
+    ShapeRenderer shapeRenderer;
+    private BitmapFont font;
+    boolean DEBUG = true;
+    String playerCoords;
+    String playerDim;
+    String ballPos;
+    String playerLives;
+    String shotPos="";
+
+    public WorldRenderer(SpriteBatch spriteBatch) {
+        this.batch = spriteBatch;
+        font = new BitmapFont(Gdx.files.internal("gui/arial-15.fnt"),
+                Gdx.files.internal("gui/arial-15.png"), false);
+        shapeRenderer = new ShapeRenderer();
+    }
+
+    public void render(GamescreenController gsController){
+        batch.begin();
+        //draw Level
+        batch.draw(Assets.moon, 700, 380, 200, 200);
+        if(gsController.getShot() != null){
+            batch.draw(Assets.shot, gsController.getShot().position.x, gsController.getShot().position.y);
+        }
+        batch.draw(Assets.gs_bar, 0, 0);
+        batch.draw(Assets.arrow_left, gsController.arrow_left.x, gsController.arrow_left.y);
+        batch.draw(Assets.arrow_right, gsController.arrow_right.x, gsController.arrow_right.y);
+        batch.draw(Assets.arrow_up, gsController.arrow_up.x, gsController.arrow_up.y);
+        if(gsController.getPlayer().isMovingRight){
+            batch.draw(Assets.playerRight, gsController.getPlayer().position.x, gsController.getPlayer().position.y);
+        } else {
+            batch.draw(Assets.playerLeft, gsController.getPlayer().position.x, gsController.getPlayer().position.y);
+        }
+        int diameter;
+        for (Ball ball : gsController.getBalls()) {
+            diameter = ball.getRadius()*2;
+            switch (ball.getSize()) {
+                case SMALL:
+                    batch.draw(Assets.ball_small, ball.position.x, ball.position.y, diameter, diameter);
+                    break;
+                case MIDDLE:
+                    batch.draw(Assets.ball_middle, ball.position.x, ball.position.y, diameter, diameter);
+                    break;
+                case BIG:
+                    batch.draw(Assets.ball_big, ball.position.x, ball.position.y, diameter, diameter);
+                    break;
+            }
+        }
+        switch (gsController.getGameState()) {
+            case paused:
+                batch.draw(Assets.transparent, 0, 0);
+                batch.draw(Assets.pauseState, 250, 160);
+                batch.draw(Assets.resumeButton, gsController.resume.x, gsController.resume.y);
+                batch.draw(Assets.restartButton, gsController.restart.x, gsController.restart.y);
+                batch.draw(Assets.exitGameButton, gsController.exitGame.x, gsController.exitGame.y);
+                break;
+            case win:
+                batch.draw(Assets.transparent, 0, 0);
+                batch.draw(Assets.winState, 250, 160);
+                batch.draw(Assets.nextLevelButton, gsController.nextLevel.x, gsController.nextLevel.y);
+                batch.draw(Assets.restartButton, gsController.restart.x, gsController.restart.y);
+                batch.draw(Assets.exitGameButton, gsController.exitGame.x, gsController.exitGame.y);
+                break;
+            case gameover:
+                batch.draw(Assets.transparent, 0, 0);
+                batch.draw(Assets.gameoverState, 250, 160);
+                batch.draw(Assets.restartButton, gsController.restart.x, gsController.restart.y);
+                batch.draw(Assets.exitGameButton, gsController.exitGame.x, gsController.exitGame.y);
+                break;
+        }
+        if(DEBUG){
+            playerCoords = "Player coords: "+gsController.getPlayer().position.x+", "+gsController.getPlayer().position.y;
+            playerDim = "Player Dimension: "+gsController.getPlayer().bounds.width+", "+gsController.getPlayer().bounds.height;
+            if(!gsController.getBalls().isEmpty()){
+                ballPos = "Ball Position: "+gsController.getBalls().get(0).position.x+", "+gsController.getBalls().get(0).position.y;
+            }
+            playerLives = "Player Lives: "+gsController.getPlayer().getLives();
+            if(gsController.getShot() != null)
+                shotPos = "Shot coords: "+gsController.getShot().position.x+", "+gsController.getShot().position.y;
+            font.draw(batch, playerCoords, 0, 470);
+            font.draw(batch, playerDim, 0, 455);
+            font.draw(batch, ballPos, 0, 440);
+            font.draw(batch, playerLives, 0, 425);
+            font.draw(batch, shotPos, 0, 410);
+        }
+        batch.end();
+//        this is just how you draw rects
+//        if(gsController.getShot() != null){
+//            shapeRenderer.begin(ShapeRenderer.ShapeType.FilledRectangle);
+//            shapeRenderer.setColor(155, 50, 100, 0);
+//            shapeRenderer.filledRect(gsController.getShot().position.x, gsController.getShot().position.y, gsController.getShot().bounds.getWidth(), gsController.getShot().bounds.getHeight());
+//            shapeRenderer.end();
+//        }
+    }
+}

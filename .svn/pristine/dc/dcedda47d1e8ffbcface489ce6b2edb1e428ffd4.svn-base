@@ -1,0 +1,52 @@
+package utils;
+
+import com.badlogic.gdx.ApplicationListener;
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.GL10;
+import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import view.Gamescreen;
+import view.Menuscreen;
+
+public class Pluvia implements ApplicationListener {
+    OrthographicCamera camera;
+    SpriteBatch batch;
+    Gamescreen gamescreen;
+    Menuscreen menuscreen;
+    MyScreen currentScreen;
+    private final Input input = new Input();
+    public static double delta;
+
+    @Override
+    public void create() {
+        camera = new OrthographicCamera();
+        camera.setToOrtho(false, 800, 480);
+        batch = new SpriteBatch();
+        batch.setProjectionMatrix(camera.combined);
+        Gdx.input.setInputProcessor(input);
+        Assets.load();
+        gamescreen = new Gamescreen(batch);
+        menuscreen = new Menuscreen(batch);
+        currentScreen = gamescreen;
+    }
+
+    @Override
+    public void render() {
+        Gdx.gl.glClearColor(0, 0, 0.2f, 1);
+        Gdx.gl.glClear(GL10.GL_COLOR_BUFFER_BIT);
+        delta = Gdx.graphics.getDeltaTime();
+        currentScreen.render(input);
+    }
+
+    @Override
+    public void resize(int width, int height) { }
+
+    @Override
+    public void pause() { }
+
+    @Override
+    public void resume() { }
+
+    @Override
+    public void dispose() { }
+}

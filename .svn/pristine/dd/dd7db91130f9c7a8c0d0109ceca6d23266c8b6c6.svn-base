@@ -1,0 +1,46 @@
+package utils;
+
+import model.Ball;
+import model.Level;
+import model.Player;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class LevelManager {
+    public Level currentLevel;
+
+    public void loadLevel(int level, String fileName){
+        String levelFile = "level"+level+".txt";
+
+
+        // Open File and fill values
+
+
+        int playerX=200;
+        Player player = new Player(playerX);
+        List<Ball> balls = new ArrayList<Ball>();
+        balls.add(new Ball(50, 300, Ball.sizeDef.BIG, 6f));
+        currentLevel = null;
+        currentLevel = new Level(0,0);
+        currentLevel.init(player, balls);
+    }
+
+    public void loadSettings() {
+        //load here settings from Filesystem
+    }
+
+    public void loadNextLevel() {
+        //load here the next level
+    }
+
+    public void reloadLevel() {
+        int playerX=200;
+        Player player = new Player(playerX);
+        List<Ball> balls = new ArrayList<Ball>();
+        balls.add(new Ball(50, 300, Ball.sizeDef.BIG, 6f));
+        currentLevel = null;
+        currentLevel = new Level(0,0);
+        currentLevel.init(player, balls);
+    }
+}

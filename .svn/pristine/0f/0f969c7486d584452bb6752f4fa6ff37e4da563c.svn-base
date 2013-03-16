@@ -1,0 +1,64 @@
+package model;
+
+import utils.GameObject;
+import utils.Pluvia;
+
+public class Player extends GameObject {
+    boolean isShooting;
+    Shot shot;
+    int speed;
+    int lives;
+    int maxLives;
+    public boolean isMovingRight;
+
+    public Player(int x, int y){
+        super(x, y);
+        init();
+    }
+
+    private void init() {
+        isShooting = false;
+        speed = 300;
+        lives = 3;
+        isMovingRight = true;
+    }
+
+    public void moveLeft(){
+        position.x -= Pluvia.delta*speed;
+        isMovingRight = false;
+    }
+
+    public void moveRight(){
+        position.x += Pluvia.delta*speed;
+        isMovingRight = true;
+    }
+
+    public boolean isShooting() {
+        return isShooting;
+    }
+
+    public void setShooting(boolean isShooting) {
+        this.isShooting = isShooting;
+    }
+
+    public Shot getShot() {
+        return shot;
+    }
+
+    public void setShot(Shot shot) {
+        this.shot = shot;
+    }
+
+    public int getLives() {
+        return lives;
+    }
+
+    public void setLives(int lives) {
+        this.lives = lives;
+    }
+
+    @Override
+    public void update() {
+        //To change body of implemented methods use File | Settings | File Templates.
+    }
+}

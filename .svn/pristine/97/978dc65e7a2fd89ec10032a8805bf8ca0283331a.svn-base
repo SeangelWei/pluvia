@@ -1,0 +1,52 @@
+package controllers;
+
+import model.Ball;
+import model.Player;
+import model.Shot;
+import model.World;
+
+import java.util.List;
+
+public class GamescreenController {
+    World world;
+    public enum gameStateDef { paused, playing, win, gameover, ready }
+    gameStateDef gameState;
+
+    public GamescreenController() {
+        world = new World(0, 0);
+        gameState = gameStateDef.playing;
+        world.init();
+    }
+
+    public void update(){
+        switch (gameState) {
+            case playing:
+                world.update();
+                break;
+        }
+        if(getBalls().size() == 0){
+            //gameState = gameStateDef.win;
+        }
+        if (getPlayer().getLives() == 0) {
+            //gameState = gameStateDef.gameover;
+        }
+        if(getShot()!= null && getShot().position.y > 400){
+            getPlayer().setShot(null);
+        }
+    }
+    public gameStateDef getGameState(){
+        return gameState;
+    }
+    public World getWorld() {
+        return world;
+    }
+    public Player getPlayer() {
+        return world.getPlayer();
+    }
+    public List<Ball> getBalls(){
+        return world.getBalls();
+    }
+    public Shot getShot(){
+        return world.getPlayer().getShot();
+    }
+}

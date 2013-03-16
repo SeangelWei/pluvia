@@ -1,0 +1,63 @@
+package view;
+
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.math.Rectangle;
+import controllers.GamescreenController;
+import utils.Assets;
+import utils.Input;
+import utils.MyScreen;
+import utils.WorldRenderer;
+
+/**
+ * Created with IntelliJ IDEA.
+ * User: Benjamín
+ * Date: 21.01.13
+ * Time: 17:36
+ * To change this template use File | Settings | File Templates.
+ */
+
+public class TestScreen extends MyScreen {
+
+    public TestScreen(SpriteBatch spriteBatch) {
+        super(spriteBatch);
+    }
+
+    @Override
+    public void render(Input input) {
+        processInput(input);
+    }
+
+    private void processInput(Input input) {
+        // Input system required.
+    }
+
+    @Override
+    public void resize(int width, int height) {
+        //To change body of implemented methods use File | Settings | File Templates.
+    }
+
+    @Override
+    public void show() {
+        //To change body of implemented methods use File | Settings | File Templates.
+    }
+
+    @Override
+    public void hide() {
+        //To change body of implemented methods use File | Settings | File Templates.
+    }
+
+    @Override
+    public void pause() {
+        //To change body of implemented methods use File | Settings | File Templates.
+    }
+
+    @Override
+    public void resume() {
+        //To change body of implemented methods use File | Settings | File Templates.
+    }
+
+    @Override
+    public void dispose() {
+        //To change body of implemented methods use File | Settings | File Templates.
+    }
+}

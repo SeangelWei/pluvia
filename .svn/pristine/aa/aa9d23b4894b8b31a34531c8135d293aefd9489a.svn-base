@@ -1,0 +1,53 @@
+package utils;
+
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import controllers.GamescreenController;
+import model.Ball;
+import model.World;
+import view.Gamescreen;
+
+public class WorldRenderer {
+    SpriteBatch batch;
+
+    public WorldRenderer(SpriteBatch spriteBatch) {
+        this.batch = spriteBatch;
+    }
+
+    public void render(GamescreenController gamescreenController){
+        batch.begin();
+        //draw Level
+        if(gamescreenController.getWorld().getPlayer().isMovingRight){
+            batch.draw(Assets.playerRight, gamescreenController.getWorld().getPlayer().position.x, gamescreenController.getWorld().getPlayer().position.y);
+        } else {
+            batch.draw(Assets.playerLeft, gamescreenController.getWorld().getPlayer().position.x, gamescreenController.getWorld().getPlayer().position.y);
+        }
+        if(gamescreenController.getWorld().getPlayer().getShot() != null){
+            batch.draw(Assets.shot, gamescreenController.getWorld().getPlayer().getShot().position.x, gamescreenController.getWorld().getPlayer().getShot().position.y);
+        }
+        for (Ball ball : gamescreenController.getWorld().getBalls()) {
+            switch (ball.getSize()) {
+                case SMALL:
+
+                    break;
+                case MIDDLE:
+                    break;
+                case BIG:
+                    break;
+            }
+        }
+        switch (gamescreenController.getGameState()) {
+            case paused:
+                //draw paused picture
+                break;
+            case win:
+                //draw win picture
+                break;
+            case gameover:
+                //draw gameover picture
+                break;
+            case ready:
+                break;
+        }
+        batch.end();
+    }
+}

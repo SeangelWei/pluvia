@@ -1,0 +1,53 @@
+package utils;
+
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import controllers.GamescreenController;
+import model.Ball;
+
+public class WorldRenderer {
+    SpriteBatch batch;
+
+    public WorldRenderer(SpriteBatch spriteBatch) {
+        this.batch = spriteBatch;
+    }
+
+    public void render(GamescreenController gsController){
+        batch.begin();
+        //draw Level
+        if(gsController.getPlayer().isMovingRight){
+            batch.draw(Assets.playerRight, gsController.getPlayer().position.x, gsController.getPlayer().position.y);
+        } else {
+            batch.draw(Assets.playerLeft, gsController.getPlayer().position.x, gsController.getPlayer().position.y);
+        }
+        if(gsController.getShot() != null){
+            //batch.draw(Assets.shot, gsController.getShot().position.x, gsController.getShot().position.y);
+        }
+        for (Ball ball : gsController.getBalls()) {
+            switch (ball.getSize()) {
+                case SMALL:
+                    batch.draw(Assets.ball_small, ball.position.x, ball.position.y, 30, 30);
+                    break;
+                case MIDDLE:
+                    batch.draw(Assets.ball_middle, ball.position.x, ball.position.y, 50, 50);
+                    break;
+                case BIG:
+                    batch.draw(Assets.ball_big, ball.position.x, ball.position.y, 70, 70);
+                    break;
+            }
+        }
+        switch (gsController.getGameState()) {
+            case paused:
+                //draw paused picture
+                break;
+            case win:
+                //draw win picture
+                break;
+            case gameover:
+                //draw gameover picture
+                break;
+            case ready:
+                break;
+        }
+        batch.end();
+    }
+}

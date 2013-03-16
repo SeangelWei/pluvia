@@ -1,0 +1,93 @@
+package view;
+
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.math.Rectangle;
+import utils.*;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class LevelScreen extends MyScreen {
+    List<LevelIcon> levelIcons = new ArrayList<LevelIcon>();
+    Rectangle backButton;
+    LevelManager levelManager;
+
+    public LevelScreen(SpriteBatch spriteBatch, ScreenManager screenManager, LevelManager levelManager) {
+        super(spriteBatch, screenManager);
+        this.levelManager = levelManager;
+        init();
+    }
+
+    @Override
+    public void render(Input input) {
+        processInput(input);
+        draw();
+    }
+
+    private void processInput(Input input) {
+        if(pointInRectangle(backButton, input.TOUCH)){
+            screenManager.changeTo("MenuScreen");
+        }
+        for (LevelIcon levelIcon : levelIcons) {
+            if(pointInRectangle(new Rectangle(levelIcon.x, levelIcon.y, levelIcon.blockWidth, levelIcon.blockWidth), input.TOUCH)){
+                levelManager.loadLevel(levelIcon.level, levelIcon.fileName);
+                screenManager.changeTo("GameScreen");
+            }
+        }
+    }
+
+    private void draw() {
+        batch.begin();
+        for (LevelIcon levelIcon : levelIcons) {
+            batch.draw(Assets.level1, levelIcon.x, levelIcon.y, levelIcon.blockWidth, levelIcon.blockWidth);
+        }
+        batch.draw(Assets.arrow_left, backButton.x, backButton.y);
+        batch.end();
+    }
+
+    @Override
+    public void init(){
+        int x, y;
+        int blockWidth = 50;
+        int levelCounter = 0;
+        for ( int row = 0;  row < 3;  row++ ) {
+            for ( int col = 0;  col < 4;  col++ ) {
+                x = 180*col + 100;
+                y = 100*row + 120;
+                levelIcons.add(new LevelIcon(x, y, blockWidth, levelCounter));
+                levelCounter++;
+            }
+        }
+        backButton = new Rectangle(700, 400, 80, 80);
+    }
+
+    @Override
+    public void resize(int width, int height) {
+        //To change body of implemented methods use File | Settings | File Templates.
+    }
+
+    @Override
+    public void show() {
+        //To change body of implemented methods use File | Settings | File Templates.
+    }
+
+    @Override
+    public void hide() {
+        //To change body of implemented methods use File | Settings | File Templates.
+    }
+
+    @Override
+    public void pause() {
+        //To change body of implemented methods use File | Settings | File Templates.
+    }
+
+    @Override
+    public void resume() {
+        //To change body of implemented methods use File | Settings | File Templates.
+    }
+
+    @Override
+    public void dispose() {
+        //To change body of implemented methods use File | Settings | File Templates.
+    }
+}

@@ -1,0 +1,134 @@
+package view;
+
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import controllers.GamescreenController;
+import model.Level;
+import utils.Input;
+import utils.MyScreen;
+import utils.ScreenManager;
+import utils.WorldRenderer;
+
+
+public class Gamescreen extends MyScreen {
+    WorldRenderer worldRenderer;
+    GamescreenController gsController;
+
+    Level currentLevel;
+
+    public Gamescreen(SpriteBatch batch, ScreenManager screenManager) {
+        super(batch, screenManager);
+        worldRenderer = new WorldRenderer(batch);
+        gsController = new GamescreenController();
+    }
+
+    public void render(Input input) {
+        switch (gsController.getGameState()) {
+            case paused:
+                processPause(input);
+                break;
+            case playing:
+                processPlaying(input);
+                break;
+            case win:
+                processWin(input);
+                break;
+            case gameover:
+                processGameover(input);
+                break;
+            case ready:
+                processReady(input);
+                break;
+        }
+        gsController.update();
+        worldRenderer.render(gsController);
+    }
+
+    private void processReady(Input input) {
+
+    }
+
+    private void processGameover(Input input) {
+        if(pointInRectangle(gsController.restart, input.TOUCH.x, input.TOUCH.y)){
+            System.out.println("Restart");
+            init();
+        }
+        if(pointInRectangle(gsController.exitGame, input.TOUCH.x, input.TOUCH.y)){
+            screenManager.changeTo("MenuScreen");
+        }
+    }
+
+    private void processWin(Input input) {
+        if(pointInRectangle(gsController.nextLevel, input.TOUCH.x, input.TOUCH.y)){
+            gsController.loadNextLevel();
+        }
+        if(pointInRectangle(gsController.restart, input.TOUCH.x, input.TOUCH.y)){
+            System.out.println("Restart");
+            init();
+        }
+        if(pointInRectangle(gsController.exitGame, input.TOUCH.x, input.TOUCH.y)){
+            screenManager.changeTo("MenuScreen");
+        }
+    }
+
+    private void processPause(Input input) {
+        if(input.ESCAPE){
+            gsController.setGameState(GamescreenController.gameStateDef.playing);
+        }
+        if(pointInRectangle(gsController.resume, input.TOUCH.x, input.TOUCH.y)){
+            gsController.setGameState(GamescreenController.gameStateDef.playing);
+        }
+        if(pointInRectangle(gsController.restart, input.TOUCH.x, input.TOUCH.y)){
+            System.out.println("Restart");
+            init();
+        }
+        if(pointInRectangle(gsController.exitGame, input.TOUCH.x, input.TOUCH.y)){
+            screenManager.changeTo("MenuScreen");
+        }
+    }
+
+    private void processPlaying(Input input) {
+        if(input.LEFT){
+            gsController.getPlayer().moveLeft();
+        }
+        if(input.RIGHT){
+            gsController.getPlayer().moveRight();
+        }
+        if(input.SPACE){
+            gsController.getPlayer().shot();
+        }
+        if(input.ESCAPE){
+            gsController.setGameState(GamescreenController.gameStateDef.paused);
+        }
+        if(pointInRectangle(gsController.arrow_left, input.TOUCH.x, input.TOUCH.y)){
+            gsController.getPlayer().moveLeft();
+        }
+        if(pointInRectangle(gsController.arrow_right, input.TOUCH.x, input.TOUCH.y)){
+            gsController.getPlayer().moveRight();
+        }
+        if(pointInRectangle(gsController.arrow_up, input.TOUCH.x, input.TOUCH.y)){
+            gsController.getPlayer().shot();
+        }
+    }
+
+    public void init(){
+        currentLevel = new Level(0,0);
+        currentLevel.init();
+    }
+    @Override
+    public void resume() { }
+
+    @Override
+    public void resize(int width, int height) { }
+
+    @Override
+    public void show() { }
+
+    @Override
+    public void hide() { }
+
+    @Override
+    public void pause() { }
+
+    @Override
+    public void dispose() { }
+}

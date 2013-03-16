@@ -1,0 +1,59 @@
+package model;
+
+import utils.GameObject;
+
+public class Player extends GameObject {
+    private boolean isShooting;
+    private Shot shot;
+    private int speed;
+    private int lives;
+    private int maxLives;
+
+    public Player(int x, int y){
+        super(x, y);
+        init();
+    }
+
+    private void init() {
+        isShooting = false;
+        speed = 300;
+        lives = 3;
+    }
+
+    public void moveLeft(){
+
+    }
+
+    public void moveRight(){
+
+    }
+
+    public boolean isShooting() {
+        return isShooting;
+    }
+
+    public void setShooting(boolean isShooting) {
+        this.isShooting = isShooting;
+    }
+
+    public Shot getShot() {
+        return shot;
+    }
+
+    public void setShot(Shot shot) {
+        this.shot = shot;
+    }
+
+    public int getLives() {
+        return lives;
+    }
+
+    public void setLives(int lives) {
+        this.lives = lives;
+    }
+
+    @Override
+    public void update() {
+        //To change body of implemented methods use File | Settings | File Templates.
+    }
+}
