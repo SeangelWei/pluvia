@@ -47,7 +47,7 @@ public class Gamescreen extends MyScreen {
 
     private void processGameover(Input input) {
         if(pointInRectangle(gsController.restart, input.TOUCH)){
-            init();
+            restart();
         }
         if(pointInRectangle(gsController.exitGame, input.TOUCH)){
             screenManager.changeTo("MenuScreen");
@@ -60,7 +60,7 @@ public class Gamescreen extends MyScreen {
             gsController.setGameState(GamescreenController.gameStateDef.playing);
         }
         if(pointInRectangle(gsController.restart, input.TOUCH)){
-            init();
+            restart();
         }
         if(pointInRectangle(gsController.exitGame, input.TOUCH)){
            screenManager.changeTo("LevelScreen");
@@ -75,7 +75,7 @@ public class Gamescreen extends MyScreen {
             gsController.setGameState(GamescreenController.gameStateDef.playing);
         }
         if(pointInRectangle(gsController.restart, input.TOUCH)){
-            init();
+            restart();
         }
         if(pointInRectangle(gsController.exitGame, input.TOUCH)){
             screenManager.changeTo("LevelScreen");
@@ -108,6 +108,9 @@ public class Gamescreen extends MyScreen {
 
     public void init(){
         gsController.setGameState(GamescreenController.gameStateDef.ready);
+    }
+
+    public void restart(){
         levelManager.reloadLevel();
     }
     @Override

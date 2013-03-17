@@ -11,6 +11,6 @@ public class LevelIcon {
         this.y = y;
         this.blockWidth = blockWidth;
         this.level = levelCounter;
-        fileName = "level"+level+".txt";
+        fileName = "level"+level+".xml";
     }
 }

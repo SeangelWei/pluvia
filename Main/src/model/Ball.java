@@ -11,7 +11,7 @@ public class Ball extends GameObject {
     private static final double gravity = 1;
     private float speed;
 
-    public static enum sizeDef {SMALLER, SMALL, MIDDLE, BIG}
+    public static enum sizeDef { SMALLER, SMALL, MIDDLE, BIG }
     private sizeDef size;
 
     public Ball(float x, float y, sizeDef theSize, float direction) {
