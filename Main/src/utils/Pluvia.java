@@ -24,6 +24,7 @@ public class Pluvia implements ApplicationListener {
         batch = new SpriteBatch();
         batch.setProjectionMatrix(camera.combined);
         Gdx.input.setInputProcessor(input);
+        Gdx.input.setCatchBackKey(true);
         Assets.loadObjects();
         Assets.loadGuiElements();
         levelManager = new LevelManager();

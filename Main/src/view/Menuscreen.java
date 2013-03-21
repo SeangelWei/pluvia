@@ -31,6 +31,9 @@ public class Menuscreen extends MyScreen {
         if(pointInRectangle(exit, input.TOUCH)){
             Gdx.app.exit();
         }
+        if(input.BACK){
+            Gdx.app.exit();
+        }
     }
 
     private void draw() {

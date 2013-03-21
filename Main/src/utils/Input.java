@@ -10,6 +10,7 @@ public class Input implements InputProcessor {
     public boolean SPACE;
     public Vector2 TOUCH;
     public boolean ESCAPE;
+    public boolean BACK;
 
     public Input(){
         TOUCH = new Vector2();
@@ -18,6 +19,7 @@ public class Input implements InputProcessor {
     public void clear() {
         ESCAPE = false;
         SPACE = false;
+        BACK = false;
     }
 
     @Override
@@ -33,6 +35,9 @@ public class Input implements InputProcessor {
     public boolean keyUp(int keycode) {
         if(keycode == 21) LEFT = false;
         if(keycode == 22) RIGHT = false;
+        if(keycode == com.badlogic.gdx.Input.Keys.BACK){
+            BACK = true;
+        }
         return true;
     }
 

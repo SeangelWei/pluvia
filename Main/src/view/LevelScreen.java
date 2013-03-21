@@ -56,6 +56,9 @@ public class LevelScreen extends MyScreen {
         if(pointInRectangle(backButton, input.TOUCH)){
             screenManager.changeTo("MenuScreen");
         }
+        if(input.BACK){
+            screenManager.changeTo("MenuScreen");
+        }
         for (LevelIcon levelIcon : levelIcons) {
             if(pointInRectangle(new Rectangle(levelIcon.x, levelIcon.y, levelIcon.blockWidth, levelIcon.blockWidth), input.TOUCH)){
                 levelManager.loadLevel(levelIcon.level, levelIcon.fileName);

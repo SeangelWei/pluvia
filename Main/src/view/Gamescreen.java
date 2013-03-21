@@ -80,6 +80,9 @@ public class Gamescreen extends MyScreen {
         if(pointInRectangle(gsController.exitGame, input.TOUCH)){
             screenManager.changeTo("LevelScreen");
         }
+        if(input.BACK){
+            gsController.setGameState(GamescreenController.gameStateDef.playing);
+        }
     }
 
     private void processPlaying(Input input) {
@@ -103,6 +106,9 @@ public class Gamescreen extends MyScreen {
         }
         if(pointInRectangle(gsController.arrow_up, input.TOUCH)){
             gsController.getPlayer().shot();
+        }
+        if(input.BACK) {
+            gsController.setGameState(GamescreenController.gameStateDef.paused);
         }
     }
 
