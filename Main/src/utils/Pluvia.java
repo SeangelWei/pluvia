@@ -15,7 +15,6 @@ public class Pluvia implements ApplicationListener {
     SpriteBatch batch;
     ScreenManager screenManager;
     LevelManager levelManager;
-    Preferences gamePrefs;
     private final Input input = new Input();
     public static double delta;
 
@@ -31,11 +30,10 @@ public class Pluvia implements ApplicationListener {
         Assets.loadGuiElements();
         levelManager = new LevelManager();
         levelManager.loadSettings();
-        gamePrefs = Gdx.app.getPreferences("pluviaSettings");
         screenManager = new ScreenManager();
         screenManager.add("MenuScreen", new Menuscreen(batch, screenManager));
         screenManager.add("GameScreen", new Gamescreen(batch, screenManager, levelManager));
-        screenManager.add("LevelScreen", new LevelScreen(batch, screenManager, levelManager, gamePrefs));
+        screenManager.add("LevelScreen", new LevelScreen(batch, screenManager, levelManager));
         screenManager.changeTo("LevelScreen");
     }
 

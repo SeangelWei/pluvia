@@ -9,21 +9,18 @@ import utils.*;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 public class LevelScreen extends MyScreen {
     List<LevelIcon> levelIcons = new ArrayList<LevelIcon>();
     Rectangle backButton;
     LevelManager levelManager;
     BitmapFont font;
-    Preferences gamePrefs;
 
-    public LevelScreen(SpriteBatch spriteBatch, ScreenManager screenManager, LevelManager levelManager, Preferences gamePrefs) {
+    public LevelScreen(SpriteBatch spriteBatch, ScreenManager screenManager, LevelManager levelManager) {
         super(spriteBatch, screenManager);
         this.levelManager = levelManager;
         font = new BitmapFont(Gdx.files.internal("gui/arial-15.fnt"),
                 Gdx.files.internal("gui/arial-15.png"), false);
-        this.gamePrefs = gamePrefs;
     }
 
     @Override
