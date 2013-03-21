@@ -15,6 +15,7 @@ public class Pluvia implements ApplicationListener {
     SpriteBatch batch;
     ScreenManager screenManager;
     LevelManager levelManager;
+    Progress progress;
     private final Input input = new Input();
     public static double delta;
 
@@ -30,10 +31,11 @@ public class Pluvia implements ApplicationListener {
         Assets.loadGuiElements();
         levelManager = new LevelManager();
         levelManager.loadSettings();
+        progress = new Progress();
         screenManager = new ScreenManager();
-        screenManager.add("MenuScreen", new Menuscreen(batch, screenManager));
-        screenManager.add("GameScreen", new Gamescreen(batch, screenManager, levelManager));
-        screenManager.add("LevelScreen", new LevelScreen(batch, screenManager, levelManager));
+        screenManager.add("MenuScreen", new Menuscreen(batch, screenManager, progress));
+        screenManager.add("GameScreen", new Gamescreen(batch, screenManager, levelManager, progress));
+        screenManager.add("LevelScreen", new LevelScreen(batch, screenManager, levelManager, progress));
         screenManager.changeTo("LevelScreen");
     }
 

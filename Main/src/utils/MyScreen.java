@@ -7,10 +7,12 @@ import com.badlogic.gdx.math.Vector2;
 public abstract class MyScreen {
     protected SpriteBatch batch;
     protected ScreenManager screenManager;
+    protected Progress progress;
 
-    public MyScreen(SpriteBatch batch, ScreenManager screenManager){
+    public MyScreen(SpriteBatch batch, ScreenManager screenManager, Progress progress){
         this.batch = batch;
         this.screenManager = screenManager;
+        this.progress = progress;
     }
 
     public abstract void render (Input input);

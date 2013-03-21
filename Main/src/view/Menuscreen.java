@@ -6,14 +6,15 @@ import com.badlogic.gdx.math.Rectangle;
 import utils.Assets;
 import utils.Input;
 import utils.MyScreen;
+import utils.Progress;
 import utils.ScreenManager;
 
 public class Menuscreen extends MyScreen {
     Rectangle start;
     Rectangle exit;
 
-    public Menuscreen(SpriteBatch spriteBatch, ScreenManager screenManager) {
-        super(spriteBatch, screenManager);
+    public Menuscreen(SpriteBatch spriteBatch, ScreenManager screenManager, Progress progress) {
+        super(spriteBatch, screenManager, progress);
         start = new Rectangle(65, 350, 145, 50);
         exit = new Rectangle(65, 280, 145, 50);
     }

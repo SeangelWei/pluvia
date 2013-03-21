@@ -10,8 +10,8 @@ public class Gamescreen extends MyScreen {
     GamescreenController gsController;
     LevelManager levelManager;
 
-    public Gamescreen(SpriteBatch batch, ScreenManager screenManager, LevelManager levelManager) {
-        super(batch, screenManager);
+    public Gamescreen(SpriteBatch batch, ScreenManager screenManager, LevelManager levelManager, Progress progress) {
+        super(batch, screenManager, progress);
         gsController = new GamescreenController(levelManager);
         worldRenderer = new WorldRenderer(batch, gsController);
         this.levelManager = levelManager;

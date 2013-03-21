@@ -16,8 +16,8 @@ public class LevelScreen extends MyScreen {
     LevelManager levelManager;
     BitmapFont font;
 
-    public LevelScreen(SpriteBatch spriteBatch, ScreenManager screenManager, LevelManager levelManager) {
-        super(spriteBatch, screenManager);
+    public LevelScreen(SpriteBatch spriteBatch, ScreenManager screenManager, LevelManager levelManager, Progress progress) {
+        super(spriteBatch, screenManager, progress);
         this.levelManager = levelManager;
         font = new BitmapFont(Gdx.files.internal("gui/arial-15.fnt"),
                 Gdx.files.internal("gui/arial-15.png"), false);
