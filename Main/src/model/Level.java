@@ -20,8 +20,10 @@ public class Level extends GameObject {
         this.player = null;
         this.balls.clear();
 
-        this.player = player;
-        this.balls = balls;
+        this.player = new Player(player.position.x);
+        for (Ball ball : balls) {
+            this.balls.add(new Ball(ball.position.x, ball.position.y, ball.getSize(), ball.getxVector()));
+        }
 
         timeBar = new TimeBar(140, 445, timeLeftSpeed);
     }

@@ -118,6 +118,7 @@ public class Gamescreen extends MyScreen {
 
     public void restart(){
         levelManager.reloadLevel();
+        gsController.setGameState(GamescreenController.gameStateDef.playing);
     }
     @Override
     public void resume() { }

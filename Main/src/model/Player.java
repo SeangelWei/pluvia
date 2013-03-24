@@ -11,7 +11,7 @@ public class Player extends GameObject {
     public boolean isMovingRight;
     public boolean isTouched;
 
-    public Player(int x){
+    public Player(float x){
         super(x, 100); // Y is always the same
         bounds.setWidth(Assets.playerLeft.getWidth());
         bounds.setHeight(Assets.playerLeft.getHeight());

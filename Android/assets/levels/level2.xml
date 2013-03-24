@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<level number="1">
+    <player x="500"/>
+    <balls>
+        <!-- SMALLER, SMALL, MIDDLE, BIG -->
+        <ball x="50" y="300" size="SMALL" xVector="6"/>
+        <ball x="700" y="300" size="SMALLER" xVector="-5"/>
+    </balls>
+    <levelSpeed speed="25"/>
+</level>

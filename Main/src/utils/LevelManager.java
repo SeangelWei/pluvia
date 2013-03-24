@@ -53,11 +53,6 @@ public class LevelManager {
         }
     }
 
-    public void loadSettings() {
-        //load playersettings from external(?) filesystem
-        //these can be how many levels he finished...
-    }
-
     public void loadNextLevel() {
         //get current Levelnumber
         //load the next level

@@ -36,6 +36,7 @@ public class Assets {
     public static Texture lifeEmpty;
     public static Texture starEmpty;
     public static Texture starFilled;
+    public static Texture levelDisabled;
     // ---- Levels ----
     public static Texture levelIcon;
 
@@ -75,5 +76,6 @@ public class Assets {
         lifeEmpty = new Texture(Gdx.files.internal("gui/life_empty.png"));
         starEmpty = new Texture(Gdx.files.internal("gui/star_empty.png"));
         starFilled = new Texture(Gdx.files.internal("gui/star_full.png"));
+        levelDisabled = new Texture(Gdx.files.internal("gui/levelDisabled.png"));
     }
 }

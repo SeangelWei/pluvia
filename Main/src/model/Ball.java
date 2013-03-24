@@ -68,4 +68,8 @@ public class Ball extends GameObject {
     public void setyVector(float yVector) {
         this.yVector = yVector;
     }
+
+    public float getxVector() {
+        return xVector;
+    }
 }
