@@ -21,7 +21,7 @@ public class Pluvia implements ApplicationListener {
     @Override
     public void create() {
         camera = new OrthographicCamera();
-        camera.setToOrtho(false, 800, 480);
+        camera.setToOrtho(false, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
         batch = new SpriteBatch();
         batch.setProjectionMatrix(camera.combined);
         Gdx.input.setInputProcessor(input);
