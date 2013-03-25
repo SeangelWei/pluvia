@@ -2,6 +2,7 @@ package utils;
 
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.FPSLogger;
 import com.badlogic.gdx.graphics.GL10;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -17,6 +18,7 @@ public class Pluvia implements ApplicationListener {
     Progress progress;
     private final Input input = new Input();
     public static double delta;
+    FPSLogger fpsLogger;
 
     @Override
     public void create() {
@@ -30,6 +32,7 @@ public class Pluvia implements ApplicationListener {
         Assets.loadGuiElements();
         levelManager = new LevelManager();
         progress = new Progress();
+        fpsLogger = new FPSLogger();
         screenManager = new ScreenManager();
         screenManager.add("MenuScreen", new Menuscreen(batch, screenManager, progress));
         screenManager.add("GameScreen", new Gamescreen(batch, screenManager, levelManager, progress));
@@ -44,6 +47,7 @@ public class Pluvia implements ApplicationListener {
         delta = Gdx.graphics.getDeltaTime();
         screenManager.getCurrScreen().render(input);
         input.clear();
+        fpsLogger.log();
     }
 
     @Override
