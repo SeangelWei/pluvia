@@ -10,20 +10,15 @@ import view.Gamescreen;
 import view.LevelScreen;
 import view.Menuscreen;
 
-public class Pluvia implements ApplicationListener {
-    OrthographicCamera camera;
+public class Pluvia {
     SpriteBatch batch;
     ScreenManager screenManager;
     LevelManager levelManager;
     Progress progress;
-    private final Input input = new Input();
-    public static double delta;
+    final Input input = new Input();
     FPSLogger fpsLogger;
 
-    @Override
-    public void create() {
-        camera = new OrthographicCamera();
-        camera.setToOrtho(false, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+    public Pluvia(OrthographicCamera camera) {
         batch = new SpriteBatch();
         batch.setProjectionMatrix(camera.combined);
         Gdx.input.setInputProcessor(input);
@@ -34,31 +29,31 @@ public class Pluvia implements ApplicationListener {
         progress = new Progress();
         fpsLogger = new FPSLogger();
         screenManager = new ScreenManager();
-        screenManager.add("MenuScreen", new Menuscreen(batch, screenManager, progress));
-        screenManager.add("GameScreen", new Gamescreen(batch, screenManager, levelManager, progress));
-        screenManager.add("LevelScreen", new LevelScreen(batch, screenManager, levelManager, progress));
+        screenManager.add("MenuScreen", new Menuscreen(this));
+        screenManager.add("GameScreen", new Gamescreen(this));
+        screenManager.add("LevelScreen", new LevelScreen(this));
         screenManager.changeTo("LevelScreen");
     }
 
-    @Override
     public void render() {
-        Gdx.gl.glClearColor(0, 0, 0.2f, 1);
-        Gdx.gl.glClear(GL10.GL_COLOR_BUFFER_BIT);
-        delta = Gdx.graphics.getDeltaTime();
         screenManager.getCurrScreen().render(input);
         input.clear();
         fpsLogger.log();
     }
 
-    @Override
-    public void resize(int width, int height) { }
+    public SpriteBatch getBatch() {
+        return batch;
+    }
 
-    @Override
-    public void pause() { }
+    public LevelManager getLevelManager() {
+        return levelManager;
+    }
 
-    @Override
-    public void resume() { }
+    public Progress getProgress() {
+        return progress;
+    }
 
-    @Override
-    public void dispose() { }
+    public ScreenManager getScreenManager() {
+        return screenManager;
+    }
 }

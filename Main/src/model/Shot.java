@@ -1,8 +1,8 @@
 package model;
 
 import utils.Assets;
+import utils.Game;
 import utils.GameObject;
-import utils.Pluvia;
 
 public class Shot extends GameObject {
     int speed;
@@ -16,6 +16,6 @@ public class Shot extends GameObject {
 
     @Override
     public void update() {
-        position.y += Pluvia.delta*speed;
+        position.y += Game.delta()*speed;
     }
 }

@@ -1,6 +1,7 @@
 package model;
 
 import utils.Assets;
+import utils.Game;
 import utils.GameObject;
 import utils.Pluvia;
 
@@ -33,13 +34,13 @@ public class Player extends GameObject {
 
     public void moveLeft(){
         if(position.x-1 > 0){
-            position.x -= Pluvia.delta*speed;
+            position.x -= Game.delta() * speed;
             isMovingRight = false;
         }
     }
     public void moveRight(){
         if(position.x+bounds.getWidth()+1 < 800){
-            position.x += Pluvia.delta*speed;
+            position.x += Game.delta() * speed;
             isMovingRight = true;
         }
     }

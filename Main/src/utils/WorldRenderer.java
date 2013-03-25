@@ -39,7 +39,7 @@ public class WorldRenderer {
         drawBalls();
         drawPoints();
         batch.end();
-        drawTimeBar();
+        drawTimeBar(); // the shapeRenderer is in this method active
         batch.begin();
         drawStates();
         drawDebug();

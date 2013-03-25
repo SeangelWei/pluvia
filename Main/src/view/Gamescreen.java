@@ -1,7 +1,7 @@
 package view;
 
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import controllers.GamescreenController;
+import static controllers.GamescreenController.gameStateDef.*;
 import utils.*;
 
 
@@ -10,11 +10,11 @@ public class Gamescreen extends MyScreen {
     GamescreenController gsController;
     LevelManager levelManager;
 
-    public Gamescreen(SpriteBatch batch, ScreenManager screenManager, LevelManager levelManager, Progress progress) {
-        super(batch, screenManager, progress);
+    public Gamescreen(Pluvia pluvia) {
+        super(pluvia.getBatch(), pluvia.getScreenManager(), pluvia.getProgress());
+        this.levelManager = pluvia.getLevelManager();
         gsController = new GamescreenController(levelManager);
         worldRenderer = new WorldRenderer(batch, gsController);
-        this.levelManager = levelManager;
     }
 
     public void render(Input input) {
@@ -41,7 +41,7 @@ public class Gamescreen extends MyScreen {
 
     private void processReady(Input input) {
         if(input.TOUCH.x > 0){
-            gsController.setGameState(GamescreenController.gameStateDef.playing);
+            gsController.setGameState(playing);
         }
     }
 
@@ -57,7 +57,7 @@ public class Gamescreen extends MyScreen {
     private void processWin(Input input) {
         if(pointInRectangle(gsController.nextLevel, input.TOUCH)){
             levelManager.loadNextLevel();
-            gsController.setGameState(GamescreenController.gameStateDef.playing);
+            gsController.setGameState(playing);
         }
         if(pointInRectangle(gsController.restart, input.TOUCH)){
             restart();
@@ -69,10 +69,10 @@ public class Gamescreen extends MyScreen {
 
     private void processPause(Input input) {
         if(input.ESCAPE){
-            gsController.setGameState(GamescreenController.gameStateDef.playing);
+            gsController.setGameState(playing);
         }
         if(pointInRectangle(gsController.resume, input.TOUCH)){
-            gsController.setGameState(GamescreenController.gameStateDef.playing);
+            gsController.setGameState(playing);
         }
         if(pointInRectangle(gsController.restart, input.TOUCH)){
             restart();
@@ -81,7 +81,7 @@ public class Gamescreen extends MyScreen {
             screenManager.changeTo("LevelScreen");
         }
         if(input.BACK){
-            gsController.setGameState(GamescreenController.gameStateDef.playing);
+            gsController.setGameState(playing);
         }
     }
 
@@ -96,7 +96,7 @@ public class Gamescreen extends MyScreen {
             gsController.getPlayer().shot();
         }
         if(input.ESCAPE){
-            gsController.setGameState(GamescreenController.gameStateDef.paused);
+            gsController.setGameState(paused);
         }
         if(pointInRectangle(gsController.arrow_left, input.TOUCH)){
             gsController.getPlayer().moveLeft();
@@ -108,17 +108,17 @@ public class Gamescreen extends MyScreen {
             gsController.getPlayer().shot();
         }
         if(input.BACK) {
-            gsController.setGameState(GamescreenController.gameStateDef.paused);
+            gsController.setGameState(paused);
         }
     }
 
     public void init(){
-        gsController.setGameState(GamescreenController.gameStateDef.ready);
+        gsController.setGameState(ready);
     }
 
     public void restart(){
         levelManager.reloadLevel();
-        gsController.setGameState(GamescreenController.gameStateDef.playing);
+        gsController.setGameState(playing);
     }
     @Override
     public void resume() { }

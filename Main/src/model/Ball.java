@@ -1,5 +1,6 @@
 package model;
 
+import utils.Game;
 import utils.GameObject;
 import utils.Pluvia;
 
@@ -43,8 +44,8 @@ public class Ball extends GameObject {
             yVector -= gravity;
         }
 
-        position.x += xVector* Pluvia.delta * speed;
-        position.y += yVector* Pluvia.delta * speed;
+        position.x += xVector* Game.delta() * speed;
+        position.y += yVector* Game.delta() * speed;
 
         if(position.x+radius >= 750){
             xVector = -xVector;

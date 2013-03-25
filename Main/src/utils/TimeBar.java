@@ -13,7 +13,7 @@ public class TimeBar extends GameObject {
     @Override
     public void update() {
         if(bounds.width > -1) {
-            bounds.width -= Pluvia.delta*speed;
+            bounds.width -= Game.delta*speed;
         } else {
             finished = true;
         }
