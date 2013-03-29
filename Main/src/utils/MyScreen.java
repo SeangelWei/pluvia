@@ -9,10 +9,10 @@ public abstract class MyScreen {
     protected ScreenManager screenManager;
     protected Progress progress;
 
-    public MyScreen(SpriteBatch batch, ScreenManager screenManager, Progress progress){
-        this.batch = batch;
-        this.screenManager = screenManager;
-        this.progress = progress;
+    public MyScreen(Pluvia pluvia){
+        this.batch = pluvia.getBatch();
+        this.screenManager = pluvia.getScreenManager();
+        this.progress = pluvia.getProgress();
     }
 
     public abstract void render (Input input);

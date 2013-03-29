@@ -37,6 +37,7 @@ public class Assets {
     public static Texture starEmpty;
     public static Texture starFilled;
     public static Texture levelDisabled;
+    public static Texture levelscreen_bg;
     // ---- Levels ----
     public static Texture levelIcon;
 
@@ -77,5 +78,6 @@ public class Assets {
         starEmpty = new Texture(Gdx.files.internal("gui/star_empty.png"));
         starFilled = new Texture(Gdx.files.internal("gui/star_full.png"));
         levelDisabled = new Texture(Gdx.files.internal("gui/levelDisabled.png"));
+        levelscreen_bg = new Texture(Gdx.files.internal("gui/levelscreen_bg.png"));
     }
 }

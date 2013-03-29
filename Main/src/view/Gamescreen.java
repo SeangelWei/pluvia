@@ -1,8 +1,9 @@
 package view;
 
 import controllers.GamescreenController;
-import static controllers.GamescreenController.gameStateDef.*;
 import utils.*;
+
+import static controllers.GamescreenController.gameStateDef.*;
 
 
 public class Gamescreen extends MyScreen {
@@ -11,7 +12,7 @@ public class Gamescreen extends MyScreen {
     LevelManager levelManager;
 
     public Gamescreen(Pluvia pluvia) {
-        super(pluvia.getBatch(), pluvia.getScreenManager(), pluvia.getProgress());
+        super(pluvia);
         this.levelManager = pluvia.getLevelManager();
         gsController = new GamescreenController(levelManager);
         worldRenderer = new WorldRenderer(batch, gsController);

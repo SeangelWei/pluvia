@@ -2,7 +2,6 @@ package view;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Rectangle;
 import utils.*;
 
@@ -16,7 +15,7 @@ public class LevelScreen extends MyScreen {
     BitmapFont font;
 
     public LevelScreen(Pluvia pluvia) {
-        super(pluvia.getBatch(), pluvia.getScreenManager(), pluvia.getProgress());
+        super(pluvia);
         this.levelManager = pluvia.getLevelManager();
         font = new BitmapFont(Gdx.files.internal("gui/arial-15.fnt"),
                 Gdx.files.internal("gui/arial-15.png"), false);
@@ -54,7 +53,7 @@ public class LevelScreen extends MyScreen {
     }
 
     private void drawBlocks() {
-        int marginTop = -180; //creepy...
+        int marginTop = -200; //creepy...
         int marginLeft = 120;
         int anzahlProReihe = 5;
         int abstandX = 60;
@@ -78,6 +77,7 @@ public class LevelScreen extends MyScreen {
 
     private void draw() {
         batch.begin();
+        batch.draw(Assets.levelscreen_bg, 0, 0);
         for (LevelIcon levelIcon : levelIcons) {
             batch.draw(Assets.levelIcon, levelIcon.x, levelIcon.y);
             font.draw(batch, levelIcon.level.toString(), levelIcon.x+(levelIcon.blockWidth/2), levelIcon.y+(levelIcon.blockWidth/2));

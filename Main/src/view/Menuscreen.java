@@ -1,21 +1,18 @@
 package view;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Rectangle;
 import utils.Assets;
 import utils.Input;
 import utils.MyScreen;
 import utils.Pluvia;
-import utils.Progress;
-import utils.ScreenManager;
 
 public class Menuscreen extends MyScreen {
     Rectangle start;
     Rectangle exit;
 
     public Menuscreen(Pluvia pluvia) {
-        super(pluvia.getBatch(), pluvia.getScreenManager(), pluvia.getProgress());
+        super(pluvia);
         start = new Rectangle(65, 350, 145, 50);
         exit = new Rectangle(65, 280, 145, 50);
     }
