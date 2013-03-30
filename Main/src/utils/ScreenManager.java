@@ -14,14 +14,14 @@ public class ScreenManager {
 
     public void changeTo(String screenName){
         if(screens.get(screenName) != null && screens.containsKey(screenName)){
-            setCurrScreen(screens.get(screenName));
-            currScreen.init();
+            screenTransition = new Transition();
+            screenTransition.nextScreen = screenName;
         } else {
             System.err.println("Screen doesnt exist");
         }
     }
 
-    public void updatescreenTransition() {
+    public void updateTransition() {
         if(screenTransition != null){
             screenTransition.update();
             if(screenTransition.canChange){

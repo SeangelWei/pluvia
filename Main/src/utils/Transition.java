@@ -1,37 +1,43 @@
 package utils;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.GL10;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 
 public class Transition {
-    public float brightness = 0;
+    public float brightness = 1;
     public boolean isFadingOut = true;
     public boolean finished = false;
     public boolean canChange = false;
     public String nextScreen;
     ShapeRenderer shapeRenderer;
 
-    public Transition(ShapeRenderer shapeRenderer) {
-        this.shapeRenderer = shapeRenderer;
+    public Transition() {
+        this.shapeRenderer = new ShapeRenderer();
     }
 
-    public void update() { // not correct
+    public void update() {
+        // 0 ist gleich transparent
         if(isFadingOut){
-            if(brightness < 255){
-                brightness+=30;
+            if(brightness < 1){
+                brightness+=0.03;
             } else {
                 canChange = true;
             }
         } else {
             if(brightness > 0){
-                brightness-=30;
+                brightness-=0.03;
             } else {
                 finished = true;
             }
         }
+        Gdx.gl.glEnable(GL10.GL_BLEND);
+        Gdx.gl.glBlendFunc(GL10.GL_SRC_ALPHA, GL10.GL_ONE_MINUS_SRC_ALPHA);
         shapeRenderer.begin(ShapeRenderer.ShapeType.FilledRectangle);
         shapeRenderer.setColor(0, 0, 0, brightness);
         shapeRenderer.filledRect(0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
         shapeRenderer.end();
+        Gdx.gl.glDisable(GL10.GL_BLEND);
     }
 }

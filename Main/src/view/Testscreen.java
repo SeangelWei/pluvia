@@ -15,6 +15,8 @@ import utils.Pluvia;
 public class Testscreen extends MyScreen {
     ShapeRenderer shapeRenderer;
     float opaque;
+    boolean fadeIn;
+    boolean fadeOut;
 
     public Testscreen(Pluvia pluvia) {
         super(pluvia);
@@ -30,17 +32,17 @@ public class Testscreen extends MyScreen {
 
         Gdx.gl.glEnable(GL20.GL_BLEND);
         Gdx.gl.glBlendFunc(GL10.GL_SRC_ALPHA, GL10.GL_ONE_MINUS_SRC_ALPHA);
-        shapeRenderer.begin(ShapeRenderer.ShapeType.FilledCircle);
+        shapeRenderer.begin(ShapeRenderer.ShapeType.FilledRectangle);
         shapeRenderer.setColor(0, 0, 0, opaque);
-        shapeRenderer.filledCircle(200, 200, 80);
+        shapeRenderer.filledRect(0, 0, 800, 480);
         shapeRenderer.end();
         opaque-=0.01;
 
         Gdx.gl.glEnable(GL10.GL_BLEND);
         Gdx.gl.glBlendFunc(GL10.GL_SRC_ALPHA, GL10.GL_ONE_MINUS_SRC_ALPHA);
         shapeRenderer.begin(ShapeRenderer.ShapeType.FilledCircle);
-        shapeRenderer.setColor(255, 0, 0, opaque);
-        shapeRenderer.filledCircle(500, 200, 80);
+        shapeRenderer.setColor(1, 0, 0, opaque); // Color is between 0 and 1
+        //shapeRenderer.filledCircle(500, 200, 80); // 0 is not transparent
         shapeRenderer.end();
         Gdx.gl.glDisable(GL10.GL_BLEND);
     }
