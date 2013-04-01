@@ -64,7 +64,7 @@ public class WorldRenderer {
             if(playerBlinkerTimer%5==0){
                 drawPlayer();
             }
-            if(playerBlinkerTimer > 20){
+            if(playerBlinkerTimer > 100){
                 gsController.getPlayer().isTouched = false;
                 playerBlinkerTimer = 0;
             }

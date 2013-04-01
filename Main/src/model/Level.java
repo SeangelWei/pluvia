@@ -40,7 +40,7 @@ public class Level extends GameObject {
 
     private void updateLogic() {
         for (int i = 0; i < balls.size();i++) {
-            if (checkCollision(player.position.x, player.position.y, player.bounds.getWidth(), player.bounds.getHeight(), balls.get(i))) {
+            if (checkCollision(player.position.x, player.position.y, player.bounds.getWidth(), player.bounds.getHeight(), balls.get(i)) && player.isTouched == false) {
                 createNewBall(balls.get(i));
                 balls.remove(i);
                 player.setLives(player.getLives() - 1);
