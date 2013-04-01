@@ -26,7 +26,7 @@ public class LevelScreen extends MyScreen {
         progress.loadProgress();
         levelIcons.clear();
         drawBlocks();
-        backButton = new Rectangle(700, 400, 80, 80);
+        backButton = new Rectangle(60, 380, 80, 80);
     }
 
     @Override

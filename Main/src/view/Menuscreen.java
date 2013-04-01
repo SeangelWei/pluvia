@@ -13,8 +13,8 @@ public class Menuscreen extends MyScreen {
 
     public Menuscreen(Pluvia pluvia) {
         super(pluvia);
-        start = new Rectangle(65, 350, 145, 50);
-        exit = new Rectangle(65, 280, 145, 50);
+        start = new Rectangle(70, 330, 145, 50);
+        exit = new Rectangle(70, 260, 145, 50);
     }
 
     @Override
