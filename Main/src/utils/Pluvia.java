@@ -16,7 +16,6 @@ public class Pluvia {
     Progress progress;
     final Input input = new Input();
     FPSLogger fpsLogger;
-    Transition transition = new Transition();
 
     public Pluvia(OrthographicCamera camera) {
         batch = new SpriteBatch();
@@ -38,11 +37,9 @@ public class Pluvia {
     }
 
     public void render() {
-        transition.update();
         if(screenManager.getCurrScreen() != null){
             screenManager.getCurrScreen().render(input);
         }
-        screenManager.updateTransition();
         input.clear();
         //fpsLogger.log();
     }
