@@ -4,10 +4,10 @@ public class XmlPair {
     private final Integer levelNumber;
     private final Integer reachedStars;
 
-    public XmlPair(Integer aKey, Integer aValue)
+    public XmlPair(Integer levelNumber, Integer reachedStars)
     {
-        levelNumber = aKey;
-        reachedStars = aValue;
+        this.levelNumber = levelNumber;
+        this.reachedStars = reachedStars;
     }
 
     public Integer levelNumber()   { return levelNumber; }

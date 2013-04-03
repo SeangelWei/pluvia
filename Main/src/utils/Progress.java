@@ -4,7 +4,18 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.utils.XmlReader;
 import com.badlogic.gdx.utils.XmlWriter;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
 
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerConfigurationException;
+import javax.xml.transform.TransformerException;
+import javax.xml.transform.TransformerFactory;
+import javax.xml.transform.dom.DOMSource;
+import javax.xml.transform.stream.StreamResult;
 import java.io.IOException;
 import java.io.StringWriter;
 import java.util.ArrayList;
@@ -25,36 +36,6 @@ public class Progress {
         reader = new XmlReader();
     }
 
-    public void saveProgress() {
-        if(fileHandler.exists()) {
-            for (XmlPair completedLevel : completedLevels) {
-                try {
-                    writer.element("completedLevel").attribute("levelNumber", completedLevel.levelNumber())
-                            .attribute("reachedStars", completedLevel.reachedStars()).pop();
-                } catch (IOException e) {
-                    System.out.println("could not save Progress");
-                    e.printStackTrace();
-                }
-            }
-        } else {
-            try {
-                fileHandler.file().createNewFile();
-                for (XmlPair completedLevel : completedLevels) {
-                    try {
-                        writer.element("completedLevel").attribute("levelNumber", completedLevel.levelNumber())
-                                .attribute("reachedStars", completedLevel.reachedStars()).pop();
-                    } catch (IOException e) {
-                        System.out.println("could not save Progress");
-                        e.printStackTrace();
-                    }
-                }
-            } catch (IOException e) {
-                System.out.println("error trying to create File");
-                e.printStackTrace();
-            }
-        }
-    }
-
     public void loadProgress() {
         try {
             if(fileHandler.exists()) {
@@ -68,6 +49,49 @@ public class Progress {
             }
         } catch (IOException e) {
             System.out.println("could not load Progress");
+            e.printStackTrace();
+        }
+    }
+
+    public void saveProgress() {
+        if(!fileHandler.exists()) {
+            fileHandler.delete();
+            writeDatas();
+        } else {
+            try {
+                fileHandler.file().createNewFile();
+                writeDatas();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    private void writeDatas() {
+        try{
+            DocumentBuilderFactory docFactory = DocumentBuilderFactory.newInstance();
+            DocumentBuilder docBuilder = docFactory.newDocumentBuilder();
+            Document doc = docBuilder.newDocument();
+            Element rootElement = doc.createElement("completedLevels");
+            doc.appendChild(rootElement);
+            for (XmlPair completedLevel : completedLevels) {
+                Element completedLevelXml = doc.createElement("completedLevel");
+                rootElement.appendChild(completedLevelXml);
+                completedLevelXml.setAttribute("levelNumber", completedLevel.levelNumber().toString());
+                completedLevelXml.setAttribute("reachedStars", completedLevel.reachedStars().toString());
+            }
+            TransformerFactory transformerFactory = TransformerFactory.newInstance();
+            Transformer transformer = transformerFactory.newTransformer();
+            DOMSource source = new DOMSource(doc);
+            StringWriter writer = new StringWriter();
+            transformer.transform(source, new StreamResult(writer));
+            String output = writer.toString();
+            fileHandler.writeString(output, false);
+        } catch (ParserConfigurationException e) {
+            e.printStackTrace();
+        } catch (TransformerConfigurationException e) {
+            e.printStackTrace();
+        } catch (TransformerException e) {
             e.printStackTrace();
         }
     }
