@@ -27,6 +27,7 @@ public class Pluvia {
         System.out.println("Assets loaded");
         levelManager = new LevelManager();
         progress = new Progress();
+        progress.loadProgress();
         fpsLogger = new FPSLogger();
         screenManager = new ScreenManager();
         screenManager.add("MenuScreen", new Menuscreen(this));
@@ -37,9 +38,7 @@ public class Pluvia {
     }
 
     public void render() {
-        if(screenManager.getCurrScreen() != null){
-            screenManager.getCurrScreen().render(input);
-        }
+        screenManager.getCurrScreen().render(input);
         input.clear();
         //fpsLogger.log();
     }

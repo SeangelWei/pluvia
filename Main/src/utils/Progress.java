@@ -10,7 +10,7 @@ import java.io.StringWriter;
 import java.util.ArrayList;
 
 public class Progress {
-    ArrayList<XmlPair> completedLevels = new ArrayList<XmlPair>();
+    public ArrayList<XmlPair> completedLevels = new ArrayList<XmlPair>();
     XmlReader reader;
     XmlReader.Element file;
     StringWriter stringWriter;
@@ -23,7 +23,6 @@ public class Progress {
         stringWriter = new StringWriter();
         writer = new XmlWriter(stringWriter);
         reader = new XmlReader();
-        loadProgress();
     }
 
     public void saveProgress() {
@@ -60,8 +59,8 @@ public class Progress {
         try {
             if(fileHandler.exists()) {
                 file = reader.parse(Gdx.files.external(filename));
-                for (int i = 0; i < file.getChildByName("completedLevels").getChildCount() ; i++) {
-                    XmlReader.Element completedLevel = file.getChildByName("completedLevel").getChild(i);
+                for (int i = 0; i < file.getChildCount();i++) {
+                    XmlReader.Element completedLevel = file.getChild(i);
                     int levelNumber = Integer.parseInt(completedLevel.getAttribute("levelNumber"));
                     int reachedStars = Integer.parseInt(completedLevel.getAttribute("reachedStars"));
                     completedLevels.add(new XmlPair(levelNumber, reachedStars));

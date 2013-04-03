@@ -23,11 +23,18 @@ public class LevelScreen extends MyScreen {
 
     @Override
     public void init(){
-        progress.loadProgress();
         levelIcons.clear();
         initialBlocks();
+        synchronize();
         backButton = new Rectangle(60, 380, 80, 80);
         levelIcons.get(0).isEnabled = true; // first level is always enabled
+    }
+
+    private void synchronize() {
+        int reachedLevels = progress.completedLevels.size();
+        for (int i = 0; i < reachedLevels; i++) {
+            levelIcons.get(i).isEnabled = true;
+        }
     }
 
     @Override
