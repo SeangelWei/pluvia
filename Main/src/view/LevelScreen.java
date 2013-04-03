@@ -25,14 +25,14 @@ public class LevelScreen extends MyScreen {
     public void init(){
         progress.loadProgress();
         levelIcons.clear();
-        drawBlocks();
+        initialBlocks();
         backButton = new Rectangle(60, 380, 80, 80);
+        levelIcons.get(0).isEnabled = true; // first level is always enabled
     }
 
     @Override
     public void render(Input input) {
         processInput(input);
-        drawBlocks();
         draw();
     }
 
@@ -52,7 +52,7 @@ public class LevelScreen extends MyScreen {
         }
     }
 
-    private void drawBlocks() {
+    private void initialBlocks() {
         int marginTop = -200; //creepy...
         int marginLeft = 120;
         int anzahlProReihe = 5;
@@ -72,7 +72,6 @@ public class LevelScreen extends MyScreen {
                 }
             }
         }
-        levelIcons.get(0).isEnabled = true; // first level is always enabled
     }
 
     private void draw() {
