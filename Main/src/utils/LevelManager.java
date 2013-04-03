@@ -12,6 +12,7 @@ import java.util.List;
 
 public class LevelManager {
     public Level currentLevel;
+    Integer currentLevelNumber;
     Player player;
     List<Ball> balls = new ArrayList<Ball>();
 
@@ -20,16 +21,20 @@ public class LevelManager {
      * if fileName is empty -> "" then it will be taken the levelNumber
      */
     public void loadLevel(int level, String fileName){
+        currentLevelNumber = level;
         XmlReader reader = new XmlReader();
         XmlReader.Element file;
         try {
             if(fileName.equals("")) {
                 file = reader.parse(Gdx.files.internal("levels/level"+level+".xml"));
+                fileName = "level"+level+".xml";
             } else {
                 file = reader.parse(Gdx.files.internal("levels/"+fileName));
             }
+            System.out.println("Load File: "+fileName);
             int playerX = Integer.parseInt(file.getChildByName("player").getAttribute("x"));
             int levelSpeed = Integer.parseInt(file.getChildByName("levelSpeed").getAttribute("speed"));
+            balls.clear();
             for (int i = 0; i < file.getChildByName("balls").getChildCount() ; i++) {
                 XmlReader.Element ball = file.getChildByName("balls").getChild(i);
                 int ballX = Integer.parseInt(ball.getAttribute("x"));
@@ -42,6 +47,7 @@ public class LevelManager {
                         balls.add(new Ball(ballX, ballY, sizeDef, vectorX));
                     }
                 }
+                player = null;
                 player = new Player(playerX);
                 currentLevel = null;
                 currentLevel = new Level(0, 0);
@@ -54,8 +60,8 @@ public class LevelManager {
     }
 
     public void loadNextLevel() {
-        //get current Levelnumber
-        //load the next level
+        currentLevelNumber++;
+        loadLevel(currentLevelNumber, "");
     }
 
     public void reloadLevel() {
