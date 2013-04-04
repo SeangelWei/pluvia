@@ -47,7 +47,7 @@ public class WorldRenderer {
     }
 
     private void drawLevel() {
-        batch.draw(Assets.game_bg, 0, 0, 800, 480);
+        batch.draw(gsController.getLevel().background, 0, 0, 800, 480);
         batch.draw(Assets.moon, 700, 380, 200, 200);
         if(gsController.getShot() != null){
             batch.draw(Assets.shot, gsController.getShot().position.x, gsController.getShot().position.y);

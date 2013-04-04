@@ -3,6 +3,9 @@ package utils;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Assets {
     public static Texture playerLeft;
     public static Texture playerRight;
@@ -12,7 +15,6 @@ public class Assets {
     public static Texture ball_middle;
     public static Texture ball_big;
     // ---- GUI ----
-    public static Texture game_bg;
     public static Texture gs_bar;
     public static Texture moon;
     public static Texture arrow_left;
@@ -40,6 +42,7 @@ public class Assets {
     public static Texture levelscreen_bg;
     // ---- Levels ----
     public static Texture levelIcon;
+    static List<Texture> levelBackgrounds = new ArrayList<Texture>();
 
     public static void loadObjects(){
         playerLeft = new Texture(Gdx.files.internal("objects/player_left.png"));
@@ -72,12 +75,16 @@ public class Assets {
         levelIcon = new Texture(Gdx.files.internal("gui/levelIcon.png"));
         readyState = new Texture(Gdx.files.internal("gui/readyState.png"));
         readyBlink = new Texture(Gdx.files.internal("gui/readyBlink.png"));
-        game_bg = new Texture(Gdx.files.internal("gui/bg.jpg"));
         lifeFilled = new Texture(Gdx.files.internal("gui/life_full.png"));
         lifeEmpty = new Texture(Gdx.files.internal("gui/life_empty.png"));
         starEmpty = new Texture(Gdx.files.internal("gui/star_empty.png"));
         starFilled = new Texture(Gdx.files.internal("gui/star_full.png"));
         levelDisabled = new Texture(Gdx.files.internal("gui/levelDisabled.png"));
         levelscreen_bg = new Texture(Gdx.files.internal("gui/levelscreen_bg.png"));
+        levelBackgrounds.add(new Texture(Gdx.files.internal("gui/level0.png")));
+        levelBackgrounds.add(new Texture(Gdx.files.internal("gui/level1.png")));
+        levelBackgrounds.add(new Texture(Gdx.files.internal("gui/level2.png")));
+        levelBackgrounds.add(new Texture(Gdx.files.internal("gui/level3.png")));
+        levelBackgrounds.add(new Texture(Gdx.files.internal("gui/level4.png")));
     }
 }

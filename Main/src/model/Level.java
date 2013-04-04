@@ -1,5 +1,6 @@
 package model;
 
+import com.badlogic.gdx.graphics.Texture;
 import utils.GameObject;
 import utils.TimeBar;
 
@@ -11,6 +12,7 @@ public class Level extends GameObject {
     List<Ball> balls = new ArrayList<Ball>();
     public int gainedPoints = 0;
     public TimeBar timeBar;
+    public Texture background;
 
     public Level(float x, float y) {
         super(x, y);

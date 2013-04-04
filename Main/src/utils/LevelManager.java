@@ -54,6 +54,7 @@ public class LevelManager {
                 currentLevel = null;
                 currentLevel = new Level(0, 0);
                 currentLevel.init(player, balls, levelSpeed);
+                currentLevel.background = Assets.levelBackgrounds.get(level);
             }
         } catch (IOException e) {
             System.out.println(e.getMessage());
