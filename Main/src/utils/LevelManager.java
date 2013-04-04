@@ -12,8 +12,9 @@ import java.util.List;
 
 public class LevelManager {
     public Level currentLevel;
-    Integer currentLevelNumber;
+    public Integer currentLevelNumber;
     Player player;
+    Integer levelSpeed;
     List<Ball> balls = new ArrayList<Ball>();
 
     /**
@@ -34,6 +35,7 @@ public class LevelManager {
             System.out.println("Load File: "+fileName);
             int playerX = Integer.parseInt(file.getChildByName("player").getAttribute("x"));
             int levelSpeed = Integer.parseInt(file.getChildByName("levelSpeed").getAttribute("speed"));
+            this.levelSpeed = levelSpeed;
             balls.clear();
             for (int i = 0; i < file.getChildByName("balls").getChildCount() ; i++) {
                 XmlReader.Element ball = file.getChildByName("balls").getChild(i);
@@ -67,6 +69,6 @@ public class LevelManager {
     public void reloadLevel() {
         currentLevel = null;
         currentLevel = new Level(0,0);
-        currentLevel.init(player, balls, 25);
+        currentLevel.init(player, balls, levelSpeed);
     }
 }

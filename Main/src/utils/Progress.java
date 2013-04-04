@@ -97,14 +97,24 @@ public class Progress {
     }
 
     public void saveLevelProgress (int level, int reachedStars) {
-        completedLevels.add(new XmlPair(level, reachedStars));
+        System.out.println("saveGameProgress");
+        System.out.println("completed Level: "+level);
+        if(completedLevels.size() == 0) {
+            completedLevels.add(new XmlPair(level, reachedStars));
+        } else {
+            if(completedLevels.size() > level) {
+                completedLevels.set(level, new XmlPair(level, reachedStars));
+            } else {
+                completedLevels.add(new XmlPair(level, reachedStars));
+            }
+        }
     }
 
     public int getReachedStars (int level) {
         if(completedLevels.isEmpty()) {
             return 0;
         } else {
-            Integer reachedStars = completedLevels.get(level-1).reachedStars();
+            Integer reachedStars = completedLevels.get(level).reachedStars();
             if(reachedStars  == null) {
                 return 0;
             } else {

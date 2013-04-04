@@ -14,7 +14,7 @@ public class Gamescreen extends MyScreen {
     public Gamescreen(Pluvia pluvia) {
         super(pluvia);
         this.levelManager = pluvia.getLevelManager();
-        gsController = new GamescreenController(levelManager);
+        gsController = new GamescreenController(pluvia);
         worldRenderer = new WorldRenderer(batch, gsController);
     }
 
@@ -48,7 +48,7 @@ public class Gamescreen extends MyScreen {
 
     private void processGameover(Input input) {
         if(pointInRectangle(gsController.restart, input.TOUCH)){
-            restart();
+            gsController.restart();
         }
         if(pointInRectangle(gsController.exitGame, input.TOUCH)){
             screenManager.changeTo("MenuScreen");
@@ -57,11 +57,11 @@ public class Gamescreen extends MyScreen {
 
     private void processWin(Input input) {
         if(pointInRectangle(gsController.nextLevel, input.TOUCH)){
-            levelManager.loadNextLevel();
+            gsController.loadNextLevel();
             gsController.setGameState(playing);
         }
         if(pointInRectangle(gsController.restart, input.TOUCH)){
-            restart();
+            gsController.restart();
         }
         if(pointInRectangle(gsController.exitGame, input.TOUCH)){
            screenManager.changeTo("LevelScreen");
@@ -76,7 +76,7 @@ public class Gamescreen extends MyScreen {
             gsController.setGameState(playing);
         }
         if(pointInRectangle(gsController.restart, input.TOUCH)){
-            restart();
+            gsController.restart();
         }
         if(pointInRectangle(gsController.exitGame, input.TOUCH)){
             screenManager.changeTo("LevelScreen");
@@ -115,11 +115,6 @@ public class Gamescreen extends MyScreen {
 
     public void init(){
         gsController.setGameState(ready);
-    }
-
-    public void restart(){
-        levelManager.reloadLevel();
-        gsController.setGameState(playing);
     }
     @Override
     public void resume() { }

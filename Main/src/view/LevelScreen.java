@@ -35,6 +35,7 @@ public class LevelScreen extends MyScreen {
         for (int i = 0; i < reachedLevels; i++) {
             levelIcons.get(i).isEnabled = true;
         }
+        // here todo makes next level enabled
     }
 
     @Override
@@ -68,7 +69,7 @@ public class LevelScreen extends MyScreen {
         int blockWidth = 65;
         int blocks = Gdx.files.internal("levels").list().length;
 
-        int levelCounter = 1;
+        int levelCounter = 0;
         for ( int col = 0;  col <= blocks/anzahlProReihe;  col++ ) {
             for ( int row = 0;  row < blocks-(col*anzahlProReihe);  row++ ) {
                 int xa = (blockWidth+abstandX)*row;
