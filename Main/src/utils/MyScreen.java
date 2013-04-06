@@ -3,16 +3,19 @@ package utils;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.scenes.scene2d.Stage;
 
 public abstract class MyScreen {
     protected SpriteBatch batch;
     protected ScreenManager screenManager;
     protected Progress progress;
+    protected Stage stage;
 
     public MyScreen(Pluvia pluvia){
         this.batch = pluvia.getBatch();
         this.screenManager = pluvia.getScreenManager();
         this.progress = pluvia.getProgress();
+        this.stage = new Stage();
     }
 
     public abstract void render (Input input);
