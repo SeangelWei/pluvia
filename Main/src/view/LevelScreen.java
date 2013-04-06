@@ -35,7 +35,7 @@ public class LevelScreen extends MyScreen {
         for (int i = 0; i < reachedLevels; i++) {
             levelIcons.get(i).isEnabled = true;
         }
-        // here todo makes next level enabled
+        // here todo: make next level enabled
     }
 
     @Override
