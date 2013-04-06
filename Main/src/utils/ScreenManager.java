@@ -1,5 +1,7 @@
 package utils;
 
+import com.badlogic.gdx.Gdx;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -14,6 +16,7 @@ public class ScreenManager {
     public void changeTo(String screenName){
         if(screens.get(screenName) != null && screens.containsKey(screenName)){
             setCurrScreen(screens.get(screenName));
+            Gdx.input.setInputProcessor(currScreen.stage);
             currScreen.init();
         } else {
             System.err.println("Screen doesnt exist");

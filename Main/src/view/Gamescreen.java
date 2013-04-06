@@ -18,22 +18,22 @@ public class Gamescreen extends MyScreen {
         worldRenderer = new WorldRenderer(batch, gsController);
     }
 
-    public void render(Input input) {
+    public void render() {
         switch (gsController.getGameState()) {
             case paused:
-                processPause(input);
+                //processPause(input);
                 break;
             case playing:
-                processPlaying(input);
+                //processPlaying(input);
                 break;
             case win:
-                processWin(input);
+                //processWin(input);
                 break;
             case gameover:
-                processGameover(input);
+                //processGameover(input);
                 break;
             case ready:
-                processReady(input);
+                //processReady(input);
                 break;
         }
         gsController.update();

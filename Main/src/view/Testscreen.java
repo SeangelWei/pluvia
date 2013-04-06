@@ -7,12 +7,9 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.Touchable;
-import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import utils.Assets;
-import utils.Input;
 import utils.MyScreen;
 import utils.Pluvia;
 
@@ -36,7 +33,7 @@ public class Testscreen extends MyScreen {
     }
 
     @Override
-    public void render(Input input) {
+    public void render() {
         batch.begin();
         batch.draw(Assets.levelscreen_bg, 0, 0);
         batch.end();

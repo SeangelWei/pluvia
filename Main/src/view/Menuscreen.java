@@ -1,9 +1,14 @@
 package view;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
-import utils.*;
+import utils.Assets;
+import utils.Button;
+import utils.MyScreen;
+import utils.Pluvia;
 
 public class Menuscreen extends MyScreen {
     Button startButton;
@@ -11,7 +16,6 @@ public class Menuscreen extends MyScreen {
 
     public Menuscreen(Pluvia pluvia) {
         super(pluvia);
-        Gdx.input.setInputProcessor(stage);
         exitButton = new Button(70, 260, Assets.menu_exit);
         startButton = new Button(70, 330, Assets.menu_start);
         exitButton.addListener(new ClickListener(){
@@ -28,17 +32,19 @@ public class Menuscreen extends MyScreen {
         });
         stage.addActor(startButton);
         stage.addActor(exitButton);
+        stage.addListener(new InputListener(){
+            @Override
+            public boolean keyDown (InputEvent event, int keycode) {
+                if(keycode == Input.Keys.BACK) {
+                    Gdx.app.exit();
+                }
+                return false;
+            }
+        });
     }
 
     @Override
-    public void render(Input input) {
-        if(Gdx.input.isKeyPressed(com.badlogic.gdx.Input.Keys.BACK)) {
-            Gdx.app.exit();
-        }
-        draw();
-    }
-
-    private void draw() {
+    public void render() {
         batch.begin();
         batch.draw(Assets.menu_bg, 0, 0);
         batch.end();

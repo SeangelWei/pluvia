@@ -2,7 +2,8 @@ package view;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
-import com.badlogic.gdx.math.Rectangle;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import utils.*;
 
 import java.util.ArrayList;
@@ -10,7 +11,7 @@ import java.util.List;
 
 public class LevelScreen extends MyScreen {
     List<LevelIcon> levelIcons = new ArrayList<LevelIcon>();
-    Rectangle backButton;
+    Button backButton;
     LevelManager levelManager;
     BitmapFont font;
 
@@ -26,7 +27,26 @@ public class LevelScreen extends MyScreen {
         levelIcons.clear();
         initialBlocks();
         synchronize();
-        backButton = new Rectangle(60, 380, 80, 80);
+        for (final LevelIcon levelIcon : levelIcons) {
+            levelIcon.addListener(new ClickListener() {
+                @Override
+                public void clicked(InputEvent event, float x, float y) {
+                    if(levelIcon.isEnabled) {
+                        levelManager.loadLevel(levelIcon.level, levelIcon.fileName);
+                        screenManager.changeTo("GameScreen");
+                    }
+                }
+            });
+            stage.addActor(levelIcon);
+        }
+        backButton = new Button(60, 380, Assets.arrow_left);
+        backButton.addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                screenManager.changeTo("MenuScreen");
+            }
+        });
+        stage.addActor(backButton);
         levelIcons.get(0).isEnabled = true; // first level is always enabled
     }
 
@@ -39,25 +59,9 @@ public class LevelScreen extends MyScreen {
     }
 
     @Override
-    public void render(Input input) {
-        processInput(input);
+    public void render() {
         draw();
-    }
-
-    private void processInput(Input input) {
-        if(pointInRectangle(backButton, input.TOUCH)){
-            screenManager.changeTo("MenuScreen");
-        }
-        if(input.BACK){
-            screenManager.changeTo("MenuScreen");
-        }
-        for (LevelIcon levelIcon : levelIcons) {
-            if(pointInRectangle(new Rectangle(levelIcon.x, levelIcon.y, levelIcon.blockWidth, levelIcon.blockWidth), input.TOUCH) &&
-                    levelIcon.isEnabled){
-                levelManager.loadLevel(levelIcon.level, levelIcon.fileName);
-                screenManager.changeTo("GameScreen");
-            }
-        }
+        stage.draw();
     }
 
     private void initialBlocks() {
@@ -97,7 +101,6 @@ public class LevelScreen extends MyScreen {
                 batch.draw(Assets.levelDisabled, levelIcon.x, levelIcon.y);
             }
         }
-        batch.draw(Assets.arrow_left, backButton.x, backButton.y);
         batch.end();
     }
 

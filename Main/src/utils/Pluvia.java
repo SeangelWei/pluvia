@@ -14,13 +14,11 @@ public class Pluvia {
     ScreenManager screenManager;
     LevelManager levelManager;
     Progress progress;
-    final Input input = new Input();
     FPSLogger fpsLogger;
 
     public Pluvia(OrthographicCamera camera) {
         batch = new SpriteBatch();
         batch.setProjectionMatrix(camera.combined);
-        Gdx.input.setInputProcessor(input);
         Gdx.input.setCatchBackKey(true);
         Assets.loadObjects();
         Assets.loadGuiElements();
@@ -38,8 +36,7 @@ public class Pluvia {
     }
 
     public void render() {
-        screenManager.getCurrScreen().render(input);
-        input.clear();
+        screenManager.getCurrScreen().render();
         //fpsLogger.log();
     }
 

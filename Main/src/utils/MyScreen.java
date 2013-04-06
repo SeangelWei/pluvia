@@ -18,7 +18,7 @@ public abstract class MyScreen {
         this.stage = new Stage();
     }
 
-    public abstract void render (Input input);
+    public abstract void render();
 
     public abstract void resize (int width, int height);
 
