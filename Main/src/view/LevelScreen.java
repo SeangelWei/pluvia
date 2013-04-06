@@ -13,12 +13,10 @@ import java.util.List;
 public class LevelScreen extends MyScreen {
     List<LevelIcon> levelIcons = new ArrayList<LevelIcon>();
     Button backButton;
-    LevelManager levelManager;
     BitmapFont font;
 
     public LevelScreen(Pluvia pluvia) {
         super(pluvia);
-        this.levelManager = pluvia.getLevelManager();
         font = new BitmapFont(Gdx.files.internal("gui/arial-15.fnt"),
                 Gdx.files.internal("gui/arial-15.png"), false);
     }
@@ -33,8 +31,8 @@ public class LevelScreen extends MyScreen {
                 @Override
                 public void clicked(InputEvent event, float x, float y) {
                     if(levelIcon.isEnabled) {
-                        levelManager.loadLevel(levelIcon.level, levelIcon.fileName);
-                        screenManager.changeTo("GameScreen");
+                        pluvia.getLevelManager().loadLevel(levelIcon.level, levelIcon.fileName);
+                        pluvia.getScreenManager().changeTo("GameScreen");
                     }
                 }
             });
@@ -44,7 +42,7 @@ public class LevelScreen extends MyScreen {
         backButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                screenManager.changeTo("MenuScreen");
+                pluvia.getScreenManager().changeTo("MenuScreen");
             }
         });
         stage.addActor(backButton);
@@ -52,7 +50,7 @@ public class LevelScreen extends MyScreen {
             @Override
             public boolean keyTyped (InputEvent event, char character) {
                 if(event.getKeyCode() == com.badlogic.gdx.Input.Keys.BACK) {
-                    screenManager.changeTo("MenuScreen");
+                    pluvia.getScreenManager().changeTo("MenuScreen");
                 }
                 return false;
             }
@@ -61,7 +59,7 @@ public class LevelScreen extends MyScreen {
     }
 
     private void synchronize() {
-        int reachedLevels = progress.completedLevels.size();
+        int reachedLevels = pluvia.getProgress().completedLevels.size();
         for (int i = 0; i < reachedLevels; i++) {
             levelIcons.get(i).isEnabled = true;
         }
@@ -103,7 +101,7 @@ public class LevelScreen extends MyScreen {
             batch.draw(Assets.levelIcon, levelIcon.x, levelIcon.y);
             font.draw(batch, levelIcon.level.toString(), levelIcon.x+(levelIcon.blockWidth/2), levelIcon.y+(levelIcon.blockWidth/2));
             if(levelIcon.isEnabled) {
-                int reachedStars = progress.getReachedStars(levelIcon.level);
+                int reachedStars = pluvia.getProgress().getReachedStars(levelIcon.level);
                 for (int i = 0; i < reachedStars; i++) {
                     batch.draw(Assets.starFilled, (levelIcon.x+(levelIcon.blockWidth/2)-45)+i*30, levelIcon.y+(levelIcon.blockWidth/2)-50, 35, 35); // well, this is ugly
                 }

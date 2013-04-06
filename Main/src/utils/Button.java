@@ -13,6 +13,6 @@ public class Button extends Actor {
     }
 
     public void draw (SpriteBatch batch, float parentAlpha) {
-        batch.draw(texture, getX(), getY());
+        batch.draw(texture, getX(), getY(), getWidth(), getHeight());
     }
 }

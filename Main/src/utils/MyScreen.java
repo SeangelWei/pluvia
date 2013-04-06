@@ -7,15 +7,13 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 
 public abstract class MyScreen {
     protected SpriteBatch batch;
-    protected ScreenManager screenManager;
-    protected Progress progress;
-    protected Stage stage;
+    protected Pluvia pluvia;
+    public Stage stage;
 
     public MyScreen(Pluvia pluvia){
-        this.batch = pluvia.getBatch();
-        this.screenManager = pluvia.getScreenManager();
-        this.progress = pluvia.getProgress();
         this.stage = new Stage();
+        this.batch = pluvia.getBatch();
+        this.pluvia = pluvia;
     }
 
     public abstract void render();

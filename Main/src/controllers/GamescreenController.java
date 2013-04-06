@@ -1,11 +1,16 @@
 package controllers;
 
-import com.badlogic.gdx.math.Rectangle;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.badlogic.gdx.scenes.scene2d.InputListener;
+import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import model.Ball;
 import model.Level;
 import model.Player;
 import model.Shot;
+import utils.Assets;
+import utils.Button;
 import utils.Pluvia;
+import view.Gamescreen;
 
 import java.util.List;
 
@@ -15,23 +20,26 @@ public class GamescreenController {
     public enum gameStateDef { paused, playing, win, gameover, ready }
     gameStateDef gameState;
     Pluvia pluvia;
-    public Rectangle arrow_right;
-    public Rectangle arrow_left;
-    public Rectangle arrow_up;
-    public Rectangle resume;
-    public Rectangle restart;
-    public Rectangle exitGame;
-    public Rectangle nextLevel;
+    Gamescreen gamescreen;
+    public Button arrow_right;
+    public Button arrow_left;
+    public Button arrow_up;
+    public Button resume;
+    public Button restart;
+    public Button exitGame;
+    public Button nextLevel;
 
-    public GamescreenController(Pluvia pluvia) {
-        arrow_left = new Rectangle(40, 8, 80, 80);
-        arrow_right = new Rectangle(140, 8, 80, 80);
-        arrow_up = new Rectangle(680, 0, 80, 80);
-        resume = new Rectangle();
-        restart = new Rectangle();
-        exitGame = new Rectangle();
-        nextLevel = new Rectangle();
+    public GamescreenController(Pluvia pluvia, Gamescreen gamescreen) {
+        arrow_left = new Button(40, 8, Assets.arrow_left);
+        arrow_right = new Button(140, 8, Assets.arrow_right);
+        arrow_up = new Button(680, 0, Assets.arrow_up);
+        resume = new Button(0, 0, Assets.resumeButton);
+        restart = new Button(0, 0, Assets.restartButton);
+        exitGame = new Button(0, 0, Assets.exitGameButton);
+        nextLevel = new Button(0, 0, Assets.nextLevelButton);
         this.pluvia = pluvia;
+        this.gamescreen = gamescreen;
+        addButtonListeners();
     }
 
     public void update(){
@@ -59,6 +67,82 @@ public class GamescreenController {
         return ((int) (Math.random() * 3))+1;
     }
 
+    private void addButtonListeners() {
+        resume.addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                setGameState(playing);
+            }
+        });
+        restart.addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                restart();
+            }
+        });
+        exitGame.addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                pluvia.getScreenManager().changeTo("LevelScreen");
+            }
+        });
+        nextLevel.addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                loadNextLevel();
+                setGameState(playing);
+            }
+        });
+        arrow_left.addListener(new InputListener() {
+            @Override
+            public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
+                gamescreen.LEFT = true;
+                return false;
+            }
+            @Override
+            public void touchUp (InputEvent event, float x, float y, int pointer, int button) {
+                gamescreen.LEFT = false;
+            }
+        });
+        arrow_right.addListener(new InputListener() {
+            @Override
+            public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
+                if(gameState == gameStateDef.playing) {
+                    gamescreen.RIGHT = true;
+                }
+                return false;
+            }
+            @Override
+            public void touchUp (InputEvent event, float x, float y, int pointer, int button) {
+                if(gameState == gameStateDef.playing) {
+                    gamescreen.RIGHT = false;
+                }
+            }
+        });
+        arrow_right.addListener(new InputListener() {
+            @Override
+            public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
+                if(gameState == gameStateDef.playing) {
+                    gamescreen.UP = true;
+                }
+                return false;
+            }
+            @Override
+            public void touchUp (InputEvent event, float x, float y, int pointer, int button) {
+                if(gameState == gameStateDef.playing) {
+                    gamescreen.UP = false;
+                }
+            }
+        });
+        gamescreen.stage.addActor(resume);
+        gamescreen.stage.addActor(restart);
+        gamescreen.stage.addActor(exitGame);
+        gamescreen.stage.addActor(nextLevel);
+        gamescreen.stage.addActor(arrow_left);
+        gamescreen.stage.addActor(arrow_right);
+        gamescreen.stage.addActor(arrow_up);
+    }
+
     public gameStateDef getGameState(){
         return gameState;
     }
@@ -79,18 +163,33 @@ public class GamescreenController {
     private void repositionButtons() {
         switch (gameState) {
             case paused:
-                resume.set(300, 240, 80, 50);
-                restart.set(420, 240, 80, 50);
-                exitGame.set(350, 180, 80, 50);
+                nextLevel.setVisible(false);
+                resume.setVisible(true);
+                restart.setVisible(true);
+                exitGame.setVisible(true);
+
+                resume.setBounds(300, 240, 80, 50);
+                restart.setBounds(420, 240, 80, 50);
+                exitGame.setBounds(350, 180, 80, 50);
                 break;
             case win:
-                nextLevel.set(420, 240, 80, 50);
-                restart.set(300, 240, 80, 50);
-                exitGame.set(350, 180, 80, 50);
+                resume.setVisible(false);
+                restart.setVisible(true);
+                exitGame.setVisible(true);
+                nextLevel.setVisible(true);
+
+                nextLevel.setBounds(420, 240, 80, 50);
+                restart.setBounds(300, 240, 80, 50);
+                exitGame.setBounds(350, 180, 80, 50);
                 break;
             case gameover:
-                restart.set(420, 240, 80, 50);
-                exitGame.set(300, 240, 80, 50);
+                resume.setVisible(false);
+                nextLevel.setVisible(true);
+                restart.setVisible(true);
+                exitGame.setVisible(true);
+
+                restart.setBounds(420, 240, 80, 50);
+                exitGame.setBounds(300, 240, 80, 50);
                 break;
         }
     }

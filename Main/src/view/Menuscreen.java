@@ -13,7 +13,7 @@ public class Menuscreen extends MyScreen {
     Button startButton;
     Button exitButton;
 
-    public Menuscreen(Pluvia pluvia) {
+    public Menuscreen(final Pluvia pluvia) {
         super(pluvia);
         exitButton = new Button(70, 260, Assets.menu_exit);
         startButton = new Button(70, 330, Assets.menu_start);
@@ -26,7 +26,7 @@ public class Menuscreen extends MyScreen {
         startButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                screenManager.changeTo("LevelScreen");
+                pluvia.getScreenManager().changeTo("LevelScreen");
             }
         });
         stage.addActor(startButton);

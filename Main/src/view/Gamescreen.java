@@ -1,120 +1,43 @@
 package view;
 
 import controllers.GamescreenController;
-import utils.*;
+import utils.MyScreen;
+import utils.Pluvia;
+import utils.WorldRenderer;
 
-import static controllers.GamescreenController.gameStateDef.*;
+import static controllers.GamescreenController.gameStateDef.playing;
 
 
 public class Gamescreen extends MyScreen {
     WorldRenderer worldRenderer;
     GamescreenController gsController;
-    LevelManager levelManager;
+    public boolean LEFT;
+    public boolean RIGHT;
+    public boolean UP;
 
     public Gamescreen(Pluvia pluvia) {
         super(pluvia);
-        this.levelManager = pluvia.getLevelManager();
-        gsController = new GamescreenController(pluvia);
+        gsController = new GamescreenController(pluvia, this);
         worldRenderer = new WorldRenderer(batch, gsController);
     }
 
     public void render() {
-        switch (gsController.getGameState()) {
-            case paused:
-                //processPause(input);
-                break;
-            case playing:
-                //processPlaying(input);
-                break;
-            case win:
-                //processWin(input);
-                break;
-            case gameover:
-                //processGameover(input);
-                break;
-            case ready:
-                //processReady(input);
-                break;
-        }
+        stage.draw();
         gsController.update();
         worldRenderer.render();
-    }
-
-    private void processReady(Input input) {
-        if(input.TOUCH.x > 0){
-            gsController.setGameState(playing);
-        }
-    }
-
-    private void processGameover(Input input) {
-        if(pointInRectangle(gsController.restart, input.TOUCH)){
-            gsController.restart();
-        }
-        if(pointInRectangle(gsController.exitGame, input.TOUCH)){
-            screenManager.changeTo("MenuScreen");
-        }
-    }
-
-    private void processWin(Input input) {
-        if(pointInRectangle(gsController.nextLevel, input.TOUCH)){
-            gsController.loadNextLevel();
-            gsController.setGameState(playing);
-        }
-        if(pointInRectangle(gsController.restart, input.TOUCH)){
-            gsController.restart();
-        }
-        if(pointInRectangle(gsController.exitGame, input.TOUCH)){
-           screenManager.changeTo("LevelScreen");
-        }
-    }
-
-    private void processPause(Input input) {
-        if(input.ESCAPE){
-            gsController.setGameState(playing);
-        }
-        if(pointInRectangle(gsController.resume, input.TOUCH)){
-            gsController.setGameState(playing);
-        }
-        if(pointInRectangle(gsController.restart, input.TOUCH)){
-            gsController.restart();
-        }
-        if(pointInRectangle(gsController.exitGame, input.TOUCH)){
-            screenManager.changeTo("LevelScreen");
-        }
-        if(input.BACK){
-            gsController.setGameState(playing);
-        }
-    }
-
-    private void processPlaying(Input input) {
-        if(input.LEFT){
+        if(LEFT) {
             gsController.getPlayer().moveLeft();
         }
-        if(input.RIGHT){
+        if(RIGHT) {
             gsController.getPlayer().moveRight();
         }
-        if(input.SPACE){
+        if(UP) {
             gsController.getPlayer().shot();
-        }
-        if(input.ESCAPE){
-            gsController.setGameState(paused);
-        }
-        if(pointInRectangle(gsController.arrow_left, input.TOUCH)){
-            gsController.getPlayer().moveLeft();
-        }
-        if(pointInRectangle(gsController.arrow_right, input.TOUCH)){
-            gsController.getPlayer().moveRight();
-        }
-        if(pointInRectangle(gsController.arrow_up, input.TOUCH)){
-            gsController.getPlayer().shot();
-        }
-        if(input.BACK) {
-            gsController.setGameState(paused);
         }
     }
 
     public void init(){
-        gsController.setGameState(ready);
+        gsController.setGameState(playing);
     }
     @Override
     public void resume() { }
