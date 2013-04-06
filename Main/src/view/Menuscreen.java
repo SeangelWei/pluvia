@@ -1,7 +1,6 @@
 package view;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
@@ -34,8 +33,8 @@ public class Menuscreen extends MyScreen {
         stage.addActor(exitButton);
         stage.addListener(new InputListener(){
             @Override
-            public boolean keyDown (InputEvent event, int keycode) {
-                if(keycode == Input.Keys.BACK) {
+            public boolean keyTyped (InputEvent event, char character) {
+                if(event.getKeyCode() == com.badlogic.gdx.Input.Keys.BACK) {
                     Gdx.app.exit();
                 }
                 return false;

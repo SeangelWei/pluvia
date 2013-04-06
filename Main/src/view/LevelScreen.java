@@ -3,6 +3,7 @@ package view;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import utils.*;
 
@@ -47,6 +48,15 @@ public class LevelScreen extends MyScreen {
             }
         });
         stage.addActor(backButton);
+        stage.addListener(new InputListener() {
+            @Override
+            public boolean keyTyped (InputEvent event, char character) {
+                if(event.getKeyCode() == com.badlogic.gdx.Input.Keys.BACK) {
+                    screenManager.changeTo("MenuScreen");
+                }
+                return false;
+            }
+        });
         levelIcons.get(0).isEnabled = true; // first level is always enabled
     }
 
