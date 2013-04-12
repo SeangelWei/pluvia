@@ -191,10 +191,12 @@ public class GamescreenController {
                 return false;
             }
             @Override
+            public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
+                return true; // it just have to return true for the touchUp event
+            }
+            @Override
             public void touchUp (InputEvent event, float x, float y, int pointer, int button) {
-                System.out.println("set it to false");
                 if(gameState == gameStateDef.playing) {
-                    System.out.println("set it to false");
                     gamescreen.LEFT = false;
                     gamescreen.RIGHT = false;
                     gamescreen.SPACE = false;

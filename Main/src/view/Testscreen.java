@@ -7,7 +7,6 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
-import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import utils.Assets;
@@ -20,14 +19,12 @@ import utils.Pluvia;
 public class Testscreen extends MyScreen {
     ShapeRenderer shapeRenderer;
     float opaque;
-    private Stage stage;
     BitmapFont font;
 
     public Testscreen(Pluvia pluvia) {
         super(pluvia);
         shapeRenderer = new ShapeRenderer();
         opaque = 1;
-        stage = new Stage();
         font = new BitmapFont(Gdx.files.internal("gui/arial-15.fnt"),
                 Gdx.files.internal("gui/arial-15.png"), false);
     }
@@ -79,6 +76,10 @@ public class Testscreen extends MyScreen {
             public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
                 System.out.println("its a touch Down");
                 return true;
+            }
+            @Override
+            public void touchUp (InputEvent event, float x, float y, int pointer, int button) {
+                System.out.println("and that is a touch up");
             }
         });
     }
