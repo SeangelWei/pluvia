@@ -1,5 +1,6 @@
 package controllers;
 
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
@@ -14,6 +15,7 @@ import view.Gamescreen;
 
 import java.util.List;
 
+import static controllers.GamescreenController.gameStateDef.paused;
 import static controllers.GamescreenController.gameStateDef.playing;
 
 public class GamescreenController {
@@ -40,6 +42,7 @@ public class GamescreenController {
         this.pluvia = pluvia;
         this.gamescreen = gamescreen;
         addButtonListeners();
+        addStageListeners();
     }
 
     public void update(){
@@ -96,12 +99,16 @@ public class GamescreenController {
         arrow_left.addListener(new InputListener() {
             @Override
             public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
-                gamescreen.LEFT = true;
+                if(gameState == playing) {
+                    gamescreen.LEFT = true;
+                }
                 return false;
             }
             @Override
             public void touchUp (InputEvent event, float x, float y, int pointer, int button) {
-                gamescreen.LEFT = false;
+                if(gameState == gameStateDef.playing) {
+                    gamescreen.LEFT = false;
+                }
             }
         });
         arrow_right.addListener(new InputListener() {
@@ -119,18 +126,18 @@ public class GamescreenController {
                 }
             }
         });
-        arrow_right.addListener(new InputListener() {
+        arrow_up.addListener(new InputListener() {
             @Override
             public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
                 if(gameState == gameStateDef.playing) {
-                    gamescreen.UP = true;
+                    gamescreen.SPACE = true;
                 }
                 return false;
             }
             @Override
             public void touchUp (InputEvent event, float x, float y, int pointer, int button) {
                 if(gameState == gameStateDef.playing) {
-                    gamescreen.UP = false;
+                    gamescreen.SPACE = false;
                 }
             }
         });
@@ -143,10 +150,66 @@ public class GamescreenController {
         gamescreen.stage.addActor(arrow_up);
     }
 
+    private void addStageListeners() {
+        gamescreen.stage.addListener(new InputListener() {
+            @Override
+            public boolean keyDown (InputEvent event, int keycode) {
+                switch (gameState) {
+                    case paused:
+                        if(Input.Keys.ESCAPE == keycode) {
+                            setGameState(playing);
+                        }
+                        break;
+                    case playing:
+                        if(Input.Keys.LEFT == keycode) {
+                            gamescreen.LEFT = true;
+                        }
+                        if(Input.Keys.RIGHT == keycode) {
+                            gamescreen.RIGHT = true;
+                        }
+                        if(Input.Keys.SPACE == keycode) {
+                            gamescreen.SPACE = true;
+                        }
+                        if(Input.Keys.ESCAPE == keycode) {
+                            setGameState(paused);
+                        }
+                        break;
+                }
+                return false;
+            }
+            @Override
+            public boolean keyUp (InputEvent event, int keycode) {
+                if(Input.Keys.LEFT == keycode) {
+                    gamescreen.LEFT = false;
+                }
+                if(Input.Keys.RIGHT == keycode) {
+                    gamescreen.RIGHT = false;
+                }
+                if(Input.Keys.SPACE == keycode) {
+                    gamescreen.SPACE = false;
+                }
+                return false;
+            }
+            @Override
+            public void touchUp (InputEvent event, float x, float y, int pointer, int button) {
+                System.out.println("set it to false");
+                if(gameState == gameStateDef.playing) {
+                    System.out.println("set it to false");
+                    gamescreen.LEFT = false;
+                    gamescreen.RIGHT = false;
+                    gamescreen.SPACE = false;
+                }
+            }
+        });
+    }
+
     public gameStateDef getGameState(){
         return gameState;
     }
     public void setGameState(gameStateDef gameState){
+        gamescreen.LEFT = false;
+        gamescreen.RIGHT = false;
+        gamescreen.SPACE = false;
         this.gameState = gameState;
         repositionButtons();
     }
@@ -162,6 +225,12 @@ public class GamescreenController {
 
     private void repositionButtons() {
         switch (gameState) {
+            case playing:
+                nextLevel.setVisible(false);
+                resume.setVisible(false);
+                restart.setVisible(false);
+                exitGame.setVisible(false);
+                break;
             case paused:
                 nextLevel.setVisible(false);
                 resume.setVisible(true);
@@ -184,7 +253,7 @@ public class GamescreenController {
                 break;
             case gameover:
                 resume.setVisible(false);
-                nextLevel.setVisible(true);
+                nextLevel.setVisible(false);
                 restart.setVisible(true);
                 exitGame.setVisible(true);
 

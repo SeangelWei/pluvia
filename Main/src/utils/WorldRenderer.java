@@ -41,7 +41,7 @@ public class WorldRenderer {
         batch.end();
         drawTimeBar(); // the shapeRenderer is in this method active
         batch.begin();
-        //drawStates();
+        drawStates();
         drawDebug();
         batch.end();
     }
@@ -53,9 +53,6 @@ public class WorldRenderer {
             batch.draw(Assets.shot, gsController.getShot().position.x, gsController.getShot().position.y);
         }
         batch.draw(Assets.gs_bar, 0, 0);
-        batch.draw(Assets.arrow_left, gsController.arrow_left.getX(), gsController.arrow_left.getY());
-        batch.draw(Assets.arrow_right, gsController.arrow_right.getX(), gsController.arrow_right.getY());
-        batch.draw(Assets.arrow_up, gsController.arrow_up.getX(), gsController.arrow_up.getY());
     }
 
     private void drawPlayerAndShot() {
@@ -133,22 +130,14 @@ public class WorldRenderer {
             case paused:
                 batch.draw(Assets.transparent, 0, 0);
                 batch.draw(Assets.pauseState, 250, 160);
-                batch.draw(Assets.resumeButton, gsController.resume.getX(), gsController.resume.getY());
-                batch.draw(Assets.restartButton, gsController.restart.getX(), gsController.restart.getY());
-                batch.draw(Assets.exitGameButton, gsController.exitGame.getX(), gsController.exitGame.getY());
                 break;
             case win:
                 batch.draw(Assets.transparent, 0, 0);
                 batch.draw(Assets.winState, 250, 160);
-                batch.draw(Assets.nextLevelButton, gsController.nextLevel.getX(), gsController.nextLevel.getY());
-                batch.draw(Assets.restartButton, gsController.restart.getX(), gsController.restart.getY());
-                batch.draw(Assets.exitGameButton, gsController.exitGame.getX(), gsController.exitGame.getY());
                 break;
             case gameover:
                 batch.draw(Assets.transparent, 0, 0);
                 batch.draw(Assets.gameoverState, 250, 160);
-                batch.draw(Assets.restartButton, gsController.restart.getX(), gsController.restart.getY());
-                batch.draw(Assets.exitGameButton, gsController.exitGame.getX(), gsController.exitGame.getY());
                 break;
             case ready:
                 batch.draw(Assets.transparent, 0, 0);

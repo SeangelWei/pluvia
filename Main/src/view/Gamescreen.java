@@ -13,7 +13,7 @@ public class Gamescreen extends MyScreen {
     GamescreenController gsController;
     public boolean LEFT;
     public boolean RIGHT;
-    public boolean UP;
+    public boolean SPACE;
 
     public Gamescreen(Pluvia pluvia) {
         super(pluvia);
@@ -22,7 +22,6 @@ public class Gamescreen extends MyScreen {
     }
 
     public void render() {
-        stage.draw();
         gsController.update();
         worldRenderer.render();
         if(LEFT) {
@@ -31,9 +30,10 @@ public class Gamescreen extends MyScreen {
         if(RIGHT) {
             gsController.getPlayer().moveRight();
         }
-        if(UP) {
+        if(SPACE) {
             gsController.getPlayer().shot();
         }
+        stage.draw();
     }
 
     public void init(){

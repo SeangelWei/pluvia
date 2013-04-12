@@ -26,18 +26,16 @@ public class Pluvia {
         levelManager = new LevelManager();
         progress = new Progress();
         progress.loadProgress();
-        fpsLogger = new FPSLogger();
         screenManager = new ScreenManager();
         screenManager.add("MenuScreen", new Menuscreen(this));
         screenManager.add("GameScreen", new Gamescreen(this));
         screenManager.add("LevelScreen", new LevelScreen(this));
         screenManager.add("TestScreen", new Testscreen(this));
-        screenManager.changeTo("LevelScreen");
+        screenManager.changeTo("TestScreen");
     }
 
     public void render() {
         screenManager.getCurrScreen().render();
-        //fpsLogger.log();
     }
 
     public SpriteBatch getBatch() {

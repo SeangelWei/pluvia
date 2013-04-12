@@ -6,6 +6,7 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
@@ -27,7 +28,6 @@ public class Testscreen extends MyScreen {
         shapeRenderer = new ShapeRenderer();
         opaque = 1;
         stage = new Stage();
-        Gdx.input.setInputProcessor(stage);
         font = new BitmapFont(Gdx.files.internal("gui/arial-15.fnt"),
                 Gdx.files.internal("gui/arial-15.png"), false);
     }
@@ -57,24 +57,30 @@ public class Testscreen extends MyScreen {
         TextButton thatButton = new TextButton("Le Button", asdf);
         thatButton.addListener(new ClickListener() {
             @Override
-            public void clicked(InputEvent event, float x, float y) {
-                System.out.println("yooouuuuu...you just pressed thaButton");
-            }
-            /* This is also possible if you need these methods
-            @Override
             public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
                 System.out.println("just touchedUP that button");
             }
-
+            @Override
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
                 System.out.println("touched down that button");
-                return true;
+                return false;
             }
-            */
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                System.out.println("yooouuuuu...you just pressed thaButton");
+            }
         });
         thatButton.setX(300);
         thatButton.setY(200);
         stage.addActor(thatButton);
+
+        stage.addListener(new InputListener() {
+            @Override
+            public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
+                System.out.println("its a touch Down");
+                return true;
+            }
+        });
     }
 
     @Override
