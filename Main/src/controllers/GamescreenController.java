@@ -202,6 +202,13 @@ public class GamescreenController {
                     gamescreen.SPACE = false;
                 }
             }
+            @Override
+            public boolean keyTyped (InputEvent event, char character) {
+                if(event.getKeyCode() == com.badlogic.gdx.Input.Keys.BACK) {
+                    setGameState(paused);
+                }
+                return false;
+            }
         });
     }
 
