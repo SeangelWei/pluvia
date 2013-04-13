@@ -2,7 +2,6 @@ package model;
 
 import utils.Game;
 import utils.GameObject;
-import utils.Pluvia;
 
 public class Ball extends GameObject {
     private int radius;

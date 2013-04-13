@@ -3,7 +3,6 @@ package model;
 import utils.Assets;
 import utils.Game;
 import utils.GameObject;
-import utils.Pluvia;
 
 public class Player extends GameObject {
     Shot shot;

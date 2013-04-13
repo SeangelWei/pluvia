@@ -1,7 +1,6 @@
 import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
 import utils.Game;
-import utils.Pluvia;
 
 public class DesktopStarter {
     public static void main(String[] args) {
