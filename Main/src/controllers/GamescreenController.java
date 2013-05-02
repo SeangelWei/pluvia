@@ -1,8 +1,9 @@
 package controllers;
 
-import com.badlogic.gdx.Input;
+import com.badlogic.gdx.Application;
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
-import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import model.Ball;
 import model.Level;
@@ -15,7 +16,6 @@ import view.Gamescreen;
 
 import java.util.List;
 
-import static controllers.GamescreenController.gameStateDef.paused;
 import static controllers.GamescreenController.gameStateDef.playing;
 
 public class GamescreenController {
@@ -23,18 +23,18 @@ public class GamescreenController {
     gameStateDef gameState;
     Pluvia pluvia;
     Gamescreen gamescreen;
-    public Button arrow_right;
-    public Button arrow_left;
-    public Button arrow_up;
+    public Rectangle arrow_right;
+    public Rectangle arrow_left;
+    public Rectangle arrow_up;
     public Button resume;
     public Button restart;
     public Button exitGame;
     public Button nextLevel;
 
     public GamescreenController(Pluvia pluvia, Gamescreen gamescreen) {
-        arrow_left = new Button(40, 8, Assets.arrow_left);
-        arrow_right = new Button(140, 8, Assets.arrow_right);
-        arrow_up = new Button(680, 0, Assets.arrow_up);
+        arrow_left = new Rectangle(40, 8, 80, 80);
+        arrow_right = new Rectangle(140, 8, 80, 80);
+        arrow_up = new Rectangle(680, 0, 80, 80);
         resume = new Button(0, 0, Assets.resumeButton);
         restart = new Button(0, 0, Assets.restartButton);
         exitGame = new Button(0, 0, Assets.exitGameButton);
@@ -42,27 +42,33 @@ public class GamescreenController {
         this.pluvia = pluvia;
         this.gamescreen = gamescreen;
         addButtonListeners();
-        addStageListeners();
     }
 
     public void update(){
-        switch (gameState) {
-            case playing:
-                pluvia.getLevelManager().currentLevel.update();
-                if(getBalls().size() == 0){
-                    setGameState(gameStateDef.win);
-                    pluvia.getProgress().saveLevelProgress(pluvia.getLevelManager().currentLevelNumber, getCalculatedPoints());
-                }
-                if (getPlayer().getLives() == 0) {
-                    setGameState(gameStateDef.gameover);
-                }
-                if(getShot()!= null && getShot().position.y > 100){
-                    getPlayer().setShot(null);
-                }
-                if(getLevel().timeBar.finished){
-                    setGameState(gameStateDef.gameover);
-                }
-                break;
+        if(gameState == playing) {
+            updateInput();
+            pluvia.getLevelManager().currentLevel.update();
+            if(getBalls().size() == 0){
+                setGameState(gameStateDef.win);
+                pluvia.getProgress().saveLevelProgress(pluvia.getLevelManager().currentLevelNumber, getCalculatedPoints());
+            }
+            if (getPlayer().getLives() == 0) {
+                setGameState(gameStateDef.gameover);
+            }
+            if(getShot()!= null && getShot().position.y > 100){
+                getPlayer().setShot(null);
+            }
+            if(getLevel().timeBar.finished){
+                setGameState(gameStateDef.gameover);
+            }
+        }
+    }
+
+    private void updateInput() {
+        if(Gdx.app.getType() == Application.ApplicationType.Android) {
+            gamescreen.input.LEFT = gamescreen.input.isPressed(arrow_left);
+            gamescreen.input.RIGHT = gamescreen.input.isPressed(arrow_right);
+            gamescreen.input.SPACE = gamescreen.input.isPressed(arrow_up);
         }
     }
 
@@ -96,129 +102,19 @@ public class GamescreenController {
                 setGameState(playing);
             }
         });
-        arrow_left.addListener(new InputListener() {
-            @Override
-            public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
-                if(gameState == playing) {
-                    gamescreen.LEFT = true;
-                }
-                return false;
-            }
-            @Override
-            public void touchUp (InputEvent event, float x, float y, int pointer, int button) {
-                if(gameState == gameStateDef.playing) {
-                    gamescreen.LEFT = false;
-                }
-            }
-        });
-        arrow_right.addListener(new InputListener() {
-            @Override
-            public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
-                if(gameState == gameStateDef.playing) {
-                    gamescreen.RIGHT = true;
-                }
-                return false;
-            }
-            @Override
-            public void touchUp (InputEvent event, float x, float y, int pointer, int button) {
-                if(gameState == gameStateDef.playing) {
-                    gamescreen.RIGHT = false;
-                }
-            }
-        });
-        arrow_up.addListener(new InputListener() {
-            @Override
-            public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
-                if(gameState == gameStateDef.playing) {
-                    gamescreen.SPACE = true;
-                }
-                return false;
-            }
-            @Override
-            public void touchUp (InputEvent event, float x, float y, int pointer, int button) {
-                if(gameState == gameStateDef.playing) {
-                    gamescreen.SPACE = false;
-                }
-            }
-        });
         gamescreen.stage.addActor(resume);
         gamescreen.stage.addActor(restart);
         gamescreen.stage.addActor(exitGame);
         gamescreen.stage.addActor(nextLevel);
-        gamescreen.stage.addActor(arrow_left);
-        gamescreen.stage.addActor(arrow_right);
-        gamescreen.stage.addActor(arrow_up);
-    }
-
-    private void addStageListeners() {
-        gamescreen.stage.addListener(new InputListener() {
-            @Override
-            public boolean keyDown (InputEvent event, int keycode) {
-                switch (gameState) {
-                    case paused:
-                        if(Input.Keys.ESCAPE == keycode) {
-                            setGameState(playing);
-                        }
-                        break;
-                    case playing:
-                        if(Input.Keys.LEFT == keycode) {
-                            gamescreen.LEFT = true;
-                        }
-                        if(Input.Keys.RIGHT == keycode) {
-                            gamescreen.RIGHT = true;
-                        }
-                        if(Input.Keys.SPACE == keycode) {
-                            gamescreen.SPACE = true;
-                        }
-                        if(Input.Keys.ESCAPE == keycode) {
-                            setGameState(paused);
-                        }
-                        break;
-                }
-                return false;
-            }
-            @Override
-            public boolean keyUp (InputEvent event, int keycode) {
-                if(Input.Keys.LEFT == keycode) {
-                    gamescreen.LEFT = false;
-                }
-                if(Input.Keys.RIGHT == keycode) {
-                    gamescreen.RIGHT = false;
-                }
-                if(Input.Keys.SPACE == keycode) {
-                    gamescreen.SPACE = false;
-                }
-                return false;
-            }
-            @Override
-            public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
-                return true; // it just have to return true for the touchUp event
-            }
-            @Override
-            public void touchUp (InputEvent event, float x, float y, int pointer, int button) {
-                if(gameState == gameStateDef.playing) {
-                    gamescreen.LEFT = false;
-                    gamescreen.RIGHT = false;
-                    gamescreen.SPACE = false;
-                }
-            }
-            @Override
-            public boolean keyTyped (InputEvent event, char character) {
-                if(event.getKeyCode() == com.badlogic.gdx.Input.Keys.BACK) {
-                    setGameState(paused);
-                }
-                return false;
-            }
-        });
     }
 
     public gameStateDef getGameState(){
         return gameState;
     }
     public void setGameState(gameStateDef gameState){
-        gamescreen.LEFT = false;
-        gamescreen.RIGHT = false;
-        gamescreen.SPACE = false;
+        gamescreen.input.LEFT = false;
+        gamescreen.input.RIGHT = false;
+        gamescreen.input.SPACE = false;
         this.gameState = gameState;
         repositionButtons();
     }
@@ -235,12 +131,14 @@ public class GamescreenController {
     private void repositionButtons() {
         switch (gameState) {
             case playing:
+                Gdx.input.setInputProcessor(gamescreen.input);
                 nextLevel.setVisible(false);
                 resume.setVisible(false);
                 restart.setVisible(false);
                 exitGame.setVisible(false);
                 break;
             case paused:
+                Gdx.input.setInputProcessor(gamescreen.stage);
                 nextLevel.setVisible(false);
                 resume.setVisible(true);
                 restart.setVisible(true);
@@ -251,6 +149,7 @@ public class GamescreenController {
                 exitGame.setBounds(350, 180, 80, 50);
                 break;
             case win:
+                Gdx.input.setInputProcessor(gamescreen.stage);
                 resume.setVisible(false);
                 restart.setVisible(true);
                 exitGame.setVisible(true);
@@ -261,6 +160,7 @@ public class GamescreenController {
                 exitGame.setBounds(350, 180, 80, 50);
                 break;
             case gameover:
+                Gdx.input.setInputProcessor(gamescreen.stage);
                 resume.setVisible(false);
                 nextLevel.setVisible(false);
                 restart.setVisible(true);

@@ -2,19 +2,18 @@ package utils;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputProcessor;
+import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
+
+import java.util.HashMap;
 
 public class Input implements InputProcessor {
     public boolean LEFT;
     public boolean RIGHT;
     public boolean SPACE;
-    public Vector2 TOUCH;
     public boolean ESCAPE;
     public boolean BACK;
-
-    public Input(){
-        TOUCH = new Vector2();
-    }
+    public HashMap<Integer, Vector2> fingers = new HashMap<Integer, Vector2>();
 
     public void clear() {
         ESCAPE = false;
@@ -48,20 +47,19 @@ public class Input implements InputProcessor {
 
     @Override
     public boolean touchDown(int screenX, int screenY, int pointer, int button) {
-        TOUCH.x = screenX;
-        TOUCH.y = Gdx.graphics.getHeight()-screenY;
+        fingers.put(pointer, new Vector2(screenX, Gdx.graphics.getHeight() - screenY));
         return true;
     }
 
     @Override
     public boolean touchUp(int screenX, int screenY, int pointer, int button) {
-        TOUCH.x = 0;
-        TOUCH.y = 0;
+        fingers.remove(pointer);
         return true;
     }
 
     @Override
     public boolean touchDragged(int screenX, int screenY, int pointer) {
+        fingers.get(pointer).set(screenX, Gdx.graphics.getHeight() - screenY);
         return false;
     }
 
@@ -73,5 +71,19 @@ public class Input implements InputProcessor {
     @Override
     public boolean scrolled(int amount) {
         return false;
+    }
+
+    public boolean isPressed(Rectangle rectangle) {
+        for (int i = 0; i < fingers.size(); i++) {
+            Vector2 touchVector = fingers.get(i);
+            if(pointInRectangle(rectangle, touchVector)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private boolean pointInRectangle (Rectangle r, Vector2 touchInput) {
+        return (touchInput.x >= r.x && touchInput.x <= r.x + r.width && touchInput.y >= r.y && touchInput.y <= r.y + r.height);
     }
 }

@@ -53,6 +53,9 @@ public class WorldRenderer {
             batch.draw(Assets.shot, gsController.getShot().position.x, gsController.getShot().position.y);
         }
         batch.draw(Assets.gs_bar, 0, 0);
+        batch.draw(Assets.arrow_left, gsController.arrow_left.x, gsController.arrow_left.y);
+        batch.draw(Assets.arrow_right, gsController.arrow_right.x, gsController.arrow_right.y);
+        batch.draw(Assets.arrow_up, gsController.arrow_up.x, gsController.arrow_up.y);
     }
 
     private void drawPlayerAndShot() {

@@ -1,7 +1,6 @@
 package utils;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.FPSLogger;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import view.Gamescreen;
@@ -14,7 +13,6 @@ public class Pluvia {
     ScreenManager screenManager;
     LevelManager levelManager;
     Progress progress;
-    FPSLogger fpsLogger;
 
     public Pluvia(OrthographicCamera camera) {
         batch = new SpriteBatch();

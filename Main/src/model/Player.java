@@ -10,6 +10,7 @@ public class Player extends GameObject {
     int lives;
     public boolean isMovingRight;
     public boolean isTouched;
+    public boolean isInvincible;
 
     public Player(float x){
         super(x, 100); // Y is always the same
@@ -23,6 +24,7 @@ public class Player extends GameObject {
         lives = 3;
         isMovingRight = true;
         isTouched = false;
+        isInvincible = false;
     }
 
     public void shot(){

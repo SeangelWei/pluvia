@@ -15,6 +15,7 @@ public class Menuscreen extends MyScreen {
 
     public Menuscreen(final Pluvia pluvia) {
         super(pluvia);
+        Gdx.input.setInputProcessor(stage);
         exitButton = new Button(70, 260, Assets.menu_exit);
         startButton = new Button(70, 330, Assets.menu_start);
         exitButton.addListener(new ClickListener(){

@@ -1,8 +1,6 @@
 package utils;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.math.Rectangle;
-import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 
 public abstract class MyScreen {
@@ -31,8 +29,4 @@ public abstract class MyScreen {
     public abstract void dispose ();
 
     public abstract void init ();
-
-    public static boolean pointInRectangle (Rectangle r, Vector2 touchInput) {
-        return (touchInput.x >= r.x && touchInput.x <= r.x + r.width && touchInput.y >= r.y && touchInput.y <= r.y + r.height);
-    }
 }

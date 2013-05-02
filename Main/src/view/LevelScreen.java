@@ -17,6 +17,7 @@ public class LevelScreen extends MyScreen {
 
     public LevelScreen(Pluvia pluvia) {
         super(pluvia);
+        Gdx.input.setInputProcessor(stage);
         font = new BitmapFont(Gdx.files.internal("gui/arial-15.fnt"),
                 Gdx.files.internal("gui/arial-15.png"), false);
     }

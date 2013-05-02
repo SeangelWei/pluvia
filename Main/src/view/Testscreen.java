@@ -10,6 +10,7 @@ import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import utils.Assets;
+import utils.Input;
 import utils.MyScreen;
 import utils.Pluvia;
 
@@ -20,6 +21,7 @@ public class Testscreen extends MyScreen {
     ShapeRenderer shapeRenderer;
     float opaque;
     BitmapFont font;
+    final Input input;
 
     public Testscreen(Pluvia pluvia) {
         super(pluvia);
@@ -27,6 +29,7 @@ public class Testscreen extends MyScreen {
         opaque = 1;
         font = new BitmapFont(Gdx.files.internal("gui/arial-15.fnt"),
                 Gdx.files.internal("gui/arial-15.png"), false);
+        input = new Input();
     }
 
     @Override
@@ -43,7 +46,13 @@ public class Testscreen extends MyScreen {
         shapeRenderer.end();
         opaque-=0.01;
 
-        stage.draw();
+        batch.begin();
+        //stage.draw();
+        for (int i = 0; i < input.fingers.size(); i++) {
+            String fingersDown = "x: "+input.fingers.get(i).x+", y "+input.fingers.get(i).y;
+            font.draw(batch, fingersDown, 50, 20*i+200);
+        }
+        batch.end();
     }
 
     @Override
@@ -82,6 +91,7 @@ public class Testscreen extends MyScreen {
                 System.out.println("and that is a touch up");
             }
         });
+        Gdx.input.setInputProcessor(input);
     }
 
     @Override
