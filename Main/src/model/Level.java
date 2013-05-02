@@ -56,10 +56,16 @@ public class Level extends GameObject {
                 if(checkCollision(getShot().position.x, getShot().position.y, getShot().bounds.getWidth(), getShot().bounds.getHeight(), balls.get(i))){
                     player.setShot(null);
                     createNewBall(balls.get(i));
+                    generatePowerUp();
                     balls.remove(i);
                 }
             }
         }
+    }
+
+    private void generatePowerUp() {
+        //here goes the logic for the powerUp generation
+        //should be done with some probabilities
     }
 
     private boolean checkCollision(float x, float y, float width, float height, Ball ball){
