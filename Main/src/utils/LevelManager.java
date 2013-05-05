@@ -71,5 +71,6 @@ public class LevelManager {
         currentLevel = null;
         currentLevel = new Level(0,0);
         currentLevel.init(player, balls, levelSpeed);
+        currentLevel.background = Assets.levelBackgrounds.get(currentLevelNumber);
     }
 }
