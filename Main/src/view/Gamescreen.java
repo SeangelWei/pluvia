@@ -1,6 +1,5 @@
 package view;
 
-import com.badlogic.gdx.Gdx;
 import controllers.GamescreenController;
 import utils.Input;
 import utils.MyScreen;
@@ -17,15 +16,14 @@ public class Gamescreen extends MyScreen {
 
     public Gamescreen(Pluvia pluvia) {
         super(pluvia);
-        input = new Input();
-        Gdx.input.setInputProcessor(input);
         gsController = new GamescreenController(pluvia, this);
         worldRenderer = new WorldRenderer(batch, gsController);
+        input = new Input();
     }
 
     public void render() {
-        gsController.update();
         worldRenderer.render();
+        gsController.update();
         if(input.LEFT) {
             gsController.getPlayer().moveLeft();
         }
@@ -35,8 +33,9 @@ public class Gamescreen extends MyScreen {
         if(input.SPACE) {
             gsController.getPlayer().shot();
         }
-        stage.draw();
-        input.clear();
+        if(gsController.getGameState() != playing) {
+            stage.draw();
+        }
     }
 
     public void init(){

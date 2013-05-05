@@ -16,6 +16,7 @@ import view.Gamescreen;
 
 import java.util.List;
 
+import static controllers.GamescreenController.gameStateDef.paused;
 import static controllers.GamescreenController.gameStateDef.playing;
 
 public class GamescreenController {
@@ -32,8 +33,8 @@ public class GamescreenController {
     public Button nextLevel;
 
     public GamescreenController(Pluvia pluvia, Gamescreen gamescreen) {
-        arrow_left = new Rectangle(40, 8, 80, 80);
-        arrow_right = new Rectangle(140, 8, 80, 80);
+        arrow_left = new Rectangle(50, 8, 80, 80);
+        arrow_right = new Rectangle(170, 8, 80, 80);
         arrow_up = new Rectangle(680, 0, 80, 80);
         resume = new Button(0, 0, Assets.resumeButton);
         restart = new Button(0, 0, Assets.restartButton);
@@ -66,9 +67,19 @@ public class GamescreenController {
 
     private void updateInput() {
         if(Gdx.app.getType() == Application.ApplicationType.Android) {
-            gamescreen.input.LEFT = gamescreen.input.isPressed(arrow_left);
-            gamescreen.input.RIGHT = gamescreen.input.isPressed(arrow_right);
-            gamescreen.input.SPACE = gamescreen.input.isPressed(arrow_up);
+            gamescreen.input.LEFT = gamescreen.input.isTouched(arrow_left, 50);
+            gamescreen.input.RIGHT = gamescreen.input.isTouched(arrow_right, 50);
+            gamescreen.input.SPACE = gamescreen.input.isTouched(arrow_up, 50);
+        } else {
+            gamescreen.input.update();
+            if(gamescreen.input.ESCAPE) {
+                if(getGameState() == playing) {
+                    setGameState(paused);
+                }
+                if(getGameState() == paused) {
+                    setGameState(playing);
+                }
+            }
         }
     }
 
@@ -131,7 +142,6 @@ public class GamescreenController {
     private void repositionButtons() {
         switch (gameState) {
             case playing:
-                Gdx.input.setInputProcessor(gamescreen.input);
                 nextLevel.setVisible(false);
                 resume.setVisible(false);
                 restart.setVisible(false);
