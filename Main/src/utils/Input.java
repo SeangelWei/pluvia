@@ -34,4 +34,8 @@ public class Input {
         SPACE = Gdx.input.isKeyPressed(62);
         ESCAPE = Gdx.input.isKeyPressed(131);
     }
+
+    public void clear() {
+        ESCAPE = false;
+    }
 }

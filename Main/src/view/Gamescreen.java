@@ -36,6 +36,7 @@ public class Gamescreen extends MyScreen {
         if(gsController.getGameState() != playing) {
             stage.draw();
         }
+        input.clear();
     }
 
     public void init(){

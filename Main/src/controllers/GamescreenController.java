@@ -46,8 +46,8 @@ public class GamescreenController {
     }
 
     public void update(){
+        updateInput();
         if(gameState == playing) {
-            updateInput();
             pluvia.getLevelManager().currentLevel.update();
             if(getBalls().size() == 0){
                 setGameState(gameStateDef.win);
@@ -67,16 +67,17 @@ public class GamescreenController {
 
     private void updateInput() {
         if(Gdx.app.getType() == Application.ApplicationType.Android) {
-            gamescreen.input.LEFT = gamescreen.input.isTouched(arrow_left, 50);
-            gamescreen.input.RIGHT = gamescreen.input.isTouched(arrow_right, 50);
-            gamescreen.input.SPACE = gamescreen.input.isTouched(arrow_up, 50);
+            if(getGameState() == playing) {
+                gamescreen.input.LEFT = gamescreen.input.isTouched(arrow_left, 50);
+                gamescreen.input.RIGHT = gamescreen.input.isTouched(arrow_right, 50);
+                gamescreen.input.SPACE = gamescreen.input.isTouched(arrow_up, 50);
+            }
         } else {
             gamescreen.input.update();
             if(gamescreen.input.ESCAPE) {
                 if(getGameState() == playing) {
                     setGameState(paused);
-                }
-                if(getGameState() == paused) {
+                } else if(getGameState() == paused) {
                     setGameState(playing);
                 }
             }
