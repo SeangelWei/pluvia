@@ -10,7 +10,6 @@ import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import utils.Assets;
-import utils.Input;
 import utils.MyScreen;
 import utils.Pluvia;
 
@@ -21,7 +20,6 @@ public class Testscreen extends MyScreen {
     ShapeRenderer shapeRenderer;
     float opaque;
     BitmapFont font;
-    final Input input;
 
     public Testscreen(Pluvia pluvia) {
         super(pluvia);
@@ -29,7 +27,6 @@ public class Testscreen extends MyScreen {
         opaque = 1;
         font = new BitmapFont(Gdx.files.internal("gui/arial-15.fnt"),
                 Gdx.files.internal("gui/arial-15.png"), false);
-        input = new Input();
     }
 
     @Override
@@ -48,9 +45,11 @@ public class Testscreen extends MyScreen {
 
         batch.begin();
         //stage.draw();
-        for (int i = 0; i < input.fingers.size(); i++) {
-            String fingersDown = "x: "+input.fingers.get(i).x+", y "+input.fingers.get(i).y;
-            font.draw(batch, fingersDown, 50, 20*i+200);
+        for (int i = 0; i < 10; i++) {
+            if(Gdx.input.isTouched(i)) {
+                String fingersDown = "x: "+Gdx.input.getX(i)+", y "+Gdx.input.getX(i);
+                font.draw(batch, fingersDown, 50, 20*i+200);
+            }
         }
         batch.end();
     }
@@ -82,16 +81,16 @@ public class Testscreen extends MyScreen {
 
         stage.addListener(new InputListener() {
             @Override
-            public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
+            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
                 System.out.println("its a touch Down");
                 return true;
             }
+
             @Override
-            public void touchUp (InputEvent event, float x, float y, int pointer, int button) {
+            public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
                 System.out.println("and that is a touch up");
             }
         });
-        Gdx.input.setInputProcessor(input);
     }
 
     @Override
