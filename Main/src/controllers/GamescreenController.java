@@ -73,7 +73,9 @@ public class GamescreenController {
                 gamescreen.input.SPACE = gamescreen.input.isTouched(arrow_up, 50);
             }
         } else {
-            gamescreen.input.update();
+            if(getGameState() == playing) {
+                gamescreen.input.update();
+            }
             if(gamescreen.input.ESCAPE) {
                 if(getGameState() == playing) {
                     setGameState(paused);

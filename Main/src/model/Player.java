@@ -8,21 +8,27 @@ public class Player extends GameObject {
     Shot shot;
     int speed;
     int lives;
-    public boolean isMovingRight;
+    public float stateTime;
+    public boolean isFacingLeft;
     public boolean isTouched;
     public boolean isInvincible;
+    public enum State {
+        IDLE, WALKING
+    }
+    public State state = State.IDLE;
 
     public Player(float x){
         super(x, 100); // Y is always the same
-        bounds.setWidth(Assets.playerLeft.getWidth());
-        bounds.setHeight(Assets.playerLeft.getHeight());
+        bounds.setWidth(Assets.playerIdleRight.getRegionWidth());
+        bounds.setHeight(Assets.playerIdleLeft.getRegionHeight());
         init();
     }
 
     private void init() {
         speed = 300;
         lives = 3;
-        isMovingRight = true;
+        stateTime = 0;
+        isFacingLeft = true;
         isTouched = false;
         isInvincible = false;
     }
@@ -36,13 +42,17 @@ public class Player extends GameObject {
     public void moveLeft(){
         if(position.x-1 > 0){
             position.x -= Game.delta() * speed;
-            isMovingRight = false;
+            isFacingLeft = true;
+            state = State.WALKING;
+            stateTime += Game.delta();
         }
     }
     public void moveRight(){
         if(position.x+bounds.getWidth()+1 < 800){
             position.x += Game.delta() * speed;
-            isMovingRight = true;
+            isFacingLeft = false;
+            state = State.WALKING;
+            stateTime += Game.delta();
         }
     }
 

@@ -3,9 +3,11 @@ package utils;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import controllers.GamescreenController;
 import model.Ball;
+import model.Player;
 
 public class WorldRenderer {
     SpriteBatch batch;
@@ -21,7 +23,9 @@ public class WorldRenderer {
     int blinkTimer = 0;
     int playerBlinkerTimer = 0;
     boolean blinker;
+    TextureRegion playerFrame;
     GamescreenController gsController;
+    Player player;
 
     public WorldRenderer(SpriteBatch spriteBatch, GamescreenController gsController) {
         this.batch = spriteBatch;
@@ -32,6 +36,7 @@ public class WorldRenderer {
     }
 
     public void render() {
+        player = gsController.getPlayer();
         batch.begin();
         drawLevel();
         drawPlayerAndShot();
@@ -59,13 +64,13 @@ public class WorldRenderer {
     }
 
     private void drawPlayerAndShot() {
-        if(gsController.getPlayer().isTouched){
+        if(player.isTouched){
             playerBlinkerTimer++;
             if(playerBlinkerTimer%5==0){
                 drawPlayer();
             }
             if(playerBlinkerTimer > 100){
-                gsController.getPlayer().isTouched = false;
+                player.isTouched = false;
                 playerBlinkerTimer = 0;
             }
         } else {
@@ -74,18 +79,22 @@ public class WorldRenderer {
     }
 
     private void drawPlayer() {
-        if(gsController.getPlayer().isMovingRight){
-            batch.draw(Assets.playerRight, gsController.getPlayer().position.x, gsController.getPlayer().position.y);
-        } else {
-            batch.draw(Assets.playerLeft, gsController.getPlayer().position.x, gsController.getPlayer().position.y);
+        playerFrame = player.isFacingLeft ? Assets.playerIdleLeft : Assets.playerIdleRight;
+        if(player.state.equals(Player.State.WALKING)) {
+            if (player.isFacingLeft) {
+                playerFrame = Assets.walkLeftAnimation.getKeyFrame(player.stateTime, true);
+            } else {
+                playerFrame = Assets.walkRightAnimation.getKeyFrame(player.stateTime, true);
+            }
         }
+        batch.draw(playerFrame, player.position.x, player.position.y);
     }
 
     private void drawLife() {
         for (int i = 0; i < 3; i++) {
             batch.draw(Assets.lifeEmpty, 350 + (40 * i), 30);
         }
-        for (int i = 0; i < gsController.getPlayer().getLives(); i++) {
+        for (int i = 0; i < player.getLives(); i++) {
             batch.draw(Assets.lifeFilled, 350 + (40 * i), 30);
         }
     }
@@ -161,12 +170,12 @@ public class WorldRenderer {
 
     private void drawDebug() {
         if(DEBUG){
-            playerCoords = "Player coords: "+gsController.getPlayer().position.x+", "+gsController.getPlayer().position.y;
-            playerDim = "Player Dimension: "+gsController.getPlayer().bounds.width+", "+gsController.getPlayer().bounds.height;
+            playerCoords = "Player coords: "+player.position.x+", "+player.position.y;
+            playerDim = "Player Dimension: "+player.bounds.width+", "+player.bounds.height;
             if(!gsController.getBalls().isEmpty()){
                 ballPos = "Ball Position: "+gsController.getBalls().get(0).position.x+", "+gsController.getBalls().get(0).position.y;
             }
-            playerLives = "Player Lives: "+gsController.getPlayer().getLives();
+            playerLives = "Player Lives: "+player.getLives();
             if(gsController.getShot() != null)
                 shotPos = "Shot coords: "+gsController.getShot().position.x+", "+gsController.getShot().position.y;
             font.draw(batch, playerCoords, 0, 470);

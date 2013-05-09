@@ -1,6 +1,7 @@
 package view;
 
 import controllers.GamescreenController;
+import model.Player;
 import utils.Input;
 import utils.MyScreen;
 import utils.Pluvia;
@@ -26,9 +27,17 @@ public class Gamescreen extends MyScreen {
         gsController.update();
         if(input.LEFT) {
             gsController.getPlayer().moveLeft();
+        } else {
+            if(!input.RIGHT) {
+                gsController.getPlayer().state = Player.State.IDLE;
+            }
         }
         if(input.RIGHT) {
             gsController.getPlayer().moveRight();
+        } else {
+            if(!input.LEFT) {
+                gsController.getPlayer().state = Player.State.IDLE;
+            }
         }
         if(input.SPACE) {
             gsController.getPlayer().shot();

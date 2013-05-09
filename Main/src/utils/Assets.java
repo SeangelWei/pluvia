@@ -2,13 +2,13 @@ package utils;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Animation;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class Assets {
-    public static Texture playerLeft;
-    public static Texture playerRight;
     public static Texture shot;
     public static Texture ball_smaller;
     public static Texture ball_small;
@@ -43,15 +43,32 @@ public class Assets {
     // ---- Levels ----
     public static Texture levelIcon;
     static List<Texture> levelBackgrounds = new ArrayList<Texture>();
+    public static Animation walkLeftAnimation;
+    public static Animation walkRightAnimation;
+    public static TextureRegion playerIdleLeft;
+    public static TextureRegion playerIdleRight;
 
     public static void loadObjects(){
-        playerLeft = new Texture(Gdx.files.internal("objects/player_left.png"));
-        playerRight = new Texture(Gdx.files.internal("objects/player_right.png"));
         shot = new Texture(Gdx.files.internal("objects/shot2.png"));
         ball_smaller = new Texture(Gdx.files.internal("objects/ball.png"));
         ball_small = new Texture(Gdx.files.internal("objects/ball.png"));
         ball_middle = new Texture(Gdx.files.internal("objects/ball.png"));
         ball_big = new Texture(Gdx.files.internal("objects/ball.png"));
+        TextureRegion[] walkLeftFrames = new TextureRegion[5];
+        for (int i = 0; i < 5; i++) {
+            walkLeftFrames[i] = new TextureRegion(new Texture(Gdx.files.internal("animationExample/bob_0"+i+".png")));
+        }
+        walkLeftAnimation = new Animation(0.06f, walkLeftFrames);
+
+        TextureRegion[] walkRightFrames = new TextureRegion[5];
+
+        for (int i = 0; i < 5; i++) {
+            walkRightFrames[i] = new TextureRegion(walkLeftFrames[i]);
+            walkRightFrames[i].flip(true, false);
+        }
+        walkRightAnimation = new Animation(0.06f, walkRightFrames);
+        playerIdleLeft = new TextureRegion(walkLeftFrames[0]);
+        playerIdleRight = new TextureRegion(walkRightFrames[0]);
     }
 
     public static void loadGuiElements(){
