@@ -18,7 +18,7 @@ public class Level extends GameObject {
         super(x, y);
     }
 
-    public void init(Player player, List<Ball> balls, int timeLeftSpeed){
+    public void init(Player player, List<Ball> balls, int timeLeftSpeed, float[] medals){
         this.player = null;
         this.balls.clear();
 
@@ -26,8 +26,7 @@ public class Level extends GameObject {
         for (Ball ball : balls) {
             this.balls.add(new Ball(ball.position.x, ball.position.y, ball.getSize(), ball.getxVector()));
         }
-
-        timeBar = new TimeBar(140, 445, timeLeftSpeed);
+        timeBar = new TimeBar(140, 445, timeLeftSpeed, medals);
     }
 
     @Override

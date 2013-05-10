@@ -87,6 +87,7 @@ public class GamescreenController {
     }
 
     private int getCalculatedPoints() {
+        //look at timebar
         return ((int) (Math.random() * 3))+1;
     }
 

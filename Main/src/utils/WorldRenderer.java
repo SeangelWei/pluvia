@@ -126,14 +126,24 @@ public class WorldRenderer {
     }
 
     private void drawTimeBar() {
+        TimeBar timeBar = gsController.getLevel().timeBar;
         shapeRenderer.begin(ShapeRenderer.ShapeType.FilledRectangle);
         shapeRenderer.setColor(8, 8, 8, 1);
-        shapeRenderer.filledRect(gsController.getLevel().timeBar.position.x, gsController.getLevel().timeBar.position.y, gsController.getLevel().timeBar.bounds.width, 15);
+        shapeRenderer.filledRect(timeBar.position.x, timeBar.position.y, timeBar.timeLeft_x, 15);
         shapeRenderer.end();
 
         shapeRenderer.begin(ShapeRenderer.ShapeType.Rectangle);
         shapeRenderer.setColor(0, 0, 0, 0);
-        shapeRenderer.rect(gsController.getLevel().timeBar.position.x, gsController.getLevel().timeBar.position.y, 480, 15);
+        shapeRenderer.rect(timeBar.position.x, timeBar.position.y, timeBar.bounds.width, 15);
+        shapeRenderer.end();
+
+        shapeRenderer.begin(ShapeRenderer.ShapeType.Line);
+        shapeRenderer.setColor(0, 0, 0, 1);
+        float width = timeBar.bounds.width;
+        float timebar_x = timeBar.position.x;
+        shapeRenderer.line(width*timeBar.gold+timebar_x, timeBar.position.y-10, width*timeBar.gold+timebar_x, timeBar.position.y+20);
+        shapeRenderer.line(width*timeBar.silver+timebar_x, timeBar.position.y-10, width*timeBar.silver+timebar_x, timeBar.position.y+20);
+        shapeRenderer.line(width*timeBar.bronze+timebar_x, timeBar.position.y-10, width*timeBar.bronze+timebar_x, timeBar.position.y+20);
         shapeRenderer.end();
     }
 
