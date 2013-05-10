@@ -87,8 +87,14 @@ public class GamescreenController {
     }
 
     private int getCalculatedPoints() {
-        //look at timebar
-        return ((int) (Math.random() * 3))+1;
+        if(getLevel().timeBar.timeLeft_x > getLevel().timeBar.gold) {
+            return 3;
+        } else if(getLevel().timeBar.timeLeft_x > getLevel().timeBar.silver) {
+            return 2;
+        } else if(getLevel().timeBar.timeLeft_x > getLevel().timeBar.bronze) {
+            return 1;
+        }
+        return 1;
     }
 
     private void addButtonListeners() {
