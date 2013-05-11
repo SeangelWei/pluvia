@@ -8,7 +8,7 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 public class Game implements ApplicationListener {
     Pluvia pluvia;
     OrthographicCamera camera;
-    static double delta;
+    static float delta;
 
     @Override
     public void create() {
@@ -24,7 +24,7 @@ public class Game implements ApplicationListener {
 
     @Override
     public void render() {
-        Gdx.gl.glClearColor(0, 0, 0.2f, 1);
+        Gdx.gl.glClearColor(0, 0, 0, 1);
         Gdx.gl.glClear(GL10.GL_COLOR_BUFFER_BIT);
         delta = Gdx.graphics.getDeltaTime();
         pluvia.render();
@@ -45,7 +45,7 @@ public class Game implements ApplicationListener {
 
     }
 
-    public static double delta() {
+    public static float delta() {
         return delta;
     }
 }

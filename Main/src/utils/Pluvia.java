@@ -3,10 +3,7 @@ package utils;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import view.Gamescreen;
-import view.LevelScreen;
-import view.Menuscreen;
-import view.Testscreen;
+import view.*;
 
 public class Pluvia {
     SpriteBatch batch;
@@ -29,7 +26,8 @@ public class Pluvia {
         screenManager.add("GameScreen", new Gamescreen(this));
         screenManager.add("LevelScreen", new LevelScreen(this));
         screenManager.add("TestScreen", new Testscreen(this));
-        screenManager.changeTo("LevelScreen");
+        screenManager.add("IntroScreen", new IntroScreen(this));
+        screenManager.changeTo("IntroScreen");
     }
 
     public void render() {

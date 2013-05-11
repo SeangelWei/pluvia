@@ -15,8 +15,8 @@ public class Menuscreen extends MyScreen {
 
     public Menuscreen(final Pluvia pluvia) {
         super(pluvia);
-        exitButton = new Button(70, 260, Assets.menu_exit);
-        startButton = new Button(70, 330, Assets.menu_start);
+        startButton = new Button(70, 180, Assets.menu_play);
+        exitButton = new Button(620, 280, Assets.menu_exit);
         exitButton.addListener(new ClickListener(){
             @Override
             public void clicked (InputEvent event, float x, float y) {

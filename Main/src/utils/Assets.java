@@ -21,7 +21,7 @@ public class Assets {
     public static Texture arrow_right;
     public static Texture arrow_up;
     public static Texture menu_bg;
-    public static Texture menu_start;
+    public static Texture menu_play;
     public static Texture menu_exit;
     public static Texture test;
     public static Texture pauseState;
@@ -40,6 +40,7 @@ public class Assets {
     public static Texture starFilled;
     public static Texture levelDisabled;
     public static Texture levelscreen_bg;
+    public static Texture logo;
     // ---- Levels ----
     public static Texture levelIcon;
     static List<Texture> levelBackgrounds = new ArrayList<Texture>();
@@ -77,9 +78,9 @@ public class Assets {
         arrow_left = new Texture(Gdx.files.internal("gui/arrow_left.png"));
         arrow_right = new Texture(Gdx.files.internal("gui/arrow_right.png"));
         arrow_up = new Texture(Gdx.files.internal("gui/arrow_up.png"));
-        menu_bg = new Texture(Gdx.files.internal("gui/menu_bg.png"));
-        menu_start = new Texture(Gdx.files.internal("gui/menu_start.png"));
-        menu_exit = new Texture(Gdx.files.internal("gui/menu_exit.png"));
+        menu_bg = new Texture(Gdx.files.internal("gui/menu_bg1.png"));
+        menu_play = new Texture(Gdx.files.internal("gui/play_button.png"));
+        menu_exit = new Texture(Gdx.files.internal("gui/exit_button.png"));
         test = new Texture(Gdx.files.internal("gui/test.png"));
         pauseState = new Texture(Gdx.files.internal("gui/pauseState.png"));
         winState = new Texture(Gdx.files.internal("gui/winState.png"));
@@ -103,5 +104,6 @@ public class Assets {
         levelBackgrounds.add(new Texture(Gdx.files.internal("gui/level2.png")));
         levelBackgrounds.add(new Texture(Gdx.files.internal("gui/level3.png")));
         levelBackgrounds.add(new Texture(Gdx.files.internal("gui/level4.png")));
+        logo = new Texture(Gdx.files.internal("gui/logo.png"));
     }
 }
