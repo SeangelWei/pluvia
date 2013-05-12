@@ -1,10 +1,9 @@
-package ch.rainbowgames;
+package ch.devilgames;
 
 import android.os.Bundle;
 import com.badlogic.gdx.backends.android.AndroidApplication;
 import com.badlogic.gdx.backends.android.AndroidApplicationConfiguration;
 import utils.Game;
-import utils.Pluvia;
 
 public class PluviaStarter extends AndroidApplication
 {
