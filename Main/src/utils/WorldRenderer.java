@@ -118,6 +118,9 @@ public class WorldRenderer {
                     break;
             }
         }
+        for (AnimationHelper currentAnimation : gsController.getLevel().currentAnimations) {
+            batch.draw(Assets.ballPoppingAnimation.getKeyFrame(currentAnimation.stateTime), currentAnimation.vector2.x, currentAnimation.vector2.y);
+        }
     }
 
     private void drawPoints() {

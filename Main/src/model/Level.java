@@ -1,8 +1,8 @@
 package model;
 
 import com.badlogic.gdx.graphics.Texture;
-import utils.GameObject;
-import utils.TimeBar;
+import com.badlogic.gdx.math.Vector2;
+import utils.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,6 +13,7 @@ public class Level extends GameObject {
     public int gainedPoints = 0;
     public TimeBar timeBar;
     public Texture background;
+    public List<AnimationHelper> currentAnimations = new ArrayList<AnimationHelper>();
 
     public Level(float x, float y) {
         super(x, y);
@@ -36,6 +37,13 @@ public class Level extends GameObject {
         }
         player.update();
         timeBar.update();
+        for (int i = 0; i < currentAnimations.size(); i++) {
+            AnimationHelper holder = currentAnimations.get(i);
+            holder.stateTime += Game.delta();
+            if(Assets.ballPoppingAnimation.isAnimationFinished(holder.stateTime)) {
+                currentAnimations.remove(i);
+            }
+        }
         updateLogic();
     }
 
@@ -92,6 +100,7 @@ public class Level extends GameObject {
     }
 
     private void createNewBall(Ball toDestroyBall){
+        currentAnimations.add(new AnimationHelper(new Vector2(toDestroyBall.position.x-toDestroyBall.getRadius(), toDestroyBall.position.y)));
         switch(toDestroyBall.getSize()){
             case BIG:
                 Ball middleBall1 = new Ball(toDestroyBall.position.x, toDestroyBall.position.y+toDestroyBall.getRadius(), Ball.sizeDef.MIDDLE, -2.4f);

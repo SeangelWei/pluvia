@@ -46,6 +46,7 @@ public class Assets {
     static List<Texture> levelBackgrounds = new ArrayList<Texture>();
     public static Animation walkLeftAnimation;
     public static Animation walkRightAnimation;
+    public static Animation ballPoppingAnimation;
     public static TextureRegion playerIdleLeft;
     public static TextureRegion playerIdleRight;
 
@@ -70,6 +71,12 @@ public class Assets {
         walkRightAnimation = new Animation(0.06f, walkRightFrames);
         playerIdleLeft = new TextureRegion(walkLeftFrames[0]);
         playerIdleRight = new TextureRegion(walkRightFrames[0]);
+
+        TextureRegion[] ballPoppingFrames = new TextureRegion[3];
+        for (int i = 0; i < 3; i++) {
+            ballPoppingFrames[i] = new TextureRegion(new Texture(Gdx.files.internal("poppingAnimation/pop_0"+i+".png")));
+        }
+        ballPoppingAnimation = new Animation(0.03f, ballPoppingFrames);
     }
 
     public static void loadGuiElements(){
