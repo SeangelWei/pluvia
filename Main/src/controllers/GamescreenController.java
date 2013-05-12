@@ -158,7 +158,6 @@ public class GamescreenController {
                 exitGame.setVisible(false);
                 break;
             case paused:
-                Gdx.input.setInputProcessor(gamescreen.stage);
                 nextLevel.setVisible(false);
                 resume.setVisible(true);
                 restart.setVisible(true);
@@ -169,7 +168,6 @@ public class GamescreenController {
                 exitGame.setBounds(350, 180, 80, 50);
                 break;
             case win:
-                Gdx.input.setInputProcessor(gamescreen.stage);
                 resume.setVisible(false);
                 restart.setVisible(true);
                 exitGame.setVisible(true);
@@ -180,7 +178,6 @@ public class GamescreenController {
                 exitGame.setBounds(350, 180, 80, 50);
                 break;
             case gameover:
-                Gdx.input.setInputProcessor(gamescreen.stage);
                 resume.setVisible(false);
                 nextLevel.setVisible(false);
                 restart.setVisible(true);
