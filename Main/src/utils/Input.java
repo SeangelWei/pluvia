@@ -14,7 +14,7 @@ public class Input {
     public boolean isTouched(Rectangle rectangle, int margin) {
         for (int i = 0; i < 10; i++) {
             if(Gdx.input.isTouched(i)) {
-                Vector2 touch = new Vector2(Gdx.input.getX(i), Gdx.graphics.getHeight()-Gdx.input.getY(i));
+                Vector2 touch = new Vector2(Gdx.input.getX(i), Gdx.graphics.getHeight() - Gdx.input.getY(i));
                 if(pointInRectangle(rectangle, touch, margin)) {
                     return true;
                 }

@@ -2,10 +2,7 @@ package view;
 
 import controllers.GamescreenController;
 import model.Player;
-import utils.Input;
-import utils.MyScreen;
-import utils.Pluvia;
-import utils.WorldRenderer;
+import utils.*;
 
 import static controllers.GamescreenController.gameStateDef.playing;
 
@@ -20,6 +17,7 @@ public class Gamescreen extends MyScreen {
         gsController = new GamescreenController(pluvia, this);
         worldRenderer = new WorldRenderer(batch, gsController);
         input = new Input();
+        stage.setViewport(Game.VIRTUAL_WIDTH, Game.VIRTUAL_HEIGHT, true);
     }
 
     public void render() {

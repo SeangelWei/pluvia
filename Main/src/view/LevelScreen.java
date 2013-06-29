@@ -38,6 +38,7 @@ public class LevelScreen extends MyScreen {
                 }
             });
             stage.addActor(levelIcon);
+            stage.setViewport(Game.VIRTUAL_WIDTH, Game.VIRTUAL_HEIGHT, true);
         }
         backButton = new Button(60, 380, Assets.arrow_left);
         backButton.addListener(new ClickListener() {
@@ -86,7 +87,7 @@ public class LevelScreen extends MyScreen {
         for ( int col = 0;  col <= blocks/anzahlProReihe;  col++ ) {
             for ( int row = 0;  row < blocks-(col*anzahlProReihe);  row++ ) {
                 int xa = (blockWidth+abstandX)*row;
-                int ya = Gdx.graphics.getHeight()-((blockWidth+abstandY)*col);
+                int ya = Game.VIRTUAL_HEIGHT-((blockWidth+abstandY)*col);
                 if(row < anzahlProReihe){
                     levelIcons.add(new LevelIcon(xa + marginLeft, ya + marginTop, blockWidth, levelCounter));
                     levelCounter++;

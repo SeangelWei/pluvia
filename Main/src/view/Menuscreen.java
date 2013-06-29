@@ -4,10 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
-import utils.Assets;
-import utils.Button;
-import utils.MyScreen;
-import utils.Pluvia;
+import utils.*;
 
 public class Menuscreen extends MyScreen {
     Button startButton;
@@ -40,6 +37,7 @@ public class Menuscreen extends MyScreen {
                 return false;
             }
         });
+        stage.setViewport(Game.VIRTUAL_WIDTH, Game.VIRTUAL_HEIGHT, true);
     }
 
     @Override
