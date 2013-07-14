@@ -58,18 +58,36 @@ public class WorldRenderer {
         for (PowerUp powerUp : gsController.getLevel().getPowerUps()) {
             if (powerUp != null) {
                 Vector2 position = powerUp.position;
-                switch (powerUp.powerUpType) {
-                    case SPEED:
-                        batch.draw(Assets.powerUp_speed, position.x, position.y);
-                        break;
-                    case IMMORTAL:
-                        batch.draw(Assets.powerUp_immortal, position.x, position.y);
-                        break;
-                    case TIME:
-                        batch.draw(Assets.powerUp_time, position.x, position.y);
-                        break;
+                if (powerUp.getMoving()) {
+                    drawLonelyPowerUp(powerUp, position);
+                } else {
+                    int powBlinkerTimer = powerUp.getPowBlinkerTimer();
+                    powBlinkerTimer++;
+                    powerUp.setPowBlinkerTimer(powBlinkerTimer);
+                    if(powBlinkerTimer%5==0){
+                        drawLonelyPowerUp(powerUp, position);
+                    }
+                    if(powBlinkerTimer > powerUp.getLifeTime()){
+                        powerUp.setPowBlinkerTimer(0);
+                        gsController.getLevel().getPowerUps().remove(powerUp);
+                        return;
+                    }
                 }
             }
+        }
+    }
+
+    private void drawLonelyPowerUp(PowerUp powerUp, Vector2 position) {
+        switch (powerUp.powerUpType) {
+            case SPEED:
+                batch.draw(Assets.powerUp_speed, position.x, position.y, 50, 50);
+                break;
+            case IMMORTAL:
+                batch.draw(Assets.powerUp_immortal, position.x, position.y, 50, 50);
+                break;
+            case TIME:
+                batch.draw(Assets.powerUp_time, position.x, position.y, 50, 50);
+                break;
         }
     }
 
