@@ -9,7 +9,7 @@ import com.badlogic.gdx.math.Vector2;
 
 public class Game implements ApplicationListener {
     Pluvia pluvia;
-    OrthographicCamera camera;
+    static OrthographicCamera camera;
     static float delta;
 
     public static final int VIRTUAL_WIDTH = 800;
@@ -75,5 +75,9 @@ public class Game implements ApplicationListener {
 
     public static float delta() {
         return delta;
+    }
+
+    public static OrthographicCamera getCamera() {
+        return camera;
     }
 }

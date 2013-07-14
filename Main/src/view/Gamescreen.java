@@ -17,7 +17,6 @@ public class Gamescreen extends MyScreen {
         gsController = new GamescreenController(pluvia, this);
         worldRenderer = new WorldRenderer(batch, gsController);
         input = new Input();
-        stage.setViewport(Game.VIRTUAL_WIDTH, Game.VIRTUAL_HEIGHT, true);
     }
 
     public void render() {

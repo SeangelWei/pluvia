@@ -11,6 +11,7 @@ import model.Player;
 import model.Shot;
 import utils.Assets;
 import utils.Button;
+import utils.Game;
 import utils.Pluvia;
 import view.Gamescreen;
 
@@ -127,6 +128,8 @@ public class GamescreenController {
         gamescreen.stage.addActor(restart);
         gamescreen.stage.addActor(exitGame);
         gamescreen.stage.addActor(nextLevel);
+        gamescreen.stage.setViewport(Game.VIRTUAL_WIDTH, Game.VIRTUAL_HEIGHT, true);
+
     }
 
     public gameStateDef getGameState(){
