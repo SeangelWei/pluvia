@@ -6,10 +6,12 @@ import utils.*;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 public class Level extends GameObject {
     Player player;
     List<Ball> balls = new ArrayList<Ball>();
+    List<PowerUp> powerUps = new ArrayList<PowerUp>();
     public int gainedPoints = 0;
     public TimeBar timeBar;
     public Texture background;
@@ -22,6 +24,7 @@ public class Level extends GameObject {
     public void init(Player player, List<Ball> balls, int timeLeftSpeed, float[] medals){
         this.player = null;
         this.balls.clear();
+        this.powerUps.clear();
 
         this.player = new Player(player.position.x);
         for (Ball ball : balls) {
@@ -34,6 +37,11 @@ public class Level extends GameObject {
     public void update() {
         for (Ball ball : balls) {
             ball.update();
+        }
+        for (PowerUp powerUp : powerUps) {
+            if (powerUp != null) {
+                powerUp.update();
+            }
         }
         player.update();
         timeBar.update();
@@ -63,16 +71,19 @@ public class Level extends GameObject {
                 if(checkCollision(getShot().position.x, getShot().position.y, getShot().bounds.getWidth(), getShot().bounds.getHeight(), balls.get(i))){
                     player.setShot(null);
                     createNewBall(balls.get(i));
-                    generatePowerUp();
+                    generatePowerUp(balls.get(i).position);
                     balls.remove(i);
                 }
             }
         }
     }
 
-    private void generatePowerUp() {
-        //here goes the logic for the powerUp generation
-        //should be done with some probabilities
+    private void generatePowerUp(Vector2 position) {
+        Random generator = new Random();
+        double value = generator.nextInt(10);
+        if (value >= 7) {
+            powerUps.add(new PowerUp(position.x, position.y));
+        }
     }
 
     private boolean checkCollision(float x, float y, float width, float height, Ball ball){
@@ -143,5 +154,8 @@ public class Level extends GameObject {
     }
     public Shot getShot() {
         return player.getShot();
+    }
+    public List<PowerUp> getPowerUps() {
+        return powerUps;
     }
 }

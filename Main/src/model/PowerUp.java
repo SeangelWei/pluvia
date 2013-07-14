@@ -15,5 +15,6 @@ public class PowerUp extends GameObject {
     public void update() {
         //gravity pulls down
         //position.y += Game.delta() * speed;
+        
     }
 }

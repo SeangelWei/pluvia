@@ -5,9 +5,11 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.badlogic.gdx.math.Vector2;
 import controllers.GamescreenController;
 import model.Ball;
 import model.Player;
+import model.PowerUp;
 
 public class WorldRenderer {
     SpriteBatch batch;
@@ -42,6 +44,7 @@ public class WorldRenderer {
         drawPlayerAndShot();
         drawLife();
         drawBalls();
+        drawPowerUp();
         drawPoints();
         batch.end();
         drawTimeBar(); // the shapeRenderer is in this method active
@@ -49,6 +52,25 @@ public class WorldRenderer {
         drawStates();
         drawDebug();
         batch.end();
+    }
+
+    private void drawPowerUp() {
+        for (PowerUp powerUp : gsController.getLevel().getPowerUps()) {
+            if (powerUp != null) {
+                Vector2 position = powerUp.position;
+                switch (powerUp.powerUpType) {
+                    case SPEED:
+                        batch.draw(Assets.powerUp_speed, position.x, position.y);
+                        break;
+                    case IMMORTAL:
+                        batch.draw(Assets.powerUp_immortal, position.x, position.y);
+                        break;
+                    case TIME:
+                        batch.draw(Assets.powerUp_time, position.x, position.y);
+                        break;
+                }
+            }
+        }
     }
 
     private void drawLevel() {

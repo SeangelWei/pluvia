@@ -14,6 +14,10 @@ public class Assets {
     public static Texture ball_small;
     public static Texture ball_middle;
     public static Texture ball_big;
+
+    public static Texture powerUp_immortal;
+    public static Texture powerUp_speed;
+    public static Texture powerUp_time;
     // ---- GUI ----
     public static Texture gs_bar;
     public static Texture moon;
@@ -51,6 +55,9 @@ public class Assets {
     public static TextureRegion playerIdleRight;
 
     public static void loadObjects(){
+        powerUp_immortal = new Texture(Gdx.files.internal("objects/power_immortal.png"));
+        powerUp_speed = new Texture(Gdx.files.internal("objects/power_speed.png"));
+        powerUp_time = new Texture(Gdx.files.internal("objects/power_time.png"));
         shot = new Texture(Gdx.files.internal("objects/shot2.png"));
         ball_smaller = new Texture(Gdx.files.internal("objects/ball.png"));
         ball_small = new Texture(Gdx.files.internal("objects/ball.png"));
