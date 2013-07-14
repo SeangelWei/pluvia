@@ -4,6 +4,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Vector2;
 import utils.*;
 
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -57,7 +58,7 @@ public class Level extends GameObject {
 
     private void updateLogic() {
         for (int i = 0; i < balls.size();i++) {
-            if (checkCollision(player.position.x, player.position.y, player.bounds.getWidth(), player.bounds.getHeight(), balls.get(i))
+            if (checkCollisionSquareRound(player.position.x, player.position.y, player.bounds.getWidth(), player.bounds.getHeight(), balls.get(i))
                     && !player.isTouched && !player.isInvincible) {
                 createNewBall(balls.get(i));
                 balls.remove(i);
@@ -68,7 +69,7 @@ public class Level extends GameObject {
 
         for(int i = 0; i < balls.size();i++){
             if(player.getShot() != null){
-                if(checkCollision(getShot().position.x, getShot().position.y, getShot().bounds.getWidth(), getShot().bounds.getHeight(), balls.get(i))){
+                if(checkCollisionSquareRound(getShot().position.x, getShot().position.y, getShot().bounds.getWidth(), getShot().bounds.getHeight(), balls.get(i))){
                     player.setShot(null);
                     createNewBall(balls.get(i));
                     generatePowerUp(balls.get(i).position);
@@ -76,17 +77,26 @@ public class Level extends GameObject {
                 }
             }
         }
+
+        for (PowerUp powerUp : powerUps) {
+            Rectangle player = new Rectangle((int) getPlayer().position.x, (int) getPlayer().position.y, (int) getPlayer().bounds.getWidth(), (int) getPlayer().bounds.getHeight());
+            Rectangle powerUpRect = new Rectangle((int) powerUp.position.x, (int) powerUp.position.y, (int) powerUp.bounds.getWidth(), (int) powerUp.bounds.getHeight());
+            if (checkCollisionSquareSquare(player, powerUpRect)) {
+                //power löschen
+                //player bekommt powerUp
+            }
+        }
     }
 
     private void generatePowerUp(Vector2 position) {
         Random generator = new Random();
         double value = generator.nextInt(10);
-        if (value >= 7) {
+        if (value >= 0) {
             powerUps.add(new PowerUp(position.x, position.y));
         }
     }
 
-    private boolean checkCollision(float x, float y, float width, float height, Ball ball){
+    private boolean checkCollisionSquareRound(float x, float y, float width, float height, Ball ball){
         float circleDistanceX = abs(ball.position.x+ball.getRadius() - x - width/2);
         float circleDistanceY = abs(ball.position.y+ball.getRadius() - y - height/2);
 
@@ -100,6 +110,13 @@ public class Level extends GameObject {
                 pow(circleDistanceY - height/2, 2);
 
         return (cornerDistance_sq <= pow(ball.getRadius(),2));
+    }
+
+    private boolean checkCollisionSquareSquare(Rectangle r1, Rectangle r2){
+        return (r1.x <= r2.x + r2.width &&
+                r2.x <= r1.x + r1.width &&
+                r1.y <= r2.y + r2.height &&
+                r2.y <= r1.y + r2.height);
     }
 
     private float pow(float n, float e) {

@@ -6,7 +6,7 @@ import utils.GameObject;
 import java.util.Random;
 
 public class PowerUp extends GameObject {
-    private float gravity = 1.03f;
+    private final float GRAVITY = 1.03f;
     public static enum powerUpTypeDef { SPEED, IMMORTAL, TIME }
     public powerUpTypeDef powerUpType;
     boolean moving = true;
@@ -17,6 +17,8 @@ public class PowerUp extends GameObject {
 
     public PowerUp(float x, float y) {
         super(x, y);
+        bounds.setHeight(50);
+        bounds.setWidth(50);
         Random generator = new Random();
         int value = generator.nextInt(3);
         switch (value) {
@@ -37,7 +39,7 @@ public class PowerUp extends GameObject {
         if (moving) {
             float v = velocity_y * Game.delta() * speed;
             position.y += v;
-            speed *= gravity;
+            speed *= GRAVITY;
             if (position.y <= 100) {
                 moving = false;
             }
