@@ -127,6 +127,16 @@ public class WorldRenderer {
                 playerFrame = Assets.walkRightAnimation.getKeyFrame(player.stateTime, true);
             }
         }
+        if (player.currentPowerUp != null) {
+            switch (player.currentPowerUp.powerUpType) {
+                case SPEED:
+                    batch.draw(Assets.powerUp_speed, 520, 35, 35, 35);
+                    break;
+                case IMMORTAL:
+                    batch.draw(Assets.powerUp_immortal, 520, 35, 35, 35);
+                    break;
+            }
+        }
         batch.draw(playerFrame, player.position.x, player.position.y);
     }
 

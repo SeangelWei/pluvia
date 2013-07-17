@@ -37,7 +37,7 @@ public class Ball extends GameObject {
 
     @Override
     public void update() {
-        if(position.y-1 < groundPosition){
+        if(position.y-1 <= groundPosition){
             yVector *= -1;
         } else {
             yVector -= gravity;

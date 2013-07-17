@@ -17,7 +17,6 @@ public class Level extends GameObject {
     public TimeBar timeBar;
     public Texture background;
     public List<AnimationHelper> currentAnimations = new ArrayList<AnimationHelper>();
-
     public Level(float x, float y) {
         super(x, y);
     }
@@ -82,8 +81,25 @@ public class Level extends GameObject {
             Rectangle player = new Rectangle((int) getPlayer().position.x, (int) getPlayer().position.y, (int) getPlayer().bounds.getWidth(), (int) getPlayer().bounds.getHeight());
             Rectangle powerUpRect = new Rectangle((int) powerUp.position.x, (int) powerUp.position.y, (int) powerUp.bounds.getWidth(), (int) powerUp.bounds.getHeight());
             if (checkCollisionSquareSquare(player, powerUpRect)) {
-                //power löschen
-                //player bekommt powerUp
+                switch (powerUp.powerUpType) {
+                    case SPEED:
+                        getPlayer().currentPowerUp = powerUp;
+                        getPlayer().speed = 500;
+                        break;
+                    case IMMORTAL:
+                        getPlayer().currentPowerUp = powerUp;
+                        getPlayer().isInvincible = true;
+                        break;
+                    case TIME:
+                        if (timeBar.timeLeft_x + 50 < Game.VIRTUAL_WIDTH) {
+                            timeBar.timeLeft_x += 50;
+                        } else {
+                            timeBar.timeLeft_x = Game.VIRTUAL_WIDTH;
+                        }
+                        break;
+                }
+                powerUps.remove(powerUp);
+                return;
             }
         }
     }

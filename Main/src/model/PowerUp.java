@@ -14,6 +14,7 @@ public class PowerUp extends GameObject {
     float velocity_y = -1;
     float lifeTime = 100;
     int powBlinkerTimer = 0;
+    int powerDuration;
 
     public PowerUp(float x, float y) {
         super(x, y);
@@ -24,9 +25,11 @@ public class PowerUp extends GameObject {
         switch (value) {
             case 0:
                 powerUpType = powerUpTypeDef.IMMORTAL;
+                powerDuration = 200;
                 break;
             case 1:
                 powerUpType = powerUpTypeDef.SPEED;
+                powerDuration = 200;
                 break;
             case 2:
                 powerUpType = powerUpTypeDef.TIME;
@@ -60,5 +63,11 @@ public class PowerUp extends GameObject {
 
     public void setPowBlinkerTimer(int powBlinkerTimer) {
         this.powBlinkerTimer = powBlinkerTimer;
+    }
+
+    public void use() {
+        if (powerUpType != powerUpTypeDef.TIME) {
+            powerDuration--;
+        }
     }
 }

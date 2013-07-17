@@ -12,6 +12,7 @@ public class Player extends GameObject {
     public boolean isFacingLeft;
     public boolean isTouched;
     public boolean isInvincible;
+    public PowerUp currentPowerUp;
     public enum State {
         IDLE, WALKING
     }
@@ -31,6 +32,7 @@ public class Player extends GameObject {
         isFacingLeft = true;
         isTouched = false;
         isInvincible = false;
+        currentPowerUp = null;
     }
 
     public void shot(){
@@ -75,5 +77,20 @@ public class Player extends GameObject {
     @Override
     public void update() {
         if(shot != null) shot.update();
+        if (currentPowerUp != null) {
+            if (currentPowerUp.powerDuration <= 0) {
+                switch (currentPowerUp.powerUpType) {
+                    case SPEED:
+                        speed = 300;
+                        break;
+                    case IMMORTAL:
+                        isInvincible = false;
+                        break;
+                }
+                currentPowerUp = null;
+            } else {
+                currentPowerUp.use();
+            }
+        }
     }
 }
