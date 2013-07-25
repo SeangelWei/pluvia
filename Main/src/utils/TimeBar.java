@@ -3,17 +3,16 @@ package utils;
 public class TimeBar extends GameObject {
     int speed;
     public boolean finished;
-    public float gold, silver, bronze;
+    public float gold, silver;
     public float timeLeft_x;
 
     public TimeBar(float x, float y, int speed, float[] medals) {
         super(x, y);
         this.speed = speed;
-        this.bounds.width = Game.VIRTUAL_WIDTH;
-        timeLeft_x = Game.VIRTUAL_WIDTH;
-        bronze = medals[0];
-        silver = medals[1];
-        gold = medals[2];
+        this.bounds.width = 480;
+        timeLeft_x = 480;
+        silver = medals[0];
+        gold = medals[1];
     }
 
     @Override

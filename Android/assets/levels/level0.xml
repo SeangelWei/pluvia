@@ -3,10 +3,9 @@
     <player x="500"/>
     <balls>
         <!-- SMALLER, SMALL, MIDDLE, BIG -->
-        <ball x="50" y="300" size="SMALL" xVector="8"/>
+        <ball x="50" y="300" size="SMALLER" xVector="8"/>
     </balls>
     <levelSpeed speed="50"/>
-    <bronze value="0.4"/>
-    <silver value="0.3"/>
-    <gold value="0.15"/>
+    <silver value="0.5"/>
+    <gold value="0.7"/>
 </level>

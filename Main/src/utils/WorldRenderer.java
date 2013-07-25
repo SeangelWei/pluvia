@@ -196,7 +196,6 @@ public class WorldRenderer {
         float timebar_x = timeBar.position.x;
         shapeRenderer.line(width*timeBar.gold+timebar_x, timeBar.position.y-10, width*timeBar.gold+timebar_x, timeBar.position.y+20);
         shapeRenderer.line(width*timeBar.silver+timebar_x, timeBar.position.y-10, width*timeBar.silver+timebar_x, timeBar.position.y+20);
-        shapeRenderer.line(width*timeBar.bronze+timebar_x, timeBar.position.y-10, width*timeBar.bronze+timebar_x, timeBar.position.y+20);
         shapeRenderer.end();
     }
 

@@ -37,9 +37,8 @@ public class LevelManager {
             int playerX = Integer.parseInt(file.getChildByName("player").getAttribute("x"));
             int levelSpeed = Integer.parseInt(file.getChildByName("levelSpeed").getAttribute("speed"));
             this.levelSpeed = levelSpeed;
-            medals_array[0] = Float.parseFloat(file.getChildByName("bronze").getAttribute("value"));
-            medals_array[1] = Float.parseFloat(file.getChildByName("silver").getAttribute("value"));
-            medals_array[2] = Float.parseFloat(file.getChildByName("gold").getAttribute("value"));
+            medals_array[0] = Float.parseFloat(file.getChildByName("silver").getAttribute("value"));
+            medals_array[1] = Float.parseFloat(file.getChildByName("gold").getAttribute("value"));
             balls.clear();
             for (int i = 0; i < file.getChildByName("balls").getChildCount() ; i++) {
                 XmlReader.Element ball = file.getChildByName("balls").getChild(i);

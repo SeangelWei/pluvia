@@ -88,12 +88,10 @@ public class GamescreenController {
     }
 
     private int getCalculatedPoints() {
-        if(getLevel().timeBar.timeLeft_x > getLevel().timeBar.gold) {
+        if(getLevel().timeBar.timeLeft_x > getLevel().timeBar.gold * 480) {
             return 3;
-        } else if(getLevel().timeBar.timeLeft_x > getLevel().timeBar.silver) {
+        } else if(getLevel().timeBar.timeLeft_x > getLevel().timeBar.silver * 480) {
             return 2;
-        } else if(getLevel().timeBar.timeLeft_x > getLevel().timeBar.bronze) {
-            return 1;
         }
         return 1;
     }
