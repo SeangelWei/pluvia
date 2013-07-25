@@ -11,11 +11,11 @@ public class Input {
     public boolean SPACE;
     public boolean ESCAPE;
 
-    public boolean isTouched(Rectangle rectangle, int margin) {
+    public boolean isTouched(Rectangle rectangle, int marginLeft, int marginRight, int marginTop, int marginBottom) {
         for (int i = 0; i < 10; i++) {
             if(Gdx.input.isTouched(i)) {
                 Vector2 touch = new Vector2(Gdx.input.getX(i), Gdx.graphics.getHeight() - Gdx.input.getY(i));
-                if(pointInRectangle(rectangle, touch, margin)) {
+                if(pointInRectangle(rectangle, touch, marginLeft, marginRight, marginTop, marginBottom)) {
                     return true;
                 }
             }
@@ -23,9 +23,9 @@ public class Input {
         return false;
     }
 
-    public boolean pointInRectangle(Rectangle r, Vector2 touchInput, int margin) {
-        return (touchInput.x >= r.x-margin && touchInput.x <= r.x + margin + r.width && touchInput.y >= r.y - margin &&
-                touchInput.y <= r.y + margin + r.height);
+    public boolean pointInRectangle(Rectangle r, Vector2 touchInput, int marginLeft, int marginRight, int marginTop, int marginBottom) {
+        return (touchInput.x >= r.x-marginLeft && touchInput.x <= r.x + marginRight + r.width && touchInput.y >= r.y - marginTop &&
+                touchInput.y <= r.y + marginBottom + r.height);
     }
 
     public void update() {
