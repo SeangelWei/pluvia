@@ -79,7 +79,7 @@ public class LevelScreen extends MyScreen {
         int marginLeft = 120;
         int anzahlProReihe = 5;
         int abstandX = 60;
-        int abstandY = 40;
+        int abstandY = 35;
         int blockWidth = 65;
         int blocks = Gdx.files.internal("levels").list().length;
 
