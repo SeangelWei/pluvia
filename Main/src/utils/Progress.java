@@ -114,12 +114,15 @@ public class Progress {
         if(completedLevels.isEmpty()) {
             return 0;
         } else {
-            Integer reachedStars = completedLevels.get(level).reachedStars();
-            if(reachedStars  == null) {
-                return 0;
-            } else {
-                return reachedStars;
+            if(!(completedLevels.size() < level+1)){
+                Integer reachedStars = completedLevels.get(level).reachedStars();
+                if(reachedStars  == null) {
+                    return 0;
+                } else {
+                    return reachedStars;
+                }
             }
         }
+        return 0;
     }
 }

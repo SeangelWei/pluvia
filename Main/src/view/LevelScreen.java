@@ -65,7 +65,9 @@ public class LevelScreen extends MyScreen {
         for (int i = 0; i < reachedLevels; i++) {
             levelIcons.get(i).isEnabled = true;
         }
-        // here todo: make next level enabled
+        if (reachedLevels > 0) {
+            levelIcons.get(reachedLevels).isEnabled = true;
+        }
     }
 
     @Override
@@ -104,8 +106,10 @@ public class LevelScreen extends MyScreen {
             font.draw(batch, levelIcon.level.toString(), levelIcon.x+(levelIcon.blockWidth/2), levelIcon.y+(levelIcon.blockWidth/2));
             if(levelIcon.isEnabled) {
                 int reachedStars = pluvia.getProgress().getReachedStars(levelIcon.level);
-                for (int i = 0; i < reachedStars; i++) {
-                    batch.draw(Assets.starFilled, (levelIcon.x+(levelIcon.blockWidth/2)-45)+i*30, levelIcon.y+(levelIcon.blockWidth/2)-50, 35, 35); // well, this is ugly
+                if (reachedStars != 0) {
+                    for (int i = 0; i < reachedStars; i++) {
+                        batch.draw(Assets.starFilled, (levelIcon.x+(levelIcon.blockWidth/2)-45)+i*30, levelIcon.y+(levelIcon.blockWidth/2)-50, 35, 35); // well, this is ugly
+                    }
                 }
             } else {
                 batch.draw(Assets.levelDisabled, levelIcon.x, levelIcon.y);
