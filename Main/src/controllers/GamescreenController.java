@@ -67,7 +67,7 @@ public class GamescreenController {
     }
 
     private void updateInput() {
-        if(Gdx.app.getType() == Application.ApplicationType.Desktop) {
+        if(Gdx.app.getType() == Application.ApplicationType.Android) {
             if(getGameState() == playing) {
                 gamescreen.input.LEFT = gamescreen.input.isTouched(arrow_left, 50, 10, 70, 50);
                 gamescreen.input.RIGHT = gamescreen.input.isTouched(arrow_right, 10, 50, 70, 50);
