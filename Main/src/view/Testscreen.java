@@ -39,8 +39,9 @@ public class Testscreen extends MyScreen {
     public void render() {
         batch.begin();
         batch.draw(Assets.levelscreen_bg, 0, 0);
-        particleEffect.setPosition(Gdx.graphics.getWidth()/2, Gdx.graphics.getHeight()/2);
+        particleEffect.setPosition(Gdx.input.getX(), Gdx.graphics.getHeight() - Gdx.input.getY());
         particleEffect.draw(batch, Game.delta());
+        particleEffect.start();
         batch.end();
 
         Gdx.gl.glEnable(GL20.GL_BLEND);
@@ -54,7 +55,13 @@ public class Testscreen extends MyScreen {
 
     @Override
     public void init() {
-
+        stage.addListener(new InputListener() {
+            public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
+                particleEffect.dispose();
+                System.out.println("clicked");
+                return false;
+            }
+        });
     }
 
     @Override
