@@ -1,5 +1,7 @@
 package model;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.g2d.ParticleEffect;
 import utils.Assets;
 import utils.Game;
 import utils.GameObject;
@@ -13,6 +15,7 @@ public class Player extends GameObject {
     public boolean isTouched;
     public boolean isInvincible;
     public PowerUp currentPowerUp;
+    public ParticleEffect particleEffect;
     public enum State {
         IDLE, WALKING
     }
@@ -22,6 +25,9 @@ public class Player extends GameObject {
         super(x, 100); // Y is always the same
         bounds.setWidth(Assets.playerIdleRight.getRegionWidth());
         bounds.setHeight(Assets.playerIdleLeft.getRegionHeight());
+        particleEffect = new ParticleEffect();
+        particleEffect.load(Gdx.files.internal("effects/smoke.p"),
+                Gdx.files.internal("effects"));
         init();
     }
 
@@ -91,6 +97,17 @@ public class Player extends GameObject {
             } else {
                 currentPowerUp.use();
             }
+        }
+        if(state == State.WALKING) {
+            particleEffect.getEmitters().get(0).setContinuous(true);
+            if(isFacingLeft) {
+                particleEffect.setPosition(position.x+15, position.y);
+            } else {
+                particleEffect.setPosition(position.x, position.y);
+
+            }
+        } else {
+            particleEffect.getEmitters().get(0).setContinuous(false);
         }
     }
 }

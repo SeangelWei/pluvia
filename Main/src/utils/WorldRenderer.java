@@ -138,6 +138,7 @@ public class WorldRenderer {
             }
         }
         batch.draw(playerFrame, player.position.x, player.position.y);
+        player.particleEffect.draw(batch, Game.delta());
     }
 
     private void drawLife() {

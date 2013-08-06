@@ -31,17 +31,16 @@ public class Testscreen extends MyScreen {
         font = new BitmapFont(Gdx.files.internal("gui/arial-15.fnt"),
                 Gdx.files.internal("gui/arial-15.png"), false);
         particleEffect = new ParticleEffect();
-        particleEffect.load(Gdx.files.internal("effects/explosion.p"),
+        particleEffect.load(Gdx.files.internal("effects/smoke.p"),
                 Gdx.files.internal("effects"));
     }
 
     @Override
     public void render() {
         batch.begin();
-        batch.draw(Assets.levelscreen_bg, 0, 0);
+        batch.draw(Assets.gs_bar, 0, 0);
         particleEffect.setPosition(Gdx.input.getX(), Gdx.graphics.getHeight() - Gdx.input.getY());
         particleEffect.draw(batch, Game.delta());
-        particleEffect.start();
         batch.end();
 
         Gdx.gl.glEnable(GL20.GL_BLEND);
@@ -55,10 +54,11 @@ public class Testscreen extends MyScreen {
 
     @Override
     public void init() {
+        particleEffect.getEmitters().get(0).duration = 10;
+        particleEffect.getEmitters().get(0).setContinuous(false);
         stage.addListener(new InputListener() {
             public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
-                particleEffect.dispose();
-                System.out.println("clicked");
+                particleEffect.reset();
                 return false;
             }
         });
