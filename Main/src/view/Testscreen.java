@@ -8,8 +8,6 @@ import com.badlogic.gdx.graphics.g2d.ParticleEffect;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
-import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
-import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import utils.Assets;
 import utils.Game;
 import utils.MyScreen;
@@ -22,7 +20,7 @@ public class Testscreen extends MyScreen {
     ShapeRenderer shapeRenderer;
     float opaque;
     BitmapFont font;
-    public ParticleEffect particleEffect;
+    public ParticleEffect walkParticle;
 
     public Testscreen(Pluvia pluvia) {
         super(pluvia);
@@ -30,8 +28,8 @@ public class Testscreen extends MyScreen {
         opaque = 1;
         font = new BitmapFont(Gdx.files.internal("gui/arial-15.fnt"),
                 Gdx.files.internal("gui/arial-15.png"), false);
-        particleEffect = new ParticleEffect();
-        particleEffect.load(Gdx.files.internal("effects/smoke.p"),
+        walkParticle = new ParticleEffect();
+        walkParticle.load(Gdx.files.internal("effects/smoke.p"),
                 Gdx.files.internal("effects"));
     }
 
@@ -39,8 +37,8 @@ public class Testscreen extends MyScreen {
     public void render() {
         batch.begin();
         batch.draw(Assets.gs_bar, 0, 0);
-        particleEffect.setPosition(Gdx.input.getX(), Gdx.graphics.getHeight() - Gdx.input.getY());
-        particleEffect.draw(batch, Game.delta());
+        walkParticle.setPosition(Gdx.input.getX(), Gdx.graphics.getHeight() - Gdx.input.getY());
+        walkParticle.draw(batch, Game.delta());
         batch.end();
 
         Gdx.gl.glEnable(GL20.GL_BLEND);
@@ -54,11 +52,10 @@ public class Testscreen extends MyScreen {
 
     @Override
     public void init() {
-        particleEffect.getEmitters().get(0).duration = 10;
-        particleEffect.getEmitters().get(0).setContinuous(false);
+        walkParticle.getEmitters().get(0).duration = 10;
         stage.addListener(new InputListener() {
             public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
-                particleEffect.reset();
+                walkParticle.reset();
                 return false;
             }
         });

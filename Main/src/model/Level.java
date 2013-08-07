@@ -1,6 +1,8 @@
 package model;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.ParticleEffect;
 import com.badlogic.gdx.math.Vector2;
 import utils.*;
 
@@ -17,6 +19,7 @@ public class Level extends GameObject {
     public TimeBar timeBar;
     public Texture background;
     public List<AnimationHelper> currentAnimations = new ArrayList<AnimationHelper>();
+    public ParticleEffect explosionParticle;
     public Level(float x, float y) {
         super(x, y);
     }
@@ -31,6 +34,9 @@ public class Level extends GameObject {
             this.balls.add(new Ball(ball.position.x, ball.position.y, ball.getSize(), ball.getxVector()));
         }
         timeBar = new TimeBar(140, 445, timeLeftSpeed, medals);
+        explosionParticle = new ParticleEffect();
+        explosionParticle.load(Gdx.files.internal("effects/explosion.p"),
+                Gdx.files.internal("effects"));
     }
 
     @Override
@@ -59,6 +65,7 @@ public class Level extends GameObject {
         for (int i = 0; i < balls.size();i++) {
             if (checkCollisionSquareRound(player.position.x, player.position.y, player.bounds.getWidth(), player.bounds.getHeight(), balls.get(i))
                     && !player.isTouched && !player.isInvincible) {
+                startExplosion(balls.get(i).position.x, balls.get(i).position.y);
                 createNewBall(balls.get(i));
                 balls.remove(i);
                 player.setLives(player.getLives() - 1);
@@ -69,6 +76,7 @@ public class Level extends GameObject {
         for(int i = 0; i < balls.size();i++){
             if(player.getShot() != null){
                 if(checkCollisionSquareRound(getShot().position.x, getShot().position.y, getShot().bounds.getWidth(), getShot().bounds.getHeight(), balls.get(i))){
+                    startExplosion(balls.get(i).position.x, balls.get(i).position.y);
                     player.setShot(null);
                     createNewBall(balls.get(i));
                     generatePowerUp(balls.get(i).position);
@@ -102,6 +110,11 @@ public class Level extends GameObject {
                 return;
             }
         }
+    }
+
+    private void startExplosion(float x, float y) {
+        explosionParticle.setPosition(x, y);
+        explosionParticle.start();
     }
 
     private void generatePowerUp(Vector2 position) {
