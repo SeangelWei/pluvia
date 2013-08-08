@@ -1,9 +1,11 @@
 package utils;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Vector2;
 import controllers.GamescreenController;
@@ -16,12 +18,6 @@ public class WorldRenderer {
     ShapeRenderer shapeRenderer;
     BitmapFont font;
     boolean DEBUG = false;
-    String playerCoords;
-    String playerDim;
-    String ballPos;
-    String playerLives;
-    String shotPos="";
-    String gainedPointsString;
     int blinkTimer = 0;
     int playerBlinkerTimer = 0;
     boolean blinker;
@@ -33,8 +29,9 @@ public class WorldRenderer {
         this.batch = spriteBatch;
         shapeRenderer = new ShapeRenderer();
         this.gsController = gsController;
-        font = new BitmapFont(Gdx.files.internal("gui/arial-15.fnt"),
-                Gdx.files.internal("gui/arial-15.png"), false);
+        FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal("fonts/PipeDream.ttf"));
+        font = generator.generateFont(30);
+        generator.dispose();
     }
 
     public void render() {
@@ -93,7 +90,6 @@ public class WorldRenderer {
 
     private void drawLevel() {
         batch.draw(gsController.getLevel().background, 0, 0, 800, 480);
-        batch.draw(Assets.moon, 700, 380, 200, 200);
         if(gsController.getShot() != null){
             batch.draw(Assets.shot, gsController.getShot().position.x, gsController.getShot().position.y);
         }
@@ -176,24 +172,24 @@ public class WorldRenderer {
     }
 
     private void drawPoints() {
-        gainedPointsString = "Points: "+gsController.getLevel().gainedPoints;
-        font.draw(batch, gainedPointsString, 20, 460);
+        font.setColor(Color.GREEN);
+        font.draw(batch, "Points: "+gsController.getLevel().gainedPoints, 20, 460);
     }
 
     private void drawTimeBar() {
         TimeBar timeBar = gsController.getLevel().timeBar;
         shapeRenderer.begin(ShapeRenderer.ShapeType.FilledRectangle);
-        shapeRenderer.setColor(8, 8, 8, 1);
+        shapeRenderer.setColor(Color.LIGHT_GRAY);
         shapeRenderer.filledRect(timeBar.position.x, timeBar.position.y, timeBar.timeLeft_x, 15);
         shapeRenderer.end();
 
         shapeRenderer.begin(ShapeRenderer.ShapeType.Rectangle);
-        shapeRenderer.setColor(0, 0, 0, 0);
+        shapeRenderer.setColor(1, 1, 1, 1);
         shapeRenderer.rect(timeBar.position.x, timeBar.position.y, timeBar.bounds.width, 15);
         shapeRenderer.end();
 
         shapeRenderer.begin(ShapeRenderer.ShapeType.Line);
-        shapeRenderer.setColor(0, 0, 0, 1);
+        shapeRenderer.setColor(Color.DARK_GRAY);
         float width = timeBar.bounds.width;
         float timebar_x = timeBar.position.x;
         shapeRenderer.line(width*timeBar.gold+timebar_x, timeBar.position.y-10, width*timeBar.gold+timebar_x, timeBar.position.y+20);
@@ -234,18 +230,17 @@ public class WorldRenderer {
 
     private void drawDebug() {
         if(DEBUG){
-            playerCoords = "Player coords: "+player.position.x+", "+player.position.y;
-            playerDim = "Player Dimension: "+player.bounds.width+", "+player.bounds.height;
+            String ballPos="";
+            String shotPos="";
             if(!gsController.getBalls().isEmpty()){
                 ballPos = "Ball Position: "+gsController.getBalls().get(0).position.x+", "+gsController.getBalls().get(0).position.y;
             }
-            playerLives = "Player Lives: "+player.getLives();
             if(gsController.getShot() != null)
                 shotPos = "Shot coords: "+gsController.getShot().position.x+", "+gsController.getShot().position.y;
-            font.draw(batch, playerCoords, 0, 470);
-            font.draw(batch, playerDim, 0, 455);
+            font.draw(batch, "Player coords: "+player.position.x+", "+player.position.y, 0, 470);
+            font.draw(batch, "Player Dimension: "+player.bounds.width+", "+player.bounds.height, 0, 455);
             font.draw(batch, ballPos, 0, 440);
-            font.draw(batch, playerLives, 0, 425);
+            font.draw(batch, "Player Lives: "+player.getLives(), 0, 425);
             font.draw(batch, shotPos, 0, 410);
         }
     }

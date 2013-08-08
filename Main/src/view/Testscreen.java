@@ -5,6 +5,7 @@ import com.badlogic.gdx.graphics.GL10;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.ParticleEffect;
+import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
@@ -26,11 +27,12 @@ public class Testscreen extends MyScreen {
         super(pluvia);
         shapeRenderer = new ShapeRenderer();
         opaque = 1;
-        font = new BitmapFont(Gdx.files.internal("gui/arial-15.fnt"),
-                Gdx.files.internal("gui/arial-15.png"), false);
         walkParticle = new ParticleEffect();
         walkParticle.load(Gdx.files.internal("effects/smoke.p"),
                 Gdx.files.internal("effects"));
+        FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal("fonts/PipeDream.ttf"));
+        font = generator.generateFont(30);
+        generator.dispose();
     }
 
     @Override
@@ -39,6 +41,7 @@ public class Testscreen extends MyScreen {
         batch.draw(Assets.gs_bar, 0, 0);
         walkParticle.setPosition(Gdx.input.getX(), Gdx.graphics.getHeight() - Gdx.input.getY());
         walkParticle.draw(batch, Game.delta());
+        font.draw(batch, "Points", Gdx.input.getX(),  Gdx.graphics.getHeight() - Gdx.input.getY());
         batch.end();
 
         Gdx.gl.glEnable(GL20.GL_BLEND);

@@ -177,6 +177,7 @@ public class GamescreenController {
                 nextLevel.setBounds(420, 240, 80, 50);
                 restart.setBounds(300, 240, 80, 50);
                 exitGame.setBounds(350, 180, 80, 50);
+                getPlayer().particleEffect.setPosition(100000, 1000000); //hack
                 break;
             case gameover:
                 resume.setVisible(false);

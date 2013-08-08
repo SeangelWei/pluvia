@@ -8,6 +8,7 @@
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" exported="" name="Mainlibs" level="project" />
+    <orderEntry type="library" name="Desktoplibs" level="project" />
   </component>
 </module>
 

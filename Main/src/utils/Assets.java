@@ -20,7 +20,6 @@ public class Assets {
     public static Texture powerUp_time;
     // ---- GUI ----
     public static Texture gs_bar;
-    public static Texture moon;
     public static Texture arrow_left;
     public static Texture arrow_right;
     public static Texture arrow_up;
@@ -88,7 +87,6 @@ public class Assets {
 
     public static void loadGuiElements(){
         gs_bar = new Texture(Gdx.files.internal("gui/gs_bar.png"));
-        moon = new Texture(Gdx.files.internal("gui/moon.png"));
         arrow_left = new Texture(Gdx.files.internal("gui/arrow_left.png"));
         arrow_right = new Texture(Gdx.files.internal("gui/arrow_right.png"));
         arrow_up = new Texture(Gdx.files.internal("gui/arrow_up.png"));

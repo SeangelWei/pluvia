@@ -33,7 +33,7 @@ public class Level extends GameObject {
         for (Ball ball : balls) {
             this.balls.add(new Ball(ball.position.x, ball.position.y, ball.getSize(), ball.getxVector()));
         }
-        timeBar = new TimeBar(140, 445, timeLeftSpeed, medals);
+        timeBar = new TimeBar(200, 440, timeLeftSpeed, medals);
         explosionParticle = new ParticleEffect();
         explosionParticle.load(Gdx.files.internal("effects/explosion.p"),
                 Gdx.files.internal("effects"));
