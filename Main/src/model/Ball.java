@@ -21,16 +21,16 @@ public class Ball extends GameObject {
         setSize(theSize);
         switch (theSize) {
             case BIG:
-                radius = 50;
-                break;
-            case MIDDLE:
                 radius = 40;
                 break;
-            case SMALL:
+            case MIDDLE:
                 radius = 30;
                 break;
-            case SMALLER:
+            case SMALL:
                 radius = 20;
+                break;
+            case SMALLER:
+                radius = 10;
                 break;
         }
     }
