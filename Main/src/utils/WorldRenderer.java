@@ -133,7 +133,7 @@ public class WorldRenderer {
                     break;
             }
         }
-        batch.draw(playerFrame, player.position.x, player.position.y);
+        batch.draw(playerFrame, player.position.x, player.position.y, 40, 58);
         player.particleEffect.draw(batch, Game.delta());
     }
 
