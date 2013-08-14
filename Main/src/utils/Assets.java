@@ -1,6 +1,7 @@
 package utils;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
@@ -52,6 +53,13 @@ public class Assets {
     public static Animation ballPoppingAnimation;
     public static TextureRegion playerIdleLeft;
     public static TextureRegion playerIdleRight;
+    // ---- Sounds ----
+    public static Sound powerup1;
+    public static Sound powerup2;
+    public static Sound powerup3;
+    public static Sound explosion1;
+    public static Sound explosion2;
+    public static Sound explosion3;
 
     public static void loadObjects(){
         powerUp_immortal = new Texture(Gdx.files.internal("objects/power_immortal.png"));
@@ -117,5 +125,14 @@ public class Assets {
         levelBackgrounds.add(new Texture(Gdx.files.internal("gui/level3.png")));
         levelBackgrounds.add(new Texture(Gdx.files.internal("gui/level4.png")));
         logo = new Texture(Gdx.files.internal("gui/logo.png"));
+    }
+
+    public static void loadSounds(){
+       powerup1 = Gdx.audio.newSound(Gdx.files.internal("sounds/powerup/powerup1.wav"));
+       powerup2 = Gdx.audio.newSound(Gdx.files.internal("sounds/powerup/powerup2.wav"));
+       powerup3 = Gdx.audio.newSound(Gdx.files.internal("sounds/powerup/powerup3.wav"));
+       explosion1 = Gdx.audio.newSound(Gdx.files.internal("sounds/explosion/explosion1.wav"));
+       explosion2 = Gdx.audio.newSound(Gdx.files.internal("sounds/explosion/explosion2.wav"));
+       explosion3 = Gdx.audio.newSound(Gdx.files.internal("sounds/explosion/explosion3.wav"));
     }
 }

@@ -17,6 +17,7 @@ public class Pluvia {
         Gdx.input.setCatchBackKey(true);
         Assets.loadObjects();
         Assets.loadGuiElements();
+        Assets.loadSounds();
         System.out.println("Assets loaded");
         levelManager = new LevelManager();
         progress = new Progress();
