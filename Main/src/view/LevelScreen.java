@@ -2,6 +2,7 @@ package view;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
@@ -17,8 +18,9 @@ public class LevelScreen extends MyScreen {
 
     public LevelScreen(Pluvia pluvia) {
         super(pluvia);
-        font = new BitmapFont(Gdx.files.internal("gui/arial-15.fnt"),
-                Gdx.files.internal("gui/arial-15.png"), false);
+        FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal("fonts/PipeDream.ttf"));
+        font = generator.generateFont(20);
+        generator.dispose();
     }
 
     @Override
@@ -103,7 +105,12 @@ public class LevelScreen extends MyScreen {
         batch.draw(Assets.levelscreen_bg, 0, 0);
         for (LevelIcon levelIcon : levelIcons) {
             batch.draw(Assets.levelIcon, levelIcon.x, levelIcon.y);
-            font.draw(batch, levelIcon.level.toString(), levelIcon.x+(levelIcon.blockWidth/2), levelIcon.y+(levelIcon.blockWidth/2));
+            Integer level = levelIcon.level+1;
+            if(level < 10) {
+                font.draw(batch, level.toString(), levelIcon.x+(levelIcon.blockWidth/2-5), levelIcon.y+(levelIcon.blockWidth/2+5));
+            } else {
+                font.draw(batch, level.toString(), levelIcon.x+(levelIcon.blockWidth/2-10), levelIcon.y+(levelIcon.blockWidth/2+10));
+            }
             if(levelIcon.isEnabled) {
                 int reachedStars = pluvia.getProgress().getReachedStars(levelIcon.level);
                 if (reachedStars != 0) {

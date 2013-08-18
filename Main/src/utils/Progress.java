@@ -54,9 +54,14 @@ public class Progress {
     }
 
     public void saveProgress() {
-        if(!fileHandler.exists()) {
-            fileHandler.delete();
-            writeDatas();
+        if(fileHandler.exists()) {
+            try {
+                fileHandler.delete();
+                fileHandler.file().createNewFile();
+                writeDatas();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         } else {
             try {
                 fileHandler.file().createNewFile();

@@ -17,6 +17,11 @@ public class LevelManager {
     Integer levelSpeed;
     List<Ball> balls = new ArrayList<Ball>();
     float[] medals_array = new float[3];
+    Pluvia pluvia;
+
+    public LevelManager(Pluvia pluvia) {
+        this.pluvia = pluvia;
+    }
 
     /**
      * can be passed either level or fileName
@@ -66,8 +71,12 @@ public class LevelManager {
     }
 
     public void loadNextLevel() {
-        currentLevelNumber++;
-        loadLevel(currentLevelNumber, "");
+        if (currentLevelNumber == 14) {
+            pluvia.getScreenManager().changeTo("CreditScreen");
+        } else {
+            currentLevelNumber++;
+            loadLevel(currentLevelNumber, "");
+        }
     }
 
     public void reloadLevel() {

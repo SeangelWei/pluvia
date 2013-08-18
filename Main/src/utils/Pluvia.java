@@ -19,16 +19,17 @@ public class Pluvia {
         Assets.loadGuiElements();
         Assets.loadSounds();
         System.out.println("Assets loaded");
-        levelManager = new LevelManager();
         progress = new Progress();
         progress.loadProgress();
         screenManager = new ScreenManager();
-        screenManager.add("MenuScreen", new Menuscreen(this));
-        screenManager.add("GameScreen", new Gamescreen(this));
+        screenManager.add("MenuScreen", new MenuScreen(this));
+        screenManager.add("GameScreen", new GameScreen(this));
         screenManager.add("LevelScreen", new LevelScreen(this));
-        screenManager.add("TestScreen", new Testscreen(this));
+        screenManager.add("TestScreen", new TestScreen(this));
         screenManager.add("IntroScreen", new IntroScreen(this));
+        screenManager.add("CreditScreen", new CreditScreen(this));
         screenManager.changeTo("LevelScreen");
+        levelManager = new LevelManager(this);
     }
 
     public void render() {

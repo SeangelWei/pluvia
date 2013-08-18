@@ -13,7 +13,7 @@ import utils.Assets;
 import utils.Button;
 import utils.Game;
 import utils.Pluvia;
-import view.Gamescreen;
+import view.GameScreen;
 
 import java.util.List;
 
@@ -24,7 +24,7 @@ public class GamescreenController {
     public enum gameStateDef { paused, playing, win, gameover, ready }
     gameStateDef gameState;
     Pluvia pluvia;
-    Gamescreen gamescreen;
+    GameScreen gameScreen;
     public Rectangle arrow_right;
     public Rectangle arrow_left;
     public Rectangle arrow_up;
@@ -33,7 +33,7 @@ public class GamescreenController {
     public Button exitGame;
     public Button nextLevel;
 
-    public GamescreenController(Pluvia pluvia, Gamescreen gamescreen) {
+    public GamescreenController(Pluvia pluvia, GameScreen gameScreen) {
         arrow_left = new Rectangle(50, 8, 80, 80);
         arrow_right = new Rectangle(170, 8, 80, 80);
         arrow_up = new Rectangle(680, 0, 80, 80);
@@ -42,7 +42,7 @@ public class GamescreenController {
         exitGame = new Button(0, 0, Assets.exitGameButton);
         nextLevel = new Button(0, 0, Assets.nextLevelButton);
         this.pluvia = pluvia;
-        this.gamescreen = gamescreen;
+        this.gameScreen = gameScreen;
         addButtonListeners();
     }
 
@@ -53,6 +53,7 @@ public class GamescreenController {
             if(getBalls().size() == 0){
                 setGameState(gameStateDef.win);
                 pluvia.getProgress().saveLevelProgress(pluvia.getLevelManager().currentLevelNumber, getCalculatedPoints());
+                pluvia.getProgress().saveProgress();
             }
             if (getPlayer().getLives() == 0) {
                 setGameState(gameStateDef.gameover);
@@ -69,15 +70,15 @@ public class GamescreenController {
     private void updateInput() {
         if(Gdx.app.getType() == Application.ApplicationType.Android) {
             if(getGameState() == playing) {
-                gamescreen.input.LEFT = gamescreen.input.isTouched(arrow_left, 50, 10, 70, 50);
-                gamescreen.input.RIGHT = gamescreen.input.isTouched(arrow_right, 10, 50, 70, 50);
-                gamescreen.input.SPACE = gamescreen.input.isTouched(arrow_up, 50, 50, 70, 50);
+                gameScreen.input.LEFT = gameScreen.input.isTouched(arrow_left, 50, 10, 70, 50);
+                gameScreen.input.RIGHT = gameScreen.input.isTouched(arrow_right, 10, 50, 70, 50);
+                gameScreen.input.SPACE = gameScreen.input.isTouched(arrow_up, 50, 50, 70, 50);
             }
         } else {
             if(getGameState() == playing) {
-                gamescreen.input.update();
+                gameScreen.input.update();
             }
-            if(gamescreen.input.ESCAPE) {
+            if(gameScreen.input.ESCAPE) {
                 if(getGameState() == playing) {
                     setGameState(paused);
                 } else if(getGameState() == paused) {
@@ -122,11 +123,11 @@ public class GamescreenController {
                 setGameState(playing);
             }
         });
-        gamescreen.stage.addActor(resume);
-        gamescreen.stage.addActor(restart);
-        gamescreen.stage.addActor(exitGame);
-        gamescreen.stage.addActor(nextLevel);
-        gamescreen.stage.setViewport(Game.VIRTUAL_WIDTH, Game.VIRTUAL_HEIGHT, true);
+        gameScreen.stage.addActor(resume);
+        gameScreen.stage.addActor(restart);
+        gameScreen.stage.addActor(exitGame);
+        gameScreen.stage.addActor(nextLevel);
+        gameScreen.stage.setViewport(Game.VIRTUAL_WIDTH, Game.VIRTUAL_HEIGHT, true);
 
     }
 
@@ -134,9 +135,9 @@ public class GamescreenController {
         return gameState;
     }
     public void setGameState(gameStateDef gameState){
-        gamescreen.input.LEFT = false;
-        gamescreen.input.RIGHT = false;
-        gamescreen.input.SPACE = false;
+        gameScreen.input.LEFT = false;
+        gameScreen.input.RIGHT = false;
+        gameScreen.input.SPACE = false;
         this.gameState = gameState;
         repositionButtons();
     }

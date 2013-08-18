@@ -119,11 +119,11 @@ public class Assets {
         starFilled = new Texture(Gdx.files.internal("gui/star_full.png"));
         levelDisabled = new Texture(Gdx.files.internal("gui/levelDisabled.png"));
         levelscreen_bg = new Texture(Gdx.files.internal("gui/levelscreen_bg.png"));
-        levelBackgrounds.add(new Texture(Gdx.files.internal("gui/level0.png")));
-        levelBackgrounds.add(new Texture(Gdx.files.internal("gui/level1.png")));
-        levelBackgrounds.add(new Texture(Gdx.files.internal("gui/level2.png")));
-        levelBackgrounds.add(new Texture(Gdx.files.internal("gui/level3.png")));
-        levelBackgrounds.add(new Texture(Gdx.files.internal("gui/level4.png")));
+        levelBackgrounds.add(new Texture(Gdx.files.internal("levelBackgrounds/level0.png")));
+        levelBackgrounds.add(new Texture(Gdx.files.internal("levelBackgrounds/level1.png")));
+        levelBackgrounds.add(new Texture(Gdx.files.internal("levelBackgrounds/level2.png")));
+        levelBackgrounds.add(new Texture(Gdx.files.internal("levelBackgrounds/level3.png")));
+        levelBackgrounds.add(new Texture(Gdx.files.internal("levelBackgrounds/level4.png")));
         logo = new Texture(Gdx.files.internal("gui/logo.png"));
     }
 

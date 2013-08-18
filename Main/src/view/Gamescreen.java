@@ -8,12 +8,12 @@ import static controllers.GamescreenController.gameStateDef.playing;
 import static controllers.GamescreenController.gameStateDef.ready;
 
 
-public class Gamescreen extends MyScreen {
+public class GameScreen extends MyScreen {
     WorldRenderer worldRenderer;
     GamescreenController gsController;
     public final Input input;
 
-    public Gamescreen(Pluvia pluvia) {
+    public GameScreen(Pluvia pluvia) {
         super(pluvia);
         gsController = new GamescreenController(pluvia, this);
         worldRenderer = new WorldRenderer(batch, gsController);

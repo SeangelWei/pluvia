@@ -17,13 +17,13 @@ import utils.Pluvia;
 /**
  * This screen is just for testing
  */
-public class Testscreen extends MyScreen {
+public class TestScreen extends MyScreen {
     ShapeRenderer shapeRenderer;
     float opaque;
     BitmapFont font;
     public ParticleEffect walkParticle;
 
-    public Testscreen(Pluvia pluvia) {
+    public TestScreen(Pluvia pluvia) {
         super(pluvia);
         shapeRenderer = new ShapeRenderer();
         opaque = 1;

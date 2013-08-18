@@ -6,11 +6,11 @@ import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import utils.*;
 
-public class Menuscreen extends MyScreen {
+public class MenuScreen extends MyScreen {
     Button startButton;
     Button exitButton;
 
-    public Menuscreen(final Pluvia pluvia) {
+    public MenuScreen(final Pluvia pluvia) {
         super(pluvia);
         startButton = new Button(70, 180, Assets.menu_play);
         exitButton = new Button(620, 280, Assets.menu_exit);
