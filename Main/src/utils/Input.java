@@ -12,11 +12,10 @@ public class Input {
     public boolean ESCAPE;
 
     public boolean isTouched(Rectangle rectangle, int marginLeft, int marginRight, int marginTop, int marginBottom) {
-        System.out.println("touched");
         for (int i = 0; i < 10; i++) {
             if(Gdx.input.isTouched(i)) {
-                Vector2 touch = new Vector2(Gdx.input.getX(i), Gdx.graphics.getHeight() - Gdx.input.getY(i));
-                if(pointInRectangle(rectangle, touch, marginLeft, marginRight, marginTop, marginBottom)) {
+                Vector2 newTouch = new Vector2(Gdx.input.getX(i)/Game.scale, (Gdx.graphics.getHeight() - Gdx.input.getY(i))/Game.scale);
+                if(pointInRectangle(rectangle, newTouch, marginLeft, marginRight, marginTop, marginBottom)) {
                     return true;
                 }
             }

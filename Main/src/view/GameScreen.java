@@ -59,11 +59,17 @@ public class GameScreen extends MyScreen {
     public void show() { }
 
     @Override
-    public void hide() { }
+    public void hide() {
+        pluvia.getProgress().saveProgress();
+    }
 
     @Override
-    public void pause() { }
+    public void pause() {
+        pluvia.getProgress().saveProgress();
+    }
 
     @Override
-    public void dispose() { }
+    public void dispose() {
+        pluvia.getProgress().saveProgress();
+    }
 }

@@ -7,8 +7,7 @@ public class DesktopStarter {
         LwjglApplicationConfiguration cfg = new LwjglApplicationConfiguration();
         cfg.title = "Pluvia";
         cfg.useGL20 = true;
-        boolean BIG = false;
-        if(BIG) {
+        if(true) {
             cfg.width = 1280;
             cfg.height = 768;
         } else {

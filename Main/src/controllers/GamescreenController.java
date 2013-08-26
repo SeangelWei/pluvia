@@ -53,7 +53,6 @@ public class GamescreenController {
             if(getBalls().size() == 0){
                 setGameState(gameStateDef.win);
                 pluvia.getProgress().saveLevelProgress(pluvia.getLevelManager().currentLevelNumber, getCalculatedPoints());
-                pluvia.getProgress().saveProgress();
             }
             if (getPlayer().getLives() == 0) {
                 setGameState(gameStateDef.gameover);

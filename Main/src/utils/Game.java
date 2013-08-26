@@ -11,11 +11,11 @@ public class Game implements ApplicationListener {
     Pluvia pluvia;
     static OrthographicCamera camera;
     static float delta;
-
     public static final int VIRTUAL_WIDTH = 800;
     public static final int VIRTUAL_HEIGHT = 480;
-    private static final float ASPECT_RATIO = (float)VIRTUAL_WIDTH/(float)VIRTUAL_HEIGHT;
+    public static final float ASPECT_RATIO = (float)VIRTUAL_WIDTH/(float)VIRTUAL_HEIGHT;
     private Rectangle viewport;
+    public static float scale;
 
     @Override
     public void create() {
@@ -27,7 +27,6 @@ public class Game implements ApplicationListener {
     @Override
     public void resize(int width, int height) {
         float aspectRatio = (float)width/(float)height;
-        float scale = 1f;
         Vector2 crop = new Vector2(0f, 0f);
         if(aspectRatio > ASPECT_RATIO)
         {
