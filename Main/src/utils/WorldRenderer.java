@@ -178,6 +178,7 @@ public class WorldRenderer {
 
     private void drawTimeBar() {
         TimeBar timeBar = gsController.getLevel().timeBar;
+        shapeRenderer.setProjectionMatrix(Game.getCamera().combined);
         shapeRenderer.begin(ShapeRenderer.ShapeType.FilledRectangle);
         shapeRenderer.setColor(Color.LIGHT_GRAY);
         shapeRenderer.filledRect(timeBar.position.x, timeBar.position.y, timeBar.timeLeft_x, 15);
