@@ -46,10 +46,10 @@ public class Ball extends GameObject {
         position.x += xVector* Game.delta() * speed;
         position.y += yVector* Game.delta() * speed;
 
-        if(position.x+radius >= 750){
+        if(position.x+radius*2 >= 800){
             xVector = -xVector;
         }
-        if(position.x+radius <= 50){
+        if(position.x <= 0){
             xVector = -xVector;
         }
     }
