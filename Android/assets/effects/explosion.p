@@ -144,4 +144,4 @@ aligned: false
 additive: true
 behind: false
 - Image Path -
-C:\Users\leo\Pictures\particle_point.png
+particle_point.png

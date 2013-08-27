@@ -135,4 +135,4 @@ aligned: false
 additive: true
 behind: false
 - Image Path -
-C:\Users\leo\Pictures\smoketex.jpg
+smoketex.jpg

@@ -131,4 +131,4 @@ aligned: false
 additive: true
 behind: false
 - Image Path -
-C:\projects\pluvia\Android\assets\effects\particle_point.png
+particle_point.png
