@@ -135,6 +135,7 @@ public class Assets {
         levelBackgrounds.add(new Texture(Gdx.files.internal("levelBackgrounds/level9.png")));
         levelBackgrounds.add(new Texture(Gdx.files.internal("levelBackgrounds/level10.png")));
         levelBackgrounds.add(new Texture(Gdx.files.internal("levelBackgrounds/level11.png")));
+        levelBackgrounds.add(new Texture(Gdx.files.internal("levelBackgrounds/level12.png")));
         logo = new Texture(Gdx.files.internal("gui/logo.png"));
     }
 

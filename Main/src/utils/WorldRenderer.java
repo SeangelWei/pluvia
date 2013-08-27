@@ -92,6 +92,7 @@ public class WorldRenderer {
         batch.draw(gsController.getLevel().background, 0, 0, 800, 480);
         if(gsController.getShot() != null){
             batch.draw(Assets.shot, gsController.getShot().position.x, gsController.getShot().position.y);
+            player.getShot().particleEffect.draw(batch, Game.delta());
         }
         batch.draw(Assets.gs_bar, 0, 0);
         batch.draw(Assets.arrow_left, gsController.arrow_left.x, gsController.arrow_left.y);

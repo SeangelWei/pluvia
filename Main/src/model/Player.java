@@ -44,6 +44,7 @@ public class Player extends GameObject {
     public void shot(){
         if(shot == null){
             shot = new Shot(position.x + bounds.width/2);
+            shot.particleEffect.start();
         }
     }
 
