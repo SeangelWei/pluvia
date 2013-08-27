@@ -1,5 +1,7 @@
 package model;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.g2d.ParticleEffect;
 import utils.Game;
 import utils.GameObject;
 
@@ -10,6 +12,7 @@ public class Ball extends GameObject {
     private final int groundPosition = 100;
     private static final double gravity = 1;
     private float speed;
+    public ParticleEffect particleEffect;
 
     public static enum sizeDef { SMALLER, SMALL, MIDDLE, BIG }
     private sizeDef size;
@@ -33,12 +36,17 @@ public class Ball extends GameObject {
                 radius = 10;
                 break;
         }
+        particleEffect = new ParticleEffect();
+        particleEffect.load(Gdx.files.internal("effects/smoke.p"),
+                Gdx.files.internal("effects"));
     }
 
     @Override
     public void update() {
         if(position.y-1 <= groundPosition){
             yVector *= -1;
+            particleEffect.setPosition(position.x+radius, position.y);
+            particleEffect.start();
         } else {
             yVector -= gravity;
         }

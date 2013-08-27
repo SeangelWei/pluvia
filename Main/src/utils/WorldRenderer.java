@@ -164,6 +164,7 @@ public class WorldRenderer {
                     batch.draw(Assets.ball_smaller, ball.position.x, ball.position.y, diameter, diameter);
                     break;
             }
+            ball.particleEffect.draw(batch, Game.delta());
         }
 //        for (AnimationHelper currentAnimation : gsController.getLevel().currentAnimations) {
 //            batch.draw(Assets.ballPoppingAnimation.getKeyFrame(currentAnimation.stateTime), currentAnimation.vector2.x, currentAnimation.vector2.y);
