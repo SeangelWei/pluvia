@@ -2,8 +2,10 @@ package controllers;
 
 import com.badlogic.gdx.Application;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import model.Ball;
 import model.Level;
@@ -72,6 +74,9 @@ public class GamescreenController {
                 gameScreen.input.LEFT = gameScreen.input.isTouched(arrow_left, 50, 10, 70, 50);
                 gameScreen.input.RIGHT = gameScreen.input.isTouched(arrow_right, 10, 50, 70, 50);
                 gameScreen.input.SPACE = gameScreen.input.isTouched(arrow_up, 50, 50, 70, 50);
+                if (Gdx.input.isKeyPressed(Input.Keys.BACK)) {
+                    setGameState(paused);
+                }
             }
         } else {
             if(getGameState() == playing) {
@@ -122,6 +127,15 @@ public class GamescreenController {
                 setGameState(playing);
             }
         });
+//        gameScreen.stage.addListener(new ClickListener() {
+//            @Override
+//            public boolean keyTyped(InputEvent event, char character) {
+//                if (gameState == paused && event.getKeyCode() == com.badlogic.gdx.Input.Keys.BACK) {
+//                    setGameState(playing);
+//                }
+//                return false;
+//            }
+//        });
         gameScreen.stage.addActor(resume);
         gameScreen.stage.addActor(restart);
         gameScreen.stage.addActor(exitGame);

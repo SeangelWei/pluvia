@@ -16,12 +16,17 @@ public class Game implements ApplicationListener {
     public static final float ASPECT_RATIO = (float)VIRTUAL_WIDTH/(float)VIRTUAL_HEIGHT;
     private Rectangle viewport;
     public static float scale;
+    public static float musicVolume = 0.3f;
+    public static float soundVolume = 0.3f;
 
     @Override
     public void create() {
         camera = new OrthographicCamera();
         camera.setToOrtho(false, VIRTUAL_WIDTH, VIRTUAL_HEIGHT);
         pluvia = new Pluvia(camera);
+        Assets.music.setVolume(musicVolume);
+        Assets.music.setLooping(true);
+        Assets.music.play();
     }
 
     @Override

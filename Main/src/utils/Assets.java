@@ -1,6 +1,7 @@
 package utils;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
@@ -60,8 +61,11 @@ public class Assets {
     public static Sound explosion1;
     public static Sound explosion2;
     public static Sound explosion3;
+    public static Sound click;
+    // ---- Music ----
+    public static Music music;
 
-    public static void loadObjects(){
+    public static void loadObjects() {
         powerUp_immortal = new Texture(Gdx.files.internal("objects/power_immortal.png"));
         powerUp_speed = new Texture(Gdx.files.internal("objects/power_speed.png"));
         powerUp_time = new Texture(Gdx.files.internal("objects/power_time.png"));
@@ -72,7 +76,7 @@ public class Assets {
         ball_big = new Texture(Gdx.files.internal("objects/ball.png"));
         TextureRegion[] walkLeftFrames = new TextureRegion[5];
         for (int i = 0; i < 5; i++) {
-            walkLeftFrames[i] = new TextureRegion(new Texture(Gdx.files.internal("animationExample/bob_0"+i+".png")));
+            walkLeftFrames[i] = new TextureRegion(new Texture(Gdx.files.internal("animationExample/bob_0" + i + ".png")));
         }
         walkLeftAnimation = new Animation(0.06f, walkLeftFrames);
 
@@ -88,12 +92,12 @@ public class Assets {
 
         TextureRegion[] ballPoppingFrames = new TextureRegion[3];
         for (int i = 0; i < 3; i++) {
-            ballPoppingFrames[i] = new TextureRegion(new Texture(Gdx.files.internal("poppingAnimation/pop_0"+i+".png")));
+            ballPoppingFrames[i] = new TextureRegion(new Texture(Gdx.files.internal("poppingAnimation/pop_0" + i + ".png")));
         }
         ballPoppingAnimation = new Animation(0.03f, ballPoppingFrames);
     }
 
-    public static void loadGuiElements(){
+    public static void loadGuiElements() {
         gs_bar = new Texture(Gdx.files.internal("gui/gs_bar.png"));
         arrow_left = new Texture(Gdx.files.internal("gui/arrow_left.png"));
         arrow_right = new Texture(Gdx.files.internal("gui/arrow_right.png"));
@@ -127,12 +131,14 @@ public class Assets {
         logo = new Texture(Gdx.files.internal("gui/logo.png"));
     }
 
-    public static void loadSounds(){
-       powerup1 = Gdx.audio.newSound(Gdx.files.internal("sounds/powerup/powerup1.wav"));
-       powerup2 = Gdx.audio.newSound(Gdx.files.internal("sounds/powerup/powerup2.wav"));
-       powerup3 = Gdx.audio.newSound(Gdx.files.internal("sounds/powerup/powerup3.wav"));
-       explosion1 = Gdx.audio.newSound(Gdx.files.internal("sounds/explosion/explosion1.wav"));
-       explosion2 = Gdx.audio.newSound(Gdx.files.internal("sounds/explosion/explosion2.wav"));
-       explosion3 = Gdx.audio.newSound(Gdx.files.internal("sounds/explosion/explosion3.wav"));
+    public static void loadSounds() {
+        powerup1 = Gdx.audio.newSound(Gdx.files.internal("sounds/powerup/powerup1.wav"));
+        powerup2 = Gdx.audio.newSound(Gdx.files.internal("sounds/powerup/powerup2.wav"));
+        powerup3 = Gdx.audio.newSound(Gdx.files.internal("sounds/powerup/powerup3.wav"));
+        explosion1 = Gdx.audio.newSound(Gdx.files.internal("sounds/explosion/explosion1.wav"));
+        explosion2 = Gdx.audio.newSound(Gdx.files.internal("sounds/explosion/explosion2.wav"));
+        explosion3 = Gdx.audio.newSound(Gdx.files.internal("sounds/explosion/explosion3.wav"));
+        music = Gdx.audio.newMusic(Gdx.files.internal("sounds/music.mp3"));
+        click = Gdx.audio.newSound(Gdx.files.internal("sounds/click.wav"));
     }
 }

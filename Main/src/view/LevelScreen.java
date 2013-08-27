@@ -34,6 +34,7 @@ public class LevelScreen extends MyScreen {
                 @Override
                 public void clicked(InputEvent event, float x, float y) {
                     if(levelIcon.isEnabled) {
+                        Assets.click.play(Game.soundVolume);
                         pluvia.getLevelManager().loadLevel(levelIcon.level, levelIcon.fileName);
                         pluvia.getScreenManager().changeTo("GameScreen");
                     }
@@ -46,6 +47,7 @@ public class LevelScreen extends MyScreen {
         backButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
+                Assets.click.play(Game.soundVolume);
                 pluvia.getScreenManager().changeTo("MenuScreen");
             }
         });
@@ -54,6 +56,7 @@ public class LevelScreen extends MyScreen {
             @Override
             public boolean keyTyped (InputEvent event, char character) {
                 if(event.getKeyCode() == com.badlogic.gdx.Input.Keys.BACK) {
+                    Assets.click.play(Game.soundVolume);
                     pluvia.getScreenManager().changeTo("MenuScreen");
                 }
                 return false;

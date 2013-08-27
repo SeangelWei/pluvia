@@ -23,6 +23,7 @@ public class MenuScreen extends MyScreen {
         startButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
+                Assets.click.play(Game.soundVolume);
                 pluvia.getScreenManager().changeTo("LevelScreen");
             }
         });
