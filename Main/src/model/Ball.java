@@ -37,7 +37,7 @@ public class Ball extends GameObject {
                 break;
         }
         particleEffect = new ParticleEffect();
-        particleEffect.load(Gdx.files.internal("effects/smoke.p"),
+        particleEffect.load(Gdx.files.internal("effects/ballJump.p"),
                 Gdx.files.internal("effects"));
     }
 
