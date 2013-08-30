@@ -20,6 +20,7 @@ import java.util.List;
 
 import static controllers.GamescreenController.gameStateDef.paused;
 import static controllers.GamescreenController.gameStateDef.playing;
+import static controllers.GamescreenController.gameStateDef.win;
 
 public class GamescreenController {
     public enum gameStateDef { paused, playing, win, gameover, ready }
@@ -92,12 +93,16 @@ public class GamescreenController {
     }
 
     private int getCalculatedPoints() {
+        int gainedStars;
         if(getLevel().timeBar.timeLeft_x > getLevel().timeBar.gold * getLevel().timeBar.bounds.width) {
-            return 3;
+            gainedStars = 3;
         } else if(getLevel().timeBar.timeLeft_x > getLevel().timeBar.silver * getLevel().timeBar.bounds.width) {
-            return 2;
+            gainedStars = 2;
+        } else {
+            gainedStars = 1;
         }
-        return 1;
+        getLevel().gainedStars = gainedStars;
+        return gainedStars;
     }
 
     private void addButtonListeners() {
@@ -191,6 +196,7 @@ public class GamescreenController {
                 restart.setBounds(300, 240, 80, 50);
                 exitGame.setBounds(350, 180, 80, 50);
                 getPlayer().particleEffect.setPosition(100000, 1000000); //hack
+
                 break;
             case gameover:
                 resume.setVisible(false);

@@ -6,6 +6,7 @@ import models.Player;
 import utils.*;
 
 import static controllers.GamescreenController.gameStateDef.playing;
+import static controllers.GamescreenController.gameStateDef.win;
 
 
 public class GameScreen extends MyScreen {

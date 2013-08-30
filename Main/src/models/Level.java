@@ -20,6 +20,7 @@ public class Level extends GameObject {
     public Texture background;
     public List<AnimationHelper> currentAnimations = new ArrayList<AnimationHelper>();
     public ParticleEffect explosionParticle;
+    public int gainedStars;
     public Level(float x, float y) {
         super(x, y);
     }

@@ -115,7 +115,7 @@ public class Assets {
         menu_exit = new Texture(Gdx.files.internal("gui/exit_button.png"));
         test = new Texture(Gdx.files.internal("gui/test.png"));
         pauseState = new Texture(Gdx.files.internal("gui/pauseState.png"));
-        winState = new Texture(Gdx.files.internal("gui/winState.png"));
+        winState = new Texture(Gdx.files.internal("gui/winState2.png"));
         gameoverState = new Texture(Gdx.files.internal("gui/gameoverState.png"));
         transparent = new Texture(Gdx.files.internal("gui/transparent.png"));
         resumeButton = new Texture(Gdx.files.internal("gui/resumeButton.png"));
