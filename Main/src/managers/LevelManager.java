@@ -12,6 +12,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import static models.Ball.*;
+
 public class LevelManager {
     public Level currentLevel;
     public Integer currentLevelNumber;
@@ -53,10 +55,16 @@ public class LevelManager {
                 int ballY = Integer.parseInt(ball.getAttribute("y"));
                 int vectorX = Integer.parseInt(ball.getAttribute("xVector"));
                 String size = ball.getAttribute("size");
-                Ball.sizeDef[] allSizes = Ball.sizeDef.values();
-                for (Ball.sizeDef sizeDef : allSizes) {
+                String color = ball.getAttribute("color");
+                sizeDef[] allSizes = sizeDef.values();
+                for (sizeDef sizeDef : allSizes) {
                     if(size.equals(sizeDef.toString())){
-                        balls.add(new Ball(ballX, ballY, sizeDef, vectorX));
+                        colorDef[] allColors = colorDef.values();
+                        for (colorDef colorDef : allColors) {
+                            if (color.equals(colorDef.toString())) {
+                                balls.add(new Ball(ballX, ballY, sizeDef, colorDef, vectorX));
+                            }
+                        }
                     }
                 }
                 player = null;

@@ -12,10 +12,15 @@ import java.util.List;
 
 public class Assets {
     public static Texture shot;
-    public static Texture ball_smaller;
-    public static Texture ball_small;
-    public static Texture ball_middle;
-    public static Texture ball_big;
+    public static Texture ball_smaller_blue;
+    public static Texture ball_small_blue;
+    public static Texture ball_middle_blue;
+    public static Texture ball_big_blue;
+
+    public static Texture ball_smaller_red;
+    public static Texture ball_small_red;
+    public static Texture ball_middle_red;
+    public static Texture ball_big_red;
 
     public static Texture powerUp_immortal;
     public static Texture powerUp_speed;
@@ -72,10 +77,11 @@ public class Assets {
         powerUp_speed = new Texture(Gdx.files.internal("objects/power_speed.png"));
         powerUp_time = new Texture(Gdx.files.internal("objects/power_time.png"));
         shot = new Texture(Gdx.files.internal("objects/shot2.png"));
-        ball_smaller = new Texture(Gdx.files.internal("objects/ball.png"));
-        ball_small = new Texture(Gdx.files.internal("objects/ball.png"));
-        ball_middle = new Texture(Gdx.files.internal("objects/ball.png"));
-        ball_big = new Texture(Gdx.files.internal("objects/ball.png"));
+        ball_smaller_blue = new Texture(Gdx.files.internal("objects/ball.png"));
+        ball_small_blue = new Texture(Gdx.files.internal("objects/ball.png"));
+        ball_middle_blue = new Texture(Gdx.files.internal("objects/ball.png"));
+        ball_big_blue = new Texture(Gdx.files.internal("objects/ball_blue.png"));
+        ball_big_red = new Texture(Gdx.files.internal("objects/ball_red.png"));
         TextureRegion[] walkLeftFrames = new TextureRegion[5];
         for (int i = 0; i < 5; i++) {
             walkLeftFrames[i] = new TextureRegion(new Texture(Gdx.files.internal("animationExample/bob_0" + i + ".png")));

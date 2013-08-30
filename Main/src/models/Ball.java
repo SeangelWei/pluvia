@@ -2,6 +2,7 @@ package models;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.ParticleEffect;
+import com.badlogic.gdx.math.Vector2;
 import managers.GameManager;
 import utils.GameObject;
 
@@ -16,12 +17,15 @@ public class Ball extends GameObject {
 
     public static enum sizeDef { SMALLER, SMALL, MIDDLE, BIG }
     private sizeDef size;
+    public static enum colorDef { BLUE, RED }
+    private colorDef color;
 
-    public Ball(float x, float y, sizeDef theSize, float direction) {
+    public Ball(float x, float y, sizeDef theSize, colorDef theColor, float direction) {
         super(x, y);
         xVector = direction;
         speed = 12;
-        setSize(theSize);
+        size = theSize;
+        color = theColor;
         switch (theSize) {
             case BIG:
                 radius = 40;
@@ -65,8 +69,8 @@ public class Ball extends GameObject {
         return size;
     }
 
-    public void setSize(sizeDef size) {
-        this.size = size;
+    public colorDef getColor() {
+        return color;
     }
 
     public int getRadius() {

@@ -3,7 +3,7 @@
     <player x="500"/>
     <balls>
         <!-- SMALLER, SMALL, MIDDLE, BIG -->
-        <ball x="100" y="300" size="SMALL" xVector="-8"/>
+        <ball x="100" y="300" size="SMALL" color="BLUE" xVector="-8"/>
     </balls>
     <levelSpeed speed="50"/>
     <silver value="0.5"/>

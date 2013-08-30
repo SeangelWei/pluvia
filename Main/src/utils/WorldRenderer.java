@@ -154,16 +154,16 @@ public class WorldRenderer {
             diameter = ball.getRadius()*2;
             switch (ball.getSize()) {
                 case SMALL:
-                    batch.draw(Assets.ball_small, ball.position.x, ball.position.y, diameter, diameter);
+                    batch.draw(Assets.ball_small_blue, ball.position.x, ball.position.y, diameter, diameter);
                     break;
                 case MIDDLE:
-                    batch.draw(Assets.ball_middle, ball.position.x, ball.position.y, diameter, diameter);
+                    batch.draw(Assets.ball_middle_blue, ball.position.x, ball.position.y, diameter, diameter);
                     break;
                 case BIG:
-                    batch.draw(Assets.ball_big, ball.position.x, ball.position.y, diameter, diameter);
+                    batch.draw(Assets.ball_big_blue, ball.position.x, ball.position.y, diameter, diameter);
                     break;
                 case SMALLER:
-                    batch.draw(Assets.ball_smaller, ball.position.x, ball.position.y, diameter, diameter);
+                    batch.draw(Assets.ball_smaller_blue, ball.position.x, ball.position.y, diameter, diameter);
                     break;
             }
             ball.particleEffect.draw(batch, GameManager.delta());
@@ -192,7 +192,7 @@ public class WorldRenderer {
         shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
         shapeRenderer.setColor(Color.DARK_GRAY);
         shapeRenderer.rect(width*timeBar.gold+timebar_x, timeBar.position.y-10, 3, 35);
-        shapeRenderer.rect(width*timeBar.silver+timebar_x, timeBar.position.y-10, 3, 35);
+        shapeRenderer.rect(width * timeBar.silver + timebar_x, timeBar.position.y - 10, 3, 35);
         shapeRenderer.end();
     }
 
