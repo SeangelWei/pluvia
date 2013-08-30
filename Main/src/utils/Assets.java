@@ -77,9 +77,9 @@ public class Assets {
         powerUp_speed = new Texture(Gdx.files.internal("objects/power_speed.png"));
         powerUp_time = new Texture(Gdx.files.internal("objects/power_time.png"));
         shot = new Texture(Gdx.files.internal("objects/shot2.png"));
-        ball_smaller_blue = new Texture(Gdx.files.internal("objects/ball.png"));
-        ball_small_blue = new Texture(Gdx.files.internal("objects/ball.png"));
-        ball_middle_blue = new Texture(Gdx.files.internal("objects/ball.png"));
+        ball_smaller_blue = new Texture(Gdx.files.internal("objects/ball_blue.png"));
+        ball_small_blue = new Texture(Gdx.files.internal("objects/ball_blue.png"));
+        ball_middle_blue = new Texture(Gdx.files.internal("objects/ball_blue.png"));
         ball_big_blue = new Texture(Gdx.files.internal("objects/ball_blue.png"));
         ball_big_red = new Texture(Gdx.files.internal("objects/ball_red.png"));
         TextureRegion[] walkLeftFrames = new TextureRegion[5];

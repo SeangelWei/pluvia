@@ -162,24 +162,24 @@ public class Level extends GameObject {
         currentAnimations.add(new AnimationHelper(new Vector2(toDestroyBall.position.x-toDestroyBall.getRadius(), toDestroyBall.position.y)));
         switch(toDestroyBall.getSize()){
             case BIG:
-                Ball middleBall1 = new Ball(toDestroyBall.position.x, toDestroyBall.position.y+toDestroyBall.getRadius(), Ball.sizeDef.MIDDLE, Ball.colorDef.BLUE, -2.4f);
-                Ball middleBall2 = new Ball(toDestroyBall.position.x, toDestroyBall.position.y+toDestroyBall.getRadius(), Ball.sizeDef.MIDDLE, Ball.colorDef.BLUE,2.2f);
+                Ball middleBall1 = new Ball(toDestroyBall.position.x, toDestroyBall.position.y+toDestroyBall.getRadius(), Ball.sizeDef.MIDDLE, Ball.colorDef.BLUE, -10f);
+                Ball middleBall2 = new Ball(toDestroyBall.position.x, toDestroyBall.position.y+toDestroyBall.getRadius(), Ball.sizeDef.MIDDLE, Ball.colorDef.BLUE, 10f);
                 middleBall1.setyVector(25);
                 middleBall2.setyVector(25);
                 balls.add(middleBall1);
                 balls.add(middleBall2);
                 break;
             case MIDDLE:
-                Ball smallBall1 = new Ball(toDestroyBall.position.x, toDestroyBall.position.y+toDestroyBall.getRadius(), Ball.sizeDef.SMALL, Ball.colorDef.BLUE, -2.4f);
-                Ball smallBall2 = new Ball(toDestroyBall.position.x, toDestroyBall.position.y+toDestroyBall.getRadius(), Ball.sizeDef.SMALL, Ball.colorDef.BLUE, 2.2f);
+                Ball smallBall1 = new Ball(toDestroyBall.position.x, toDestroyBall.position.y+toDestroyBall.getRadius(), Ball.sizeDef.SMALL, Ball.colorDef.BLUE, -10f);
+                Ball smallBall2 = new Ball(toDestroyBall.position.x, toDestroyBall.position.y+toDestroyBall.getRadius(), Ball.sizeDef.SMALL, Ball.colorDef.BLUE, 10f);
                 smallBall1.setyVector(25);
                 smallBall2.setyVector(25);
                 balls.add(smallBall1);
                 balls.add(smallBall2);
                 break;
             case SMALL:
-                Ball smallerBall1 = new Ball(toDestroyBall.position.x, toDestroyBall.position.y+toDestroyBall.getRadius(), Ball.sizeDef.SMALLER, Ball.colorDef.BLUE,-2.4f);
-                Ball smallerBall2 = new Ball(toDestroyBall.position.x, toDestroyBall.position.y+toDestroyBall.getRadius(), Ball.sizeDef.SMALLER, Ball.colorDef.BLUE,2.2f);
+                Ball smallerBall1 = new Ball(toDestroyBall.position.x, toDestroyBall.position.y+toDestroyBall.getRadius(), Ball.sizeDef.SMALLER, Ball.colorDef.BLUE,-10f);
+                Ball smallerBall2 = new Ball(toDestroyBall.position.x, toDestroyBall.position.y+toDestroyBall.getRadius(), Ball.sizeDef.SMALLER, Ball.colorDef.BLUE, 10f);
                 smallerBall1.setyVector(25);
                 smallerBall2.setyVector(25);
                 balls.add(smallerBall1);
