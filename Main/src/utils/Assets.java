@@ -48,7 +48,7 @@ public class Assets {
     public static Texture logo;
     // ---- Levels ----
     public static Texture levelIcon;
-    static List<Texture> levelBackgrounds = new ArrayList<Texture>();
+    public static List<Texture> levelBackgrounds = new ArrayList<Texture>();
     public static Animation walkLeftAnimation;
     public static Animation walkRightAnimation;
     public static Animation ballPoppingAnimation;

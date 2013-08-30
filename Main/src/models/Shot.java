@@ -1,9 +1,9 @@
-package model;
+package models;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.ParticleEffect;
 import utils.Assets;
-import utils.Game;
+import managers.GameManager;
 import utils.GameObject;
 
 public class Shot extends GameObject {
@@ -22,7 +22,7 @@ public class Shot extends GameObject {
 
     @Override
     public void update() {
-        position.y += Game.delta()*speed;
+        position.y += GameManager.delta()*speed;
         particleEffect.setPosition(position.x+Assets.shot.getWidth()/2, position.y+bounds.getHeight());
     }
 }

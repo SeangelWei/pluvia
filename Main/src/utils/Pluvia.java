@@ -3,13 +3,16 @@ package utils;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import managers.LevelManager;
+import managers.ProgressManager;
+import managers.ScreenManager;
 import view.*;
 
 public class Pluvia {
     SpriteBatch batch;
     ScreenManager screenManager;
     LevelManager levelManager;
-    Progress progress;
+    ProgressManager progressManager;
 
     public Pluvia(OrthographicCamera camera) {
         batch = new SpriteBatch();
@@ -19,8 +22,8 @@ public class Pluvia {
         Assets.loadGuiElements();
         Assets.loadSounds();
         System.out.println("Assets loaded");
-        progress = new Progress();
-        progress.loadProgress();
+        progressManager = new ProgressManager();
+        progressManager.loadProgress();
         screenManager = new ScreenManager();
         screenManager.add("MenuScreen", new MenuScreen(this));
         screenManager.add("GameScreen", new GameScreen(this));
@@ -44,8 +47,8 @@ public class Pluvia {
         return levelManager;
     }
 
-    public Progress getProgress() {
-        return progress;
+    public ProgressManager getProgressManager() {
+        return progressManager;
     }
 
     public ScreenManager getScreenManager() {

@@ -10,7 +10,7 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 import utils.Assets;
-import utils.Game;
+import managers.GameManager;
 import utils.MyScreen;
 import utils.Pluvia;
 
@@ -40,7 +40,7 @@ public class TestScreen extends MyScreen {
         batch.begin();
         batch.draw(Assets.gs_bar, 0, 0);
         walkParticle.setPosition(Gdx.input.getX(), Gdx.graphics.getHeight() - Gdx.input.getY());
-        walkParticle.draw(batch, Game.delta());
+        walkParticle.draw(batch, GameManager.delta());
         font.draw(batch, "Points", Gdx.input.getX(),  Gdx.graphics.getHeight() - Gdx.input.getY());
         batch.end();
 

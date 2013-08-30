@@ -3,7 +3,7 @@ package ch.devilgames;
 import android.os.Bundle;
 import com.badlogic.gdx.backends.android.AndroidApplication;
 import com.badlogic.gdx.backends.android.AndroidApplicationConfiguration;
-import utils.Game;
+import managers.GameManager;
 
 public class PluviaStarter extends AndroidApplication
 {
@@ -16,6 +16,6 @@ public class PluviaStarter extends AndroidApplication
         cfg.useCompass = false;
         cfg.useWakelock = true;
         cfg.useGL20 = true;
-        initialize(new Game(), cfg);
+        initialize(new GameManager(), cfg);
     }
 }

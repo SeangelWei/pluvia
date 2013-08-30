@@ -5,15 +5,14 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
-import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
-import model.Ball;
-import model.Level;
-import model.Player;
-import model.Shot;
+import models.Ball;
+import models.Level;
+import models.Player;
+import models.Shot;
 import utils.Assets;
 import utils.Button;
-import utils.Game;
+import managers.GameManager;
 import utils.Pluvia;
 import view.GameScreen;
 
@@ -54,7 +53,7 @@ public class GamescreenController {
             pluvia.getLevelManager().currentLevel.update();
             if(getBalls().size() == 0){
                 setGameState(gameStateDef.win);
-                pluvia.getProgress().saveLevelProgress(pluvia.getLevelManager().currentLevelNumber, getCalculatedPoints());
+                pluvia.getProgressManager().saveLevelProgress(pluvia.getLevelManager().currentLevelNumber, getCalculatedPoints());
             }
             if (getPlayer().getLives() == 0) {
                 setGameState(gameStateDef.gameover);
@@ -71,18 +70,18 @@ public class GamescreenController {
     private void updateInput() {
         if(Gdx.app.getType() == Application.ApplicationType.Android) {
             if(getGameState() == playing) {
-                gameScreen.input.LEFT = gameScreen.input.isTouched(arrow_left, 50, 10, 70, 50);
-                gameScreen.input.RIGHT = gameScreen.input.isTouched(arrow_right, 10, 50, 70, 50);
-                gameScreen.input.SPACE = gameScreen.input.isTouched(arrow_up, 50, 50, 70, 50);
+                gameScreen.inputManager.LEFT = gameScreen.inputManager.isTouched(arrow_left, 50, 10, 70, 50);
+                gameScreen.inputManager.RIGHT = gameScreen.inputManager.isTouched(arrow_right, 10, 50, 70, 50);
+                gameScreen.inputManager.SPACE = gameScreen.inputManager.isTouched(arrow_up, 50, 50, 70, 50);
                 if (Gdx.input.isKeyPressed(Input.Keys.BACK)) {
                     setGameState(paused);
                 }
             }
         } else {
             if(getGameState() == playing) {
-                gameScreen.input.update();
+                gameScreen.inputManager.update();
             }
-            if(gameScreen.input.ESCAPE) {
+            if(gameScreen.inputManager.ESCAPE) {
                 if(getGameState() == playing) {
                     setGameState(paused);
                 } else if(getGameState() == paused) {
@@ -130,7 +129,7 @@ public class GamescreenController {
 //        gameScreen.stage.addListener(new ClickListener() {
 //            @Override
 //            public boolean keyTyped(InputEvent event, char character) {
-//                if (gameState == paused && event.getKeyCode() == com.badlogic.gdx.Input.Keys.BACK) {
+//                if (gameState == paused && event.getKeyCode() == com.badlogic.gdx.InputManager.Keys.BACK) {
 //                    setGameState(playing);
 //                }
 //                return false;
@@ -140,7 +139,7 @@ public class GamescreenController {
         gameScreen.stage.addActor(restart);
         gameScreen.stage.addActor(exitGame);
         gameScreen.stage.addActor(nextLevel);
-        gameScreen.stage.setViewport(Game.VIRTUAL_WIDTH, Game.VIRTUAL_HEIGHT, true);
+        gameScreen.stage.setViewport(GameManager.VIRTUAL_WIDTH, GameManager.VIRTUAL_HEIGHT, true);
 
     }
 
@@ -148,9 +147,9 @@ public class GamescreenController {
         return gameState;
     }
     public void setGameState(gameStateDef gameState){
-        gameScreen.input.LEFT = false;
-        gameScreen.input.RIGHT = false;
-        gameScreen.input.SPACE = false;
+        gameScreen.inputManager.LEFT = false;
+        gameScreen.inputManager.RIGHT = false;
+        gameScreen.inputManager.SPACE = false;
         this.gameState = gameState;
         repositionButtons();
     }

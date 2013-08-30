@@ -1,49 +1,49 @@
 package view;
 
 import controllers.GamescreenController;
-import model.Player;
+import managers.InputManager;
+import models.Player;
 import utils.*;
 
 import static controllers.GamescreenController.gameStateDef.playing;
-import static controllers.GamescreenController.gameStateDef.ready;
 
 
 public class GameScreen extends MyScreen {
     WorldRenderer worldRenderer;
     GamescreenController gsController;
-    public final Input input;
+    public final InputManager inputManager;
 
     public GameScreen(Pluvia pluvia) {
         super(pluvia);
         gsController = new GamescreenController(pluvia, this);
         worldRenderer = new WorldRenderer(batch, gsController);
-        input = new Input();
+        inputManager = new InputManager();
     }
 
     public void render() {
         worldRenderer.render();
         gsController.update();
-        if(input.LEFT) {
+        if(inputManager.LEFT) {
             gsController.getPlayer().moveLeft();
         } else {
-            if(!input.RIGHT) {
+            if(!inputManager.RIGHT) {
                 gsController.getPlayer().state = Player.State.IDLE;
             }
         }
-        if(input.RIGHT) {
+        if(inputManager.RIGHT) {
             gsController.getPlayer().moveRight();
         } else {
-            if(!input.LEFT) {
+            if(!inputManager.LEFT) {
                 gsController.getPlayer().state = Player.State.IDLE;
             }
         }
-        if(input.SPACE) {
+        if(inputManager.SPACE) {
             gsController.getPlayer().shot();
         }
         if(gsController.getGameState() != playing) {
             stage.draw();
         }
-        input.clear();
+        inputManager.clear();
     }
 
     public void init(){
@@ -60,16 +60,16 @@ public class GameScreen extends MyScreen {
 
     @Override
     public void hide() {
-        pluvia.getProgress().saveProgress();
+        pluvia.getProgressManager().saveProgress();
     }
 
     @Override
     public void pause() {
-        pluvia.getProgress().saveProgress();
+        pluvia.getProgressManager().saveProgress();
     }
 
     @Override
     public void dispose() {
-        pluvia.getProgress().saveProgress();
+        pluvia.getProgressManager().saveProgress();
     }
 }

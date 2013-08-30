@@ -1,6 +1,6 @@
 import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
-import utils.Game;
+import managers.GameManager;
 
 public class DesktopStarter {
     public static void main(String[] args) {
@@ -14,6 +14,6 @@ public class DesktopStarter {
             cfg.width = 800;
             cfg.height = 480;
         }
-        new LwjglApplication(new Game(), cfg);
+        new LwjglApplication(new GameManager(), cfg);
     }
 }

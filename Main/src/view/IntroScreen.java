@@ -8,7 +8,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.Scaling;
 import utils.Assets;
-import utils.Game;
+import managers.GameManager;
 import utils.MyScreen;
 import utils.Pluvia;
 
@@ -22,7 +22,7 @@ public class IntroScreen extends MyScreen {
 
     @Override
     public void render() {
-        stage.act(Game.delta());
+        stage.act(GameManager.delta());
         stage.draw();
     }
 

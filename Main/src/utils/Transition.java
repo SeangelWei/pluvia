@@ -3,6 +3,7 @@ package utils;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL10;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import managers.GameManager;
 
 public class Transition {
     public float brightness = 1;
@@ -35,7 +36,7 @@ public class Transition {
         Gdx.gl.glBlendFunc(GL10.GL_SRC_ALPHA, GL10.GL_ONE_MINUS_SRC_ALPHA);
         shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
         shapeRenderer.setColor(0, 0, 0, brightness);
-        shapeRenderer.rect(0, 0, Game.VIRTUAL_WIDTH, Game.VIRTUAL_HEIGHT);
+        shapeRenderer.rect(0, 0, GameManager.VIRTUAL_WIDTH, GameManager.VIRTUAL_HEIGHT);
         shapeRenderer.end();
         Gdx.gl.glDisable(GL10.GL_BLEND);
     }

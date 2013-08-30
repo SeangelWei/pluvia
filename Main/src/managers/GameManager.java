@@ -1,4 +1,4 @@
-package utils;
+package managers;
 
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
@@ -6,8 +6,10 @@ import com.badlogic.gdx.graphics.GL10;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
+import utils.Assets;
+import utils.Pluvia;
 
-public class Game implements ApplicationListener {
+public class GameManager implements ApplicationListener {
     Pluvia pluvia;
     static OrthographicCamera camera;
     static float delta;

@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+import managers.GameManager;
 import utils.*;
 
 public class MenuScreen extends MyScreen {
@@ -23,7 +24,7 @@ public class MenuScreen extends MyScreen {
         startButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                Assets.click.play(Game.soundVolume);
+                Assets.click.play(GameManager.soundVolume);
                 pluvia.getScreenManager().changeTo("LevelScreen");
             }
         });
@@ -38,7 +39,7 @@ public class MenuScreen extends MyScreen {
                 return false;
             }
         });
-        stage.setViewport(Game.VIRTUAL_WIDTH, Game.VIRTUAL_HEIGHT, true);
+        stage.setViewport(GameManager.VIRTUAL_WIDTH, GameManager.VIRTUAL_HEIGHT, true);
     }
 
     @Override

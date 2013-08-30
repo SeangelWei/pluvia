@@ -9,9 +9,11 @@ import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Vector2;
 import controllers.GamescreenController;
-import model.Ball;
-import model.Player;
-import model.PowerUp;
+import managers.GameManager;
+import models.Ball;
+import models.Player;
+import models.PowerUp;
+import models.TimeBar;
 
 public class WorldRenderer {
     SpriteBatch batch;
@@ -92,7 +94,7 @@ public class WorldRenderer {
         batch.draw(gsController.getLevel().background, 0, 0, 800, 480);
         if(gsController.getShot() != null){
             batch.draw(Assets.shot, gsController.getShot().position.x, gsController.getShot().position.y);
-            player.getShot().particleEffect.draw(batch, Game.delta());
+            player.getShot().particleEffect.draw(batch, GameManager.delta());
         }
         batch.draw(Assets.gs_bar, 0, 0);
         batch.draw(Assets.arrow_left, gsController.arrow_left.x, gsController.arrow_left.y);
@@ -123,7 +125,7 @@ public class WorldRenderer {
                     break;
             }
         }
-        player.particleEffect.draw(batch, Game.delta());
+        player.particleEffect.draw(batch, GameManager.delta());
     }
 
     private void drawPlayer() {
@@ -165,12 +167,12 @@ public class WorldRenderer {
                     batch.draw(Assets.ball_smaller, ball.position.x, ball.position.y, diameter, diameter);
                     break;
             }
-            ball.particleEffect.draw(batch, Game.delta());
+            ball.particleEffect.draw(batch, GameManager.delta());
         }
 //        for (AnimationHelper currentAnimation : gsController.getLevel().currentAnimations) {
 //            batch.draw(Assets.ballPoppingAnimation.getKeyFrame(currentAnimation.stateTime), currentAnimation.vector2.x, currentAnimation.vector2.y);
 //        }
-        gsController.getLevel().explosionParticle.draw(batch, Game.delta());
+        gsController.getLevel().explosionParticle.draw(batch, GameManager.delta());
     }
 
     private void drawPoints() {
@@ -180,7 +182,7 @@ public class WorldRenderer {
 
     private void drawTimeBar() {
         TimeBar timeBar = gsController.getLevel().timeBar;
-        shapeRenderer.setProjectionMatrix(Game.getCamera().combined);
+        shapeRenderer.setProjectionMatrix(GameManager.getCamera().combined);
         shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
         shapeRenderer.setColor(Color.LIGHT_GRAY);
         shapeRenderer.rect(timeBar.position.x, timeBar.position.y, timeBar.timeLeft_x, 15);

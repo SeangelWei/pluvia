@@ -6,6 +6,7 @@ import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+import managers.GameManager;
 import utils.*;
 
 import java.util.ArrayList;
@@ -34,20 +35,20 @@ public class LevelScreen extends MyScreen {
                 @Override
                 public void clicked(InputEvent event, float x, float y) {
                     if(levelIcon.isEnabled) {
-                        Assets.click.play(Game.soundVolume);
+                        Assets.click.play(GameManager.soundVolume);
                         pluvia.getLevelManager().loadLevel(levelIcon.level, levelIcon.fileName);
                         pluvia.getScreenManager().changeTo("GameScreen");
                     }
                 }
             });
             stage.addActor(levelIcon);
-            stage.setViewport(Game.VIRTUAL_WIDTH, Game.VIRTUAL_HEIGHT, true);
+            stage.setViewport(GameManager.VIRTUAL_WIDTH, GameManager.VIRTUAL_HEIGHT, true);
         }
         backButton = new Button(60, 380, Assets.arrow_left);
         backButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                Assets.click.play(Game.soundVolume);
+                Assets.click.play(GameManager.soundVolume);
                 pluvia.getScreenManager().changeTo("MenuScreen");
             }
         });
@@ -56,7 +57,7 @@ public class LevelScreen extends MyScreen {
             @Override
             public boolean keyTyped (InputEvent event, char character) {
                 if(event.getKeyCode() == com.badlogic.gdx.Input.Keys.BACK) {
-                    Assets.click.play(Game.soundVolume);
+                    Assets.click.play(GameManager.soundVolume);
                     pluvia.getScreenManager().changeTo("MenuScreen");
                 }
                 return false;
@@ -66,7 +67,7 @@ public class LevelScreen extends MyScreen {
     }
 
     private void synchronize() {
-        int reachedLevels = pluvia.getProgress().completedLevels.size();
+        int reachedLevels = pluvia.getProgressManager().completedLevels.size();
         for (int i = 0; i < reachedLevels; i++) {
             levelIcons.get(i).isEnabled = true;
         }
@@ -94,7 +95,7 @@ public class LevelScreen extends MyScreen {
         for ( int col = 0;  col <= blocks/anzahlProReihe;  col++ ) {
             for ( int row = 0;  row < blocks-(col*anzahlProReihe);  row++ ) {
                 int xa = (blockWidth+abstandX)*row;
-                int ya = Game.VIRTUAL_HEIGHT-((blockWidth+abstandY)*col);
+                int ya = GameManager.VIRTUAL_HEIGHT-((blockWidth+abstandY)*col);
                 if(row < anzahlProReihe){
                     levelIcons.add(new LevelIcon(xa + marginLeft, ya + marginTop, blockWidth, levelCounter));
                     levelCounter++;
@@ -115,7 +116,7 @@ public class LevelScreen extends MyScreen {
                 font.draw(batch, level.toString(), levelIcon.x+(levelIcon.blockWidth/2-10), levelIcon.y+(levelIcon.blockWidth/2+10));
             }
             if(levelIcon.isEnabled) {
-                int reachedStars = pluvia.getProgress().getReachedStars(levelIcon.level);
+                int reachedStars = pluvia.getProgressManager().getReachedStars(levelIcon.level);
                 if (reachedStars != 0) {
                     for (int i = 0; i < reachedStars; i++) {
                         batch.draw(Assets.starFilled, (levelIcon.x+(levelIcon.blockWidth/2)-45)+i*30, levelIcon.y+(levelIcon.blockWidth/2)-50, 35, 35); // well, this is ugly

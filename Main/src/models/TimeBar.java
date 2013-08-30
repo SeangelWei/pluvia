@@ -1,4 +1,7 @@
-package utils;
+package models;
+
+import managers.GameManager;
+import utils.GameObject;
 
 public class TimeBar extends GameObject {
     int speed;
@@ -18,7 +21,7 @@ public class TimeBar extends GameObject {
     @Override
     public void update() {
         if(timeLeft_x > -1) {
-            timeLeft_x -= Game.delta * speed;
+            timeLeft_x -= GameManager.delta() * speed;
         } else {
             finished = true;
         }
