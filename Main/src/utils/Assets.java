@@ -46,6 +46,8 @@ public class Assets {
     public static Texture levelDisabled;
     public static Texture levelscreen_bg;
     public static Texture logo;
+    public static Texture soundOn;
+    public static Texture soundOff;
     // ---- Levels ----
     public static Texture levelIcon;
     public static List<Texture> levelBackgrounds = new ArrayList<Texture>();
@@ -137,6 +139,8 @@ public class Assets {
         levelBackgrounds.add(new Texture(Gdx.files.internal("levelBackgrounds/level11.png")));
         levelBackgrounds.add(new Texture(Gdx.files.internal("levelBackgrounds/level12.png")));
         logo = new Texture(Gdx.files.internal("gui/logo.png"));
+        soundOn = new Texture(Gdx.files.internal("gui/soundOn.png"));
+        soundOff = new Texture(Gdx.files.internal("gui/soundOff.png"));
     }
 
     public static void loadSounds() {

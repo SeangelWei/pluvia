@@ -12,8 +12,8 @@ public class TimeBar extends GameObject {
     public TimeBar(float x, float y, int speed, float[] medals) {
         super(x, y);
         this.speed = speed;
-        this.bounds.width = 480;
-        timeLeft_x = 480;
+        this.bounds.width = 600;
+        timeLeft_x = 600;
         silver = medals[0];
         gold = medals[1];
     }

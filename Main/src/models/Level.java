@@ -16,7 +16,6 @@ public class Level extends GameObject {
     Player player;
     List<Ball> balls = new ArrayList<Ball>();
     List<PowerUp> powerUps = new ArrayList<PowerUp>();
-    public int gainedPoints = 0;
     public TimeBar timeBar;
     public Texture background;
     public List<AnimationHelper> currentAnimations = new ArrayList<AnimationHelper>();
@@ -34,7 +33,7 @@ public class Level extends GameObject {
         for (Ball ball : balls) {
             this.balls.add(new Ball(ball.position.x, ball.position.y, ball.getSize(), ball.getxVector()));
         }
-        timeBar = new TimeBar(200, 440, timeLeftSpeed, medals);
+        timeBar = new TimeBar(100, 445, timeLeftSpeed, medals);
         explosionParticle = new ParticleEffect();
         explosionParticle.load(Gdx.files.internal("effects/explosion.p"),
                 Gdx.files.internal("effects"));
@@ -77,7 +76,7 @@ public class Level extends GameObject {
         for(int i = 0; i < balls.size();i++){
             if(player.getShot() != null){
                 if(checkCollisionSquareRound(getShot().position.x, getShot().position.y, getShot().bounds.getWidth(), getShot().bounds.getHeight(), balls.get(i))){
-                    Assets.explosion1.play();
+                    Assets.explosion1.setVolume(Assets.explosion1.play(), GameManager.soundVolume);
                     startExplosionEffect(balls.get(i).position.x, balls.get(i).position.y);
                     player.setShot(null);
                     createNewBall(balls.get(i));
@@ -91,7 +90,7 @@ public class Level extends GameObject {
             Rectangle player = new Rectangle((int) getPlayer().position.x, (int) getPlayer().position.y, (int) getPlayer().bounds.getWidth(), (int) getPlayer().bounds.getHeight());
             Rectangle powerUpRect = new Rectangle((int) powerUp.position.x, (int) powerUp.position.y, (int) powerUp.bounds.getWidth(), (int) powerUp.bounds.getHeight());
             if (checkCollisionSquareSquare(player, powerUpRect)) {
-                Assets.powerup1.play();
+                Assets.powerup1.setVolume(Assets.powerup1.play(), GameManager.soundVolume);
                 switch (powerUp.powerUpType) {
                     case SPEED:
                         getPlayer().currentPowerUp = powerUp;
@@ -169,7 +168,6 @@ public class Level extends GameObject {
                 middleBall2.setyVector(25);
                 balls.add(middleBall1);
                 balls.add(middleBall2);
-                gainedPoints+=50;
                 break;
             case MIDDLE:
                 Ball smallBall1 = new Ball(toDestroyBall.position.x, toDestroyBall.position.y+toDestroyBall.getRadius(), Ball.sizeDef.SMALL, -2.4f);
@@ -178,7 +176,6 @@ public class Level extends GameObject {
                 smallBall2.setyVector(25);
                 balls.add(smallBall1);
                 balls.add(smallBall2);
-                gainedPoints+=40;
                 break;
             case SMALL:
                 Ball smallerBall1 = new Ball(toDestroyBall.position.x, toDestroyBall.position.y+toDestroyBall.getRadius(), Ball.sizeDef.SMALLER, -2.4f);
@@ -187,11 +184,6 @@ public class Level extends GameObject {
                 smallerBall2.setyVector(25);
                 balls.add(smallerBall1);
                 balls.add(smallerBall2);
-                gainedPoints+=30;
-                break;
-            case SMALLER:
-                gainedPoints+=20;
-            default:
                 break;
         }
     }

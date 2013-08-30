@@ -44,7 +44,6 @@ public class WorldRenderer {
         drawLife();
         drawPowerUp();
         drawBalls();
-        drawPoints();
         batch.end();
         drawTimeBar(); // the shapeRenderer is in this method active
         batch.begin();
@@ -175,11 +174,6 @@ public class WorldRenderer {
         gsController.getLevel().explosionParticle.draw(batch, GameManager.delta());
     }
 
-    private void drawPoints() {
-        font.setColor(Color.GREEN);
-        font.draw(batch, "Points: "+gsController.getLevel().gainedPoints, 20, 460);
-    }
-
     private void drawTimeBar() {
         TimeBar timeBar = gsController.getLevel().timeBar;
         shapeRenderer.setProjectionMatrix(GameManager.getCamera().combined);
@@ -193,12 +187,12 @@ public class WorldRenderer {
         shapeRenderer.rect(timeBar.position.x, timeBar.position.y, timeBar.bounds.width, 15);
         shapeRenderer.end();
 
-        shapeRenderer.begin(ShapeRenderer.ShapeType.Line);
-        shapeRenderer.setColor(Color.DARK_GRAY);
         float width = timeBar.bounds.width;
         float timebar_x = timeBar.position.x;
-        shapeRenderer.line(width*timeBar.gold+timebar_x, timeBar.position.y-10, width*timeBar.gold+timebar_x, timeBar.position.y+20);
-        shapeRenderer.line(width*timeBar.silver+timebar_x, timeBar.position.y-10, width*timeBar.silver+timebar_x, timeBar.position.y+20);
+        shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
+        shapeRenderer.setColor(Color.DARK_GRAY);
+        shapeRenderer.rect(width*timeBar.gold+timebar_x, timeBar.position.y-10, 3, 35);
+        shapeRenderer.rect(width*timeBar.silver+timebar_x, timeBar.position.y-10, 3, 35);
         shapeRenderer.end();
     }
 
