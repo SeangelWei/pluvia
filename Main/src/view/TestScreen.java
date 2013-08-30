@@ -46,9 +46,9 @@ public class TestScreen extends MyScreen {
 
         Gdx.gl.glEnable(GL20.GL_BLEND);
         Gdx.gl.glBlendFunc(GL10.GL_SRC_ALPHA, GL10.GL_ONE_MINUS_SRC_ALPHA);
-        shapeRenderer.begin(ShapeRenderer.ShapeType.FilledRectangle);
+        shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
         shapeRenderer.setColor(0, 0, 0, opaque);
-        shapeRenderer.filledRect(0, 0, 50, 50);
+        shapeRenderer.rect(0, 0, 50, 50);
         shapeRenderer.end();
         opaque-=0.01;
     }

@@ -23,6 +23,6 @@ public class Shot extends GameObject {
     @Override
     public void update() {
         position.y += Game.delta()*speed;
-        particleEffect.setPosition(position.x, position.y+bounds.getHeight());
+        particleEffect.setPosition(position.x+Assets.shot.getWidth()/2, position.y+bounds.getHeight());
     }
 }
