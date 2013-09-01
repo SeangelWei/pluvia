@@ -16,6 +16,7 @@ public class MenuScreen extends MyScreen {
 
     public MenuScreen(final Pluvia pluvia) {
         super(pluvia);
+        stage.setViewport(GameManager.VIRTUAL_WIDTH, GameManager.VIRTUAL_HEIGHT, false);
         startButton = new Button(70, 180, Assets.menu_play);
         exitButton = new Button(620, 280, Assets.menu_exit);
         soundButton = new Actor();
@@ -62,7 +63,6 @@ public class MenuScreen extends MyScreen {
                 return false;
             }
         });
-        stage.setViewport(GameManager.VIRTUAL_WIDTH, GameManager.VIRTUAL_HEIGHT, true);
     }
 
     @Override

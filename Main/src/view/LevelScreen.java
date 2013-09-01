@@ -26,6 +26,7 @@ public class LevelScreen extends MyScreen {
 
     @Override
     public void init(){
+        stage.setViewport(GameManager.VIRTUAL_WIDTH, GameManager.VIRTUAL_HEIGHT, false);
         Gdx.input.setInputProcessor(stage);
         levelIcons.clear();
         initialBlocks();
@@ -42,7 +43,6 @@ public class LevelScreen extends MyScreen {
                 }
             });
             stage.addActor(levelIcon);
-            stage.setViewport(GameManager.VIRTUAL_WIDTH, GameManager.VIRTUAL_HEIGHT, true);
         }
         backButton = new Button(60, 380, Assets.arrow_left);
         backButton.addListener(new ClickListener() {

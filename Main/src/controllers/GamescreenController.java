@@ -54,6 +54,7 @@ public class GamescreenController {
         nextLevel = new Button(0, 0, Assets.nextLevelButton);
         this.pluvia = pluvia;
         this.gameScreen = gameScreen;
+        gameScreen.stage.setViewport(GameManager.VIRTUAL_WIDTH, GameManager.VIRTUAL_HEIGHT, false);
         addButtonListeners();
     }
 
@@ -157,8 +158,6 @@ public class GamescreenController {
         gameScreen.stage.addActor(restart);
         gameScreen.stage.addActor(exitGame);
         gameScreen.stage.addActor(nextLevel);
-        gameScreen.stage.setViewport(GameManager.VIRTUAL_WIDTH, GameManager.VIRTUAL_HEIGHT, true);
-
     }
 
     public gameStateDef getGameState(){
@@ -211,9 +210,15 @@ public class GamescreenController {
                 exitGame.setBounds(350, 180, 80, 50);
                 getPlayer().particleEffect.setPosition(100000, 1000000); //hack
                 if(gameScreen.stage.getActors().size > 4) {
-                    gameScreen.stage.getRoot().findActor("star0").remove();
-                    gameScreen.stage.getRoot().findActor("star1").remove();
-                    gameScreen.stage.getRoot().findActor("star2").remove();
+                    if (gameScreen.stage.getRoot().findActor("star0") != null) {
+                        gameScreen.stage.getRoot().findActor("star0").remove();
+                    }
+                    if (gameScreen.stage.getRoot().findActor("star1") != null) {
+                        gameScreen.stage.getRoot().findActor("star1").remove();
+                    }
+                    if (gameScreen.stage.getRoot().findActor("star2") != null) {
+                        gameScreen.stage.getRoot().findActor("star2").remove();
+                    }
                 }
                 startStarAction();
                 break;
