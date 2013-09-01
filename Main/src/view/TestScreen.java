@@ -14,9 +14,8 @@ import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
-import com.badlogic.gdx.utils.Scaling;
-import utils.Assets;
 import managers.GameManager;
+import utils.Assets;
 import utils.MyScreen;
 import utils.Pluvia;
 
@@ -56,7 +55,7 @@ public class TestScreen extends MyScreen {
         shapeRenderer.setColor(1, 1, 1, opaque);
         shapeRenderer.rect(0, 50, 50, 50);
         shapeRenderer.end();
-        opaque-=0.01;
+        opaque -= 0.01;
         stage.act(GameManager.delta());
         stage.draw();
     }
@@ -65,7 +64,7 @@ public class TestScreen extends MyScreen {
     public void init() {
         walkParticle.getEmitters().get(0).duration = 10;
         stage.addListener(new InputListener() {
-            public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
+            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
                 walkParticle.reset();
                 return false;
             }
@@ -87,20 +86,26 @@ public class TestScreen extends MyScreen {
     }
 
     @Override
-    public void resize(int width, int height) { }
+    public void resize(int width, int height) {
+    }
 
     @Override
-    public void show() { }
+    public void show() {
+    }
 
     @Override
-    public void hide() { }
+    public void hide() {
+    }
 
     @Override
-    public void pause() { }
+    public void pause() {
+    }
 
     @Override
-    public void resume() { }
+    public void resume() {
+    }
 
     @Override
-    public void dispose() {  }
+    public void dispose() {
+    }
 }

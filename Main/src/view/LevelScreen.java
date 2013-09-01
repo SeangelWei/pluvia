@@ -25,7 +25,7 @@ public class LevelScreen extends MyScreen {
     }
 
     @Override
-    public void init(){
+    public void init() {
         stage.setViewport(GameManager.VIRTUAL_WIDTH, GameManager.VIRTUAL_HEIGHT, false);
         Gdx.input.setInputProcessor(stage);
         levelIcons.clear();
@@ -35,7 +35,7 @@ public class LevelScreen extends MyScreen {
             levelIcon.addListener(new ClickListener() {
                 @Override
                 public void clicked(InputEvent event, float x, float y) {
-                    if(levelIcon.isEnabled) {
+                    if (levelIcon.isEnabled) {
                         Assets.click.play(GameManager.soundVolume);
                         pluvia.getLevelManager().loadLevel(levelIcon.level, levelIcon.fileName);
                         pluvia.getScreenManager().changeTo("GameScreen");
@@ -55,8 +55,8 @@ public class LevelScreen extends MyScreen {
         stage.addActor(backButton);
         stage.addListener(new InputListener() {
             @Override
-            public boolean keyTyped (InputEvent event, char character) {
-                if(event.getKeyCode() == com.badlogic.gdx.Input.Keys.BACK) {
+            public boolean keyTyped(InputEvent event, char character) {
+                if (event.getKeyCode() == com.badlogic.gdx.Input.Keys.BACK) {
                     Assets.click.play(GameManager.soundVolume);
                     pluvia.getScreenManager().changeTo("MenuScreen");
                 }
@@ -92,11 +92,11 @@ public class LevelScreen extends MyScreen {
         int blocks = Gdx.files.internal("levels").list().length;
 
         int levelCounter = 0;
-        for ( int col = 0;  col <= blocks/anzahlProReihe;  col++ ) {
-            for ( int row = 0;  row < blocks-(col*anzahlProReihe);  row++ ) {
-                int xa = (blockWidth+abstandX)*row;
-                int ya = GameManager.VIRTUAL_HEIGHT-((blockWidth+abstandY)*col);
-                if(row < anzahlProReihe){
+        for (int col = 0; col <= blocks / anzahlProReihe; col++) {
+            for (int row = 0; row < blocks - (col * anzahlProReihe); row++) {
+                int xa = (blockWidth + abstandX) * row;
+                int ya = GameManager.VIRTUAL_HEIGHT - ((blockWidth + abstandY) * col);
+                if (row < anzahlProReihe) {
                     levelIcons.add(new LevelIcon(xa + marginLeft, ya + marginTop, blockWidth, levelCounter));
                     levelCounter++;
                 }
@@ -109,17 +109,17 @@ public class LevelScreen extends MyScreen {
         batch.draw(Assets.levelscreen_bg, 0, 0);
         for (LevelIcon levelIcon : levelIcons) {
             batch.draw(Assets.levelIcon, levelIcon.x, levelIcon.y);
-            Integer level = levelIcon.level+1;
-            if(level < 10) {
-                font.draw(batch, level.toString(), levelIcon.x+(levelIcon.blockWidth/2-5), levelIcon.y+(levelIcon.blockWidth/2+5));
+            Integer level = levelIcon.level + 1;
+            if (level < 10) {
+                font.draw(batch, level.toString(), levelIcon.x + (levelIcon.blockWidth / 2 - 5), levelIcon.y + (levelIcon.blockWidth / 2 + 5));
             } else {
-                font.draw(batch, level.toString(), levelIcon.x+(levelIcon.blockWidth/2-10), levelIcon.y+(levelIcon.blockWidth/2+10));
+                font.draw(batch, level.toString(), levelIcon.x + (levelIcon.blockWidth / 2 - 10), levelIcon.y + (levelIcon.blockWidth / 2 + 10));
             }
-            if(levelIcon.isEnabled) {
+            if (levelIcon.isEnabled) {
                 int reachedStars = pluvia.getProgressManager().getReachedStars(levelIcon.level);
                 if (reachedStars != 0) {
                     for (int i = 0; i < reachedStars; i++) {
-                        batch.draw(Assets.starFilled, levelIcon.x-10+(i*30), levelIcon.y-20, 25, 25);
+                        batch.draw(Assets.starFilled, levelIcon.x - 10 + (i * 30), levelIcon.y - 20, 25, 25);
                     }
                 }
             } else {
@@ -130,20 +130,26 @@ public class LevelScreen extends MyScreen {
     }
 
     @Override
-    public void resize(int width, int height) { }
+    public void resize(int width, int height) {
+    }
 
     @Override
-    public void show() { }
+    public void show() {
+    }
 
     @Override
-    public void hide() { }
+    public void hide() {
+    }
 
     @Override
-    public void pause() { }
+    public void pause() {
+    }
 
     @Override
-    public void resume() { }
+    public void resume() {
+    }
 
     @Override
-    public void dispose() { }
+    public void dispose() {
+    }
 }

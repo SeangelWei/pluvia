@@ -6,7 +6,10 @@ import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import managers.GameManager;
-import utils.*;
+import utils.Assets;
+import utils.Button;
+import utils.MyScreen;
+import utils.Pluvia;
 
 public class MenuScreen extends MyScreen {
     Button startButton;
@@ -22,9 +25,9 @@ public class MenuScreen extends MyScreen {
         soundButton = new Actor();
         soundButton.setBounds(470, 140, Assets.soundOff.getWidth(), Assets.soundOff.getHeight());
         sound = true;
-        exitButton.addListener(new ClickListener(){
+        exitButton.addListener(new ClickListener() {
             @Override
-            public void clicked (InputEvent event, float x, float y) {
+            public void clicked(InputEvent event, float x, float y) {
                 Gdx.app.exit();
             }
         });
@@ -38,7 +41,7 @@ public class MenuScreen extends MyScreen {
         soundButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                if(sound) {
+                if (sound) {
                     sound = false;
                     GameManager.musicVolume = 0;
                     GameManager.soundVolume = 0;
@@ -54,10 +57,10 @@ public class MenuScreen extends MyScreen {
         stage.addActor(startButton);
         stage.addActor(exitButton);
         stage.addActor(soundButton);
-        stage.addListener(new InputListener(){
+        stage.addListener(new InputListener() {
             @Override
-            public boolean keyTyped (InputEvent event, char character) {
-                if(event.getKeyCode() == com.badlogic.gdx.Input.Keys.BACK) {
+            public boolean keyTyped(InputEvent event, char character) {
+                if (event.getKeyCode() == com.badlogic.gdx.Input.Keys.BACK) {
                     Gdx.app.exit();
                 }
                 return false;
@@ -69,7 +72,7 @@ public class MenuScreen extends MyScreen {
     public void render() {
         batch.begin();
         batch.draw(Assets.menu_bg, 0, 0);
-        if(sound) {
+        if (sound) {
             batch.draw(Assets.soundOn, soundButton.getX(), soundButton.getY());
         } else {
             batch.draw(Assets.soundOff, soundButton.getX(), soundButton.getY());
@@ -79,22 +82,28 @@ public class MenuScreen extends MyScreen {
     }
 
     @Override
-    public void resize(int width, int height) { }
+    public void resize(int width, int height) {
+    }
 
     @Override
-    public void show() { }
+    public void show() {
+    }
 
     @Override
-    public void hide() { }
+    public void hide() {
+    }
 
     @Override
-    public void pause() { }
+    public void pause() {
+    }
 
     @Override
-    public void resume() { }
+    public void resume() {
+    }
 
     @Override
-    public void dispose() { }
+    public void dispose() {
+    }
 
     @Override
     public void init() {

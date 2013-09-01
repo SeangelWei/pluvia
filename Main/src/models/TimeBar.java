@@ -20,7 +20,7 @@ public class TimeBar extends GameObject {
 
     @Override
     public void update() {
-        if(timeLeft_x > -1) {
+        if (timeLeft_x > -1) {
             timeLeft_x -= GameManager.delta() * speed;
         } else {
             finished = true;

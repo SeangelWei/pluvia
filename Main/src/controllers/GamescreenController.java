@@ -4,35 +4,33 @@ import com.badlogic.gdx.Application;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.MathUtils;
+import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.scenes.scene2d.Action;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
+import managers.GameManager;
 import models.Ball;
 import models.Level;
 import models.Player;
 import models.Shot;
 import utils.Assets;
 import utils.Button;
-import managers.GameManager;
 import utils.Pluvia;
 import view.GameScreen;
 
 import java.util.List;
-import java.util.Random;
 
 import static com.badlogic.gdx.scenes.scene2d.actions.Actions.*;
-import static com.badlogic.gdx.scenes.scene2d.actions.Actions.rotateBy;
 import static controllers.GamescreenController.gameStateDef.paused;
 import static controllers.GamescreenController.gameStateDef.playing;
-import static controllers.GamescreenController.gameStateDef.win;
 
 public class GamescreenController {
-    public enum gameStateDef { paused, playing, win, gameover, ready }
+    public enum gameStateDef {paused, playing, win, gameover, ready}
+
     gameStateDef gameState;
     Pluvia pluvia;
     GameScreen gameScreen;
@@ -58,33 +56,33 @@ public class GamescreenController {
         addButtonListeners();
     }
 
-    public void update(){
+    public void update() {
         updateInput();
         updatePlaying();
     }
 
     private void updatePlaying() {
-        if(gameState == playing) {
+        if (gameState == playing) {
             pluvia.getLevelManager().currentLevel.update();
-            if(getBalls().size() == 0){
+            if (getBalls().size() == 0) {
                 setGameState(gameStateDef.win);
                 pluvia.getProgressManager().saveLevelProgress(pluvia.getLevelManager().currentLevelNumber, getCalculatedPoints());
             }
             if (getPlayer().getLives() == 0) {
                 setGameState(gameStateDef.gameover);
             }
-            if(getShot()!= null && getShot().position.y > 100){
+            if (getShot() != null && getShot().position.y > 100) {
                 getPlayer().setShot(null);
             }
-            if(getLevel().timeBar.finished){
+            if (getLevel().timeBar.finished) {
                 setGameState(gameStateDef.gameover);
             }
         }
     }
 
     private void updateInput() {
-        if(Gdx.app.getType() == Application.ApplicationType.Android) {
-            if(getGameState() == playing) {
+        if (Gdx.app.getType() == Application.ApplicationType.Android) {
+            if (getGameState() == playing) {
                 gameScreen.inputManager.LEFT = gameScreen.inputManager.isTouched(arrow_left, 50, 10, 70, 50);
                 gameScreen.inputManager.RIGHT = gameScreen.inputManager.isTouched(arrow_right, 10, 50, 70, 50);
                 gameScreen.inputManager.SPACE = gameScreen.inputManager.isTouched(arrow_up, 50, 50, 70, 50);
@@ -93,13 +91,13 @@ public class GamescreenController {
                 }
             }
         } else {
-            if(getGameState() == playing) {
+            if (getGameState() == playing) {
                 gameScreen.inputManager.update();
             }
-            if(gameScreen.inputManager.ESCAPE) {
-                if(getGameState() == playing) {
+            if (gameScreen.inputManager.ESCAPE) {
+                if (getGameState() == playing) {
                     setGameState(paused);
-                } else if(getGameState() == paused) {
+                } else if (getGameState() == paused) {
                     setGameState(playing);
                 }
             }
@@ -108,9 +106,9 @@ public class GamescreenController {
 
     private int getCalculatedPoints() {
         int gainedStars;
-        if(getLevel().timeBar.timeLeft_x > getLevel().timeBar.gold * getLevel().timeBar.bounds.width) {
+        if (getLevel().timeBar.timeLeft_x > getLevel().timeBar.gold * getLevel().timeBar.bounds.width) {
             gainedStars = 3;
-        } else if(getLevel().timeBar.timeLeft_x > getLevel().timeBar.silver * getLevel().timeBar.bounds.width) {
+        } else if (getLevel().timeBar.timeLeft_x > getLevel().timeBar.silver * getLevel().timeBar.bounds.width) {
             gainedStars = 2;
         } else {
             gainedStars = 1;
@@ -160,10 +158,11 @@ public class GamescreenController {
         gameScreen.stage.addActor(nextLevel);
     }
 
-    public gameStateDef getGameState(){
+    public gameStateDef getGameState() {
         return gameState;
     }
-    public void setGameState(gameStateDef gameState){
+
+    public void setGameState(gameStateDef gameState) {
         gameScreen.inputManager.LEFT = false;
         gameScreen.inputManager.RIGHT = false;
         gameScreen.inputManager.SPACE = false;
@@ -182,6 +181,17 @@ public class GamescreenController {
 
     //will be called up when changing states
     private void repositionButtons() {
+        if (gameScreen.stage.getActors().size > 4) {
+            if (gameScreen.stage.getRoot().findActor("star0") != null) {
+                gameScreen.stage.getRoot().findActor("star0").remove();
+            }
+            if (gameScreen.stage.getRoot().findActor("star1") != null) {
+                gameScreen.stage.getRoot().findActor("star1").remove();
+            }
+            if (gameScreen.stage.getRoot().findActor("star2") != null) {
+                gameScreen.stage.getRoot().findActor("star2").remove();
+            }
+        }
         switch (gameState) {
             case playing:
                 nextLevel.setVisible(false);
@@ -209,17 +219,6 @@ public class GamescreenController {
                 restart.setBounds(300, 240, 80, 50);
                 exitGame.setBounds(350, 180, 80, 50);
                 getPlayer().particleEffect.setPosition(100000, 1000000); //hack
-                if(gameScreen.stage.getActors().size > 4) {
-                    if (gameScreen.stage.getRoot().findActor("star0") != null) {
-                        gameScreen.stage.getRoot().findActor("star0").remove();
-                    }
-                    if (gameScreen.stage.getRoot().findActor("star1") != null) {
-                        gameScreen.stage.getRoot().findActor("star1").remove();
-                    }
-                    if (gameScreen.stage.getRoot().findActor("star2") != null) {
-                        gameScreen.stage.getRoot().findActor("star2").remove();
-                    }
-                }
                 startStarAction();
                 break;
             case gameover:
@@ -248,6 +247,7 @@ public class GamescreenController {
                         @Override
                         public boolean act(
                                 float delta) {
+                            Assets.starSound.setVolume(Assets.starSound.play(), GameManager.soundVolume);
                             return true;
                         }
                     })));
@@ -258,14 +258,16 @@ public class GamescreenController {
     public Player getPlayer() {
         return pluvia.getLevelManager().currentLevel.getPlayer();
     }
-    public List<Ball> getBalls(){
+
+    public List<Ball> getBalls() {
         return pluvia.getLevelManager().currentLevel.getBalls();
     }
-    public Shot getShot(){
+
+    public Shot getShot() {
         return pluvia.getLevelManager().currentLevel.getPlayer().getShot();
     }
 
-    public Level getLevel(){
+    public Level getLevel() {
         return pluvia.getLevelManager().currentLevel;
     }
 }

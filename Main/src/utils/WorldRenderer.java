@@ -62,10 +62,10 @@ public class WorldRenderer {
                     int powBlinkerTimer = powerUp.getPowBlinkerTimer();
                     powBlinkerTimer++;
                     powerUp.setPowBlinkerTimer(powBlinkerTimer);
-                    if(powBlinkerTimer%5==0){
+                    if (powBlinkerTimer % 5 == 0) {
                         drawLonelyPowerUp(powerUp, position);
                     }
-                    if(powBlinkerTimer > powerUp.getLifeTime()){
+                    if (powBlinkerTimer > powerUp.getLifeTime()) {
                         powerUp.setPowBlinkerTimer(0);
                         gsController.getLevel().getPowerUps().remove(powerUp);
                         return;
@@ -91,7 +91,7 @@ public class WorldRenderer {
 
     private void drawLevel() {
         batch.draw(gsController.getLevel().background, 0, 0, 800, 480);
-        if(gsController.getShot() != null){
+        if (gsController.getShot() != null) {
             batch.draw(Assets.shot, gsController.getShot().position.x, gsController.getShot().position.y);
             player.getShot().particleEffect.draw(batch, GameManager.delta());
         }
@@ -102,12 +102,12 @@ public class WorldRenderer {
     }
 
     private void drawPlayerAndShot() {
-        if(player.isTouched){
+        if (player.isTouched) {
             playerBlinkerTimer++;
-            if(playerBlinkerTimer%5==0){
+            if (playerBlinkerTimer % 5 == 0) {
                 drawPlayer();
             }
-            if(playerBlinkerTimer > 100){
+            if (playerBlinkerTimer > 100) {
                 player.isTouched = false;
                 playerBlinkerTimer = 0;
             }
@@ -128,13 +128,14 @@ public class WorldRenderer {
     }
 
     private void drawPlayer() {
-        playerFrame = player.isFacingLeft ? Assets.playerIdleLeft : Assets.playerIdleRight;
-        if(player.state.equals(Player.State.WALKING)) {
+        if (player.state.equals(Player.State.WALKING)) {
             if (player.isFacingLeft) {
                 playerFrame = Assets.walkLeftAnimation.getKeyFrame(player.stateTime, true);
             } else {
                 playerFrame = Assets.walkRightAnimation.getKeyFrame(player.stateTime, true);
             }
+        } else if (player.state.equals(Player.State.IDLE)) {
+            playerFrame = Assets.idleAnimation.getKeyFrame(player.stateTime, true);
         }
         batch.draw(playerFrame, player.position.x, player.position.y, 40, 58);
     }
@@ -151,7 +152,7 @@ public class WorldRenderer {
     private void drawBalls() {
         int diameter;
         for (Ball ball : gsController.getBalls()) {
-            diameter = ball.getRadius()*2;
+            diameter = ball.getRadius() * 2;
             switch (ball.getSize()) {
                 case SMALL:
                     switch (ball.getColor()) {
@@ -219,7 +220,7 @@ public class WorldRenderer {
         float timebar_x = timeBar.position.x;
         shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
         shapeRenderer.setColor(Color.DARK_GRAY);
-        shapeRenderer.rect(width*timeBar.gold+timebar_x, timeBar.position.y-10, 3, 35);
+        shapeRenderer.rect(width * timeBar.gold + timebar_x, timeBar.position.y - 10, 3, 35);
         shapeRenderer.rect(width * timeBar.silver + timebar_x, timeBar.position.y - 10, 3, 35);
         shapeRenderer.end();
     }
@@ -234,7 +235,7 @@ public class WorldRenderer {
                 batch.draw(Assets.transparent, 0, 0);
                 batch.draw(Assets.winState, 250, 160);
                 for (int i = 0; i < 3; i++) {
-                    batch.draw(Assets.starEmpty, 340+(i*45), 305, 40, 40);
+                    batch.draw(Assets.starEmpty, 340 + (i * 45), 305, 40, 40);
                 }
                 break;
             case gameover:
@@ -259,18 +260,18 @@ public class WorldRenderer {
     }
 
     private void drawDebug() {
-        if(DEBUG){
-            String ballPos="";
-            String shotPos="";
-            if(!gsController.getBalls().isEmpty()){
-                ballPos = "Ball Position: "+gsController.getBalls().get(0).position.x+", "+gsController.getBalls().get(0).position.y;
+        if (DEBUG) {
+            String ballPos = "";
+            String shotPos = "";
+            if (!gsController.getBalls().isEmpty()) {
+                ballPos = "Ball Position: " + gsController.getBalls().get(0).position.x + ", " + gsController.getBalls().get(0).position.y;
             }
-            if(gsController.getShot() != null)
-                shotPos = "Shot coords: "+gsController.getShot().position.x+", "+gsController.getShot().position.y;
-            font.draw(batch, "Player coords: "+player.position.x+", "+player.position.y, 0, 470);
-            font.draw(batch, "Player Dimension: "+player.bounds.width+", "+player.bounds.height, 0, 455);
+            if (gsController.getShot() != null)
+                shotPos = "Shot coords: " + gsController.getShot().position.x + ", " + gsController.getShot().position.y;
+            font.draw(batch, "Player coords: " + player.position.x + ", " + player.position.y, 0, 470);
+            font.draw(batch, "Player Dimension: " + player.bounds.width + ", " + player.bounds.height, 0, 455);
             font.draw(batch, ballPos, 0, 440);
-            font.draw(batch, "Player Lives: "+player.getLives(), 0, 425);
+            font.draw(batch, "Player Lives: " + player.getLives(), 0, 425);
             font.draw(batch, shotPos, 0, 410);
         }
     }

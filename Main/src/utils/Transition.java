@@ -19,15 +19,15 @@ public class Transition {
 
     public void update() {
         // 0 ist gleich transparent
-        if(isFadingOut){
-            if(brightness < 1){
-                brightness+=0.03;
+        if (isFadingOut) {
+            if (brightness < 1) {
+                brightness += 0.03;
             } else {
                 canChange = true;
             }
         } else {
-            if(brightness > 0){
-                brightness-=0.03;
+            if (brightness > 0) {
+                brightness -= 0.03;
             } else {
                 finished = true;
             }

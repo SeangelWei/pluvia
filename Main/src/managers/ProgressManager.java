@@ -39,9 +39,9 @@ public class ProgressManager {
 
     public void loadProgress() {
         try {
-            if(fileHandler.exists()) {
+            if (fileHandler.exists()) {
                 file = reader.parse(Gdx.files.external(filename));
-                for (int i = 0; i < file.getChildCount();i++) {
+                for (int i = 0; i < file.getChildCount(); i++) {
                     XmlReader.Element completedLevel = file.getChild(i);
                     int levelNumber = Integer.parseInt(completedLevel.getAttribute("levelNumber"));
                     int reachedStars = Integer.parseInt(completedLevel.getAttribute("reachedStars"));
@@ -55,7 +55,7 @@ public class ProgressManager {
     }
 
     public void saveProgress() {
-        if(fileHandler.exists()) {
+        if (fileHandler.exists()) {
             try {
                 fileHandler.delete();
                 fileHandler.file().createNewFile();
@@ -74,7 +74,7 @@ public class ProgressManager {
     }
 
     private void writeDatas() {
-        try{
+        try {
             DocumentBuilderFactory docFactory = DocumentBuilderFactory.newInstance();
             DocumentBuilder docBuilder = docFactory.newDocumentBuilder();
             Document doc = docBuilder.newDocument();
@@ -102,13 +102,13 @@ public class ProgressManager {
         }
     }
 
-    public void saveLevelProgress (int level, int reachedStars) {
+    public void saveLevelProgress(int level, int reachedStars) {
         System.out.println("saveGameProgress");
-        System.out.println("completed Level: "+level);
-        if(completedLevels.size() == 0) {
+        System.out.println("completed Level: " + level);
+        if (completedLevels.size() == 0) {
             completedLevels.add(new XmlPair(level, reachedStars));
         } else {
-            if(completedLevels.size() > level) {
+            if (completedLevels.size() > level) {
                 completedLevels.set(level, new XmlPair(level, reachedStars));
             } else {
                 completedLevels.add(new XmlPair(level, reachedStars));
@@ -116,13 +116,13 @@ public class ProgressManager {
         }
     }
 
-    public int getReachedStars (int level) {
-        if(completedLevels.isEmpty()) {
+    public int getReachedStars(int level) {
+        if (completedLevels.isEmpty()) {
             return 0;
         } else {
-            if(!(completedLevels.size() < level+1)){
+            if (!(completedLevels.size() < level + 1)) {
                 Integer reachedStars = completedLevels.get(level).reachedStars();
-                if(reachedStars  == null) {
+                if (reachedStars == null) {
                     return 0;
                 } else {
                     return reachedStars;

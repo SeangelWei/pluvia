@@ -4,10 +4,11 @@ import controllers.GamescreenController;
 import managers.GameManager;
 import managers.InputManager;
 import models.Player;
-import utils.*;
+import utils.MyScreen;
+import utils.Pluvia;
+import utils.WorldRenderer;
 
 import static controllers.GamescreenController.gameStateDef.playing;
-import static controllers.GamescreenController.gameStateDef.win;
 
 
 public class GameScreen extends MyScreen {
@@ -25,41 +26,45 @@ public class GameScreen extends MyScreen {
     public void render() {
         worldRenderer.render();
         gsController.update();
-        if(inputManager.LEFT) {
+        if (inputManager.LEFT) {
             gsController.getPlayer().moveLeft();
         } else {
-            if(!inputManager.RIGHT) {
+            if (!inputManager.RIGHT) {
                 gsController.getPlayer().state = Player.State.IDLE;
             }
         }
-        if(inputManager.RIGHT) {
+        if (inputManager.RIGHT) {
             gsController.getPlayer().moveRight();
         } else {
-            if(!inputManager.LEFT) {
+            if (!inputManager.LEFT) {
                 gsController.getPlayer().state = Player.State.IDLE;
             }
         }
-        if(inputManager.SPACE) {
+        if (inputManager.SPACE) {
             gsController.getPlayer().shot();
         }
-        if(gsController.getGameState() != playing) {
+        if (gsController.getGameState() != playing) {
             stage.act(GameManager.delta());
             stage.draw();
         }
         inputManager.clear();
     }
 
-    public void init(){
+    public void init() {
         gsController.setGameState(playing);
     }
-    @Override
-    public void resume() { }
 
     @Override
-    public void resize(int width, int height) { }
+    public void resume() {
+    }
 
     @Override
-    public void show() { }
+    public void resize(int width, int height) {
+    }
+
+    @Override
+    public void show() {
+    }
 
     @Override
     public void hide() {

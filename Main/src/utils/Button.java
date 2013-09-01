@@ -12,7 +12,7 @@ public class Button extends Actor {
         this.texture = texture;
     }
 
-    public void draw (SpriteBatch batch, float parentAlpha) {
+    public void draw(SpriteBatch batch, float parentAlpha) {
         batch.draw(texture, getX(), getY(), getWidth(), getHeight());
     }
 }

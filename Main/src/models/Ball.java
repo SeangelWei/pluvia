@@ -14,9 +14,12 @@ public class Ball extends GameObject {
     private float speed;
     public ParticleEffect particleEffect;
 
-    public static enum sizeDef { SMALLER, SMALL, MIDDLE, BIG }
+    public static enum sizeDef {SMALLER, SMALL, MIDDLE, BIG}
+
     private sizeDef size;
-    public static enum colorDef { BLUE, RED }
+
+    public static enum colorDef {BLUE, RED}
+
     private colorDef color;
 
     public Ball(float x, float y, sizeDef theSize, colorDef theColor, float direction) {
@@ -46,9 +49,9 @@ public class Ball extends GameObject {
 
     @Override
     public void update() {
-        if(position.y-1 <= groundPosition){
+        if (position.y - 1 <= groundPosition) {
             YVelocity *= -1;
-            particleEffect.setPosition(position.x+radius, position.y);
+            particleEffect.setPosition(position.x + radius, position.y);
             particleEffect.start();
         } else {
             YVelocity -= gravity;
@@ -57,13 +60,14 @@ public class Ball extends GameObject {
         position.x += XVelocity * GameManager.delta() * speed;
         position.y += YVelocity * GameManager.delta() * speed;
 
-        if(position.x+radius*2 >= 800){
+        if (position.x + radius * 2 >= 800) {
             XVelocity = -XVelocity;
         }
-        if(position.x <= 0){
+        if (position.x <= 0) {
             XVelocity = -XVelocity;
         }
     }
+
     public sizeDef getSize() {
         return size;
     }

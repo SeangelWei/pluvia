@@ -15,7 +15,7 @@ public class LevelIcon extends Actor {
         this.y = y;
         this.blockWidth = blockWidth;
         this.level = levelCounter;
-        fileName = "level"+level+".xml";
+        fileName = "level" + level + ".xml";
         isEnabled = false;
     }
 }

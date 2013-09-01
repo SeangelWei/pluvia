@@ -6,13 +6,16 @@ import com.badlogic.gdx.graphics.g2d.ParticleEffect;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import managers.GameManager;
-import utils.*;
+import utils.AnimationHelper;
+import utils.Assets;
+import utils.GameObject;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-import static models.Ball.*;
+import static models.Ball.colorDef;
+import static models.Ball.sizeDef;
 
 public class Level extends GameObject {
     Player player;
@@ -23,11 +26,12 @@ public class Level extends GameObject {
     public List<AnimationHelper> currentAnimations = new ArrayList<AnimationHelper>();
     public ParticleEffect explosionParticle;
     public int gainedStars;
+
     public Level(float x, float y) {
         super(x, y);
     }
 
-    public void init(Player player, List<Ball> balls, int timeLeftSpeed, float[] medals){
+    public void init(Player player, List<Ball> balls, int timeLeftSpeed, float[] medals) {
         this.player = null;
         this.balls.clear();
         this.powerUps.clear();
@@ -57,7 +61,7 @@ public class Level extends GameObject {
         for (int i = 0; i < currentAnimations.size(); i++) {
             AnimationHelper holder = currentAnimations.get(i);
             holder.stateTime += GameManager.delta();
-            if(Assets.ballPoppingAnimation.isAnimationFinished(holder.stateTime)) {
+            if (Assets.ballPoppingAnimation.isAnimationFinished(holder.stateTime)) {
                 currentAnimations.remove(i);
             }
         }
@@ -65,7 +69,7 @@ public class Level extends GameObject {
     }
 
     private void updateLogic() {
-        for (int i = 0; i < balls.size();i++) {
+        for (int i = 0; i < balls.size(); i++) {
             if (checkCollisionSquareRound(player.position.x, player.position.y, player.bounds.getWidth(), player.bounds.getHeight(), balls.get(i))
                     && !player.isTouched && !player.isInvincible) {
                 startExplosionEffect(balls.get(i).position.x, balls.get(i).position.y);
@@ -76,9 +80,9 @@ public class Level extends GameObject {
             }
         }
 
-        for(int i = 0; i < balls.size();i++){
-            if(player.getShot() != null){
-                if(checkCollisionSquareRound(getShot().position.x, getShot().position.y, getShot().bounds.getWidth(), getShot().bounds.getHeight(), balls.get(i))){
+        for (int i = 0; i < balls.size(); i++) {
+            if (player.getShot() != null) {
+                if (checkCollisionSquareRound(getShot().position.x, getShot().position.y, getShot().bounds.getWidth(), getShot().bounds.getHeight(), balls.get(i))) {
                     Assets.explosion1.setVolume(Assets.explosion1.play(), GameManager.soundVolume);
                     startExplosionEffect(balls.get(i).position.x, balls.get(i).position.y);
                     player.setShot(null);
@@ -130,23 +134,31 @@ public class Level extends GameObject {
         }
     }
 
-    private boolean checkCollisionSquareRound(float x, float y, float width, float height, Ball ball){
-        float circleDistanceX = abs(ball.position.x+ball.getRadius() - x - width/2);
-        float circleDistanceY = abs(ball.position.y+ball.getRadius() - y - height/2);
+    private boolean checkCollisionSquareRound(float x, float y, float width, float height, Ball ball) {
+        float circleDistanceX = abs(ball.position.x + ball.getRadius() - x - width / 2);
+        float circleDistanceY = abs(ball.position.y + ball.getRadius() - y - height / 2);
 
-        if (circleDistanceX > (width/2 + ball.getRadius())) { return false; }
-        if (circleDistanceY > (height/2 + ball.getRadius())) { return false; }
+        if (circleDistanceX > (width / 2 + ball.getRadius())) {
+            return false;
+        }
+        if (circleDistanceY > (height / 2 + ball.getRadius())) {
+            return false;
+        }
 
-        if (circleDistanceX <= (width/2)) { return true; }
-        if (circleDistanceY <= (height/2)) { return true; }
+        if (circleDistanceX <= (width / 2)) {
+            return true;
+        }
+        if (circleDistanceY <= (height / 2)) {
+            return true;
+        }
 
-        float cornerDistance_sq = pow(circleDistanceX - width/2, 2) +
-                pow(circleDistanceY - height/2, 2);
+        float cornerDistance_sq = pow(circleDistanceX - width / 2, 2) +
+                pow(circleDistanceY - height / 2, 2);
 
-        return (cornerDistance_sq <= pow(ball.getRadius(),2));
+        return (cornerDistance_sq <= pow(ball.getRadius(), 2));
     }
 
-    private boolean checkCollisionSquareSquare(Rectangle r1, Rectangle r2){
+    private boolean checkCollisionSquareSquare(Rectangle r1, Rectangle r2) {
         return (r1.x <= r2.x + r2.width &&
                 r2.x <= r1.x + r1.width &&
                 r1.y <= r2.y + r2.height &&
@@ -161,9 +173,9 @@ public class Level extends GameObject {
         return Math.abs(number);
     }
 
-    private void createNewBall(Ball toDestroyBall){
-        currentAnimations.add(new AnimationHelper(new Vector2(toDestroyBall.position.x-toDestroyBall.getRadius(), toDestroyBall.position.y)));
-        switch(toDestroyBall.getSize()){
+    private void createNewBall(Ball toDestroyBall) {
+        currentAnimations.add(new AnimationHelper(new Vector2(toDestroyBall.position.x - toDestroyBall.getRadius(), toDestroyBall.position.y)));
+        switch (toDestroyBall.getSize()) {
             case BIG:
                 switch (toDestroyBall.getColor()) {
                     case BLUE:
@@ -201,8 +213,8 @@ public class Level extends GameObject {
     }
 
     private void create2Balls(Ball toDestroyBall, sizeDef size, colorDef color, float xVelocity) {
-        Ball newBall1 = new Ball(toDestroyBall.position.x, toDestroyBall.position.y+toDestroyBall.getRadius(), size, color, -xVelocity);
-        Ball newBall2 = new Ball(toDestroyBall.position.x, toDestroyBall.position.y+toDestroyBall.getRadius(), size, color, xVelocity);
+        Ball newBall1 = new Ball(toDestroyBall.position.x, toDestroyBall.position.y + toDestroyBall.getRadius(), size, color, -xVelocity);
+        Ball newBall2 = new Ball(toDestroyBall.position.x, toDestroyBall.position.y + toDestroyBall.getRadius(), size, color, xVelocity);
         newBall1.setYVelocity(25);
         newBall2.setYVelocity(25);
         balls.add(newBall1);
@@ -212,12 +224,15 @@ public class Level extends GameObject {
     public Player getPlayer() {
         return player;
     }
-    public List<Ball> getBalls(){
+
+    public List<Ball> getBalls() {
         return balls;
     }
+
     public Shot getShot() {
         return player.getShot();
     }
+
     public List<PowerUp> getPowerUps() {
         return powerUps;
     }

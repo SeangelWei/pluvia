@@ -7,7 +7,9 @@ import java.util.Random;
 
 public class PowerUp extends GameObject {
     private final float GRAVITY = 1.03f;
-    public static enum powerUpTypeDef { SPEED, IMMORTAL, TIME }
+
+    public static enum powerUpTypeDef {SPEED, IMMORTAL, TIME}
+
     public powerUpTypeDef powerUpType;
     boolean moving = true;
     float speed = 100;

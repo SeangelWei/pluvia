@@ -2,8 +2,8 @@ package models;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.ParticleEffect;
-import utils.Assets;
 import managers.GameManager;
+import utils.Assets;
 import utils.GameObject;
 
 public class Player extends GameObject {
@@ -16,15 +16,17 @@ public class Player extends GameObject {
     public boolean isInvincible;
     public PowerUp currentPowerUp;
     public ParticleEffect particleEffect;
+
     public enum State {
         IDLE, WALKING
     }
+
     public State state = State.IDLE;
 
-    public Player(float x){
+    public Player(float x) {
         super(x, 100); // Y is always the same
-        bounds.setWidth(Assets.playerIdleRight.getRegionWidth());
-        bounds.setHeight(Assets.playerIdleLeft.getRegionHeight());
+        bounds.setWidth(Assets.playerIdleRight.getRegionWidth()-5);
+        bounds.setHeight(Assets.playerIdleLeft.getRegionHeight()-5);
         particleEffect = new ParticleEffect();
         particleEffect.load(Gdx.files.internal("effects/smoke.p"),
                 Gdx.files.internal("effects"));
@@ -41,27 +43,26 @@ public class Player extends GameObject {
         currentPowerUp = null;
     }
 
-    public void shot(){
-        if(shot == null){
-            shot = new Shot(position.x + bounds.width/2);
+    public void shot() {
+        if (shot == null) {
+            shot = new Shot(position.x + bounds.width / 2);
             shot.particleEffect.start();
         }
     }
 
-    public void moveLeft(){
-        if(position.x-1 > 0){
+    public void moveLeft() {
+        if (position.x - 1 > 0) {
             position.x -= GameManager.delta() * speed;
             isFacingLeft = true;
             state = State.WALKING;
-            stateTime += GameManager.delta();
         }
     }
-    public void moveRight(){
-        if(position.x+bounds.getWidth()+1 < 800){
+
+    public void moveRight() {
+        if (position.x + bounds.getWidth() + 1 < 800) {
             position.x += GameManager.delta() * speed;
             isFacingLeft = false;
             state = State.WALKING;
-            stateTime += GameManager.delta();
         }
     }
 
@@ -83,7 +84,8 @@ public class Player extends GameObject {
 
     @Override
     public void update() {
-        if(shot != null) shot.update();
+        stateTime += GameManager.delta();
+        if (shot != null) shot.update();
         if (currentPowerUp != null) {
             if (currentPowerUp.powerDuration <= 0) {
                 switch (currentPowerUp.powerUpType) {
@@ -99,10 +101,10 @@ public class Player extends GameObject {
                 currentPowerUp.use();
             }
         }
-        if(state == State.WALKING) {
+        if (state == State.WALKING) {
             particleEffect.getEmitters().get(0).setContinuous(true);
-            if(isFacingLeft) {
-                particleEffect.setPosition(position.x+15, position.y);
+            if (isFacingLeft) {
+                particleEffect.setPosition(position.x + 15, position.y);
             } else {
                 particleEffect.setPosition(position.x, position.y);
 

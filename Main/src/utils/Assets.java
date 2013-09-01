@@ -59,6 +59,7 @@ public class Assets {
     public static Animation walkLeftAnimation;
     public static Animation walkRightAnimation;
     public static Animation ballPoppingAnimation;
+    public static Animation idleAnimation;
     public static TextureRegion playerIdleLeft;
     public static TextureRegion playerIdleRight;
     // ---- Sounds ----
@@ -69,6 +70,7 @@ public class Assets {
     public static Sound explosion2;
     public static Sound explosion3;
     public static Sound click;
+    public static Sound starSound;
     // ---- Music ----
     public static Music music;
 
@@ -85,23 +87,27 @@ public class Assets {
         ball_smaller_red = new Texture(Gdx.files.internal("objects/ball_red.png"));
         ball_small_red = new Texture(Gdx.files.internal("objects/ball_red.png"));
         ball_middle_red = new Texture(Gdx.files.internal("objects/ball_red.png"));
-        ball_big_red = new Texture(Gdx.files.internal("objects/ball_red.png"));
-        TextureRegion[] walkLeftFrames = new TextureRegion[5];
-        for (int i = 0; i < 5; i++) {
-            walkLeftFrames[i] = new TextureRegion(new Texture(Gdx.files.internal("animationExample/bob_0" + i + ".png")));
+        TextureRegion[] walkLeftFrames = new TextureRegion[6];
+        for (int i = 0; i < 6; i++) {
+            walkLeftFrames[i] = new TextureRegion(new Texture(Gdx.files.internal("animations/c" + i + ".png")));
+            walkLeftFrames[i].flip(true, false);
         }
         walkLeftAnimation = new Animation(0.06f, walkLeftFrames);
 
-        TextureRegion[] walkRightFrames = new TextureRegion[5];
-
-        for (int i = 0; i < 5; i++) {
+        TextureRegion[] walkRightFrames = new TextureRegion[6];
+        for (int i = 0; i < 6; i++) {
             walkRightFrames[i] = new TextureRegion(walkLeftFrames[i]);
             walkRightFrames[i].flip(true, false);
         }
         walkRightAnimation = new Animation(0.06f, walkRightFrames);
+        TextureRegion[] idleFrames = new TextureRegion[7];
+        for (int i = 0; i < 7; i++) {
+            idleFrames[i] = new TextureRegion(new Texture(Gdx.files.internal("animations/st" + i + ".png")));
+        }
         playerIdleLeft = new TextureRegion(walkLeftFrames[0]);
         playerIdleRight = new TextureRegion(walkRightFrames[0]);
-
+        idleAnimation = new Animation(0.1f, idleFrames);
+        walkLeftAnimation = new Animation(0.06f, walkLeftFrames);
         TextureRegion[] ballPoppingFrames = new TextureRegion[3];
         for (int i = 0; i < 3; i++) {
             ballPoppingFrames[i] = new TextureRegion(new Texture(Gdx.files.internal("poppingAnimation/pop_0" + i + ".png")));
@@ -162,5 +168,6 @@ public class Assets {
         explosion3 = Gdx.audio.newSound(Gdx.files.internal("sounds/explosion/explosion3.wav"));
         music = Gdx.audio.newMusic(Gdx.files.internal("sounds/music.mp3"));
         click = Gdx.audio.newSound(Gdx.files.internal("sounds/click.wav"));
+        starSound = Gdx.audio.newSound(Gdx.files.internal("sounds/star.wav"));
     }
 }
