@@ -2,14 +2,13 @@ package models;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.ParticleEffect;
-import com.badlogic.gdx.math.Vector2;
 import managers.GameManager;
 import utils.GameObject;
 
 public class Ball extends GameObject {
     private int radius;
-    private float xVector;
-    private float yVector = 0;
+    private float XVelocity;
+    private float YVelocity = 0;
     private final int groundPosition = 100;
     private static final double gravity = 1;
     private float speed;
@@ -22,7 +21,7 @@ public class Ball extends GameObject {
 
     public Ball(float x, float y, sizeDef theSize, colorDef theColor, float direction) {
         super(x, y);
-        xVector = direction;
+        XVelocity = direction;
         speed = 12;
         size = theSize;
         color = theColor;
@@ -48,21 +47,21 @@ public class Ball extends GameObject {
     @Override
     public void update() {
         if(position.y-1 <= groundPosition){
-            yVector *= -1;
+            YVelocity *= -1;
             particleEffect.setPosition(position.x+radius, position.y);
             particleEffect.start();
         } else {
-            yVector -= gravity;
+            YVelocity -= gravity;
         }
 
-        position.x += xVector* GameManager.delta() * speed;
-        position.y += yVector* GameManager.delta() * speed;
+        position.x += XVelocity * GameManager.delta() * speed;
+        position.y += YVelocity * GameManager.delta() * speed;
 
         if(position.x+radius*2 >= 800){
-            xVector = -xVector;
+            XVelocity = -XVelocity;
         }
         if(position.x <= 0){
-            xVector = -xVector;
+            XVelocity = -XVelocity;
         }
     }
     public sizeDef getSize() {
@@ -77,11 +76,11 @@ public class Ball extends GameObject {
         return radius;
     }
 
-    public void setyVector(float yVector) {
-        this.yVector = yVector;
+    public void setYVelocity(float yVector) {
+        this.YVelocity = yVector;
     }
 
-    public float getxVector() {
-        return xVector;
+    public float getXVelocity() {
+        return XVelocity;
     }
 }
