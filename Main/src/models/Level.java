@@ -163,28 +163,82 @@ public class Level extends GameObject {
         currentAnimations.add(new AnimationHelper(new Vector2(toDestroyBall.position.x-toDestroyBall.getRadius(), toDestroyBall.position.y)));
         switch(toDestroyBall.getSize()){
             case BIG:
-                Ball middleBall1 = new Ball(toDestroyBall.position.x, toDestroyBall.position.y+toDestroyBall.getRadius(), Ball.sizeDef.MIDDLE, Ball.colorDef.BLUE, -10f);
-                Ball middleBall2 = new Ball(toDestroyBall.position.x, toDestroyBall.position.y+toDestroyBall.getRadius(), Ball.sizeDef.MIDDLE, Ball.colorDef.BLUE, 10f);
-                middleBall1.setyVector(25);
-                middleBall2.setyVector(25);
-                balls.add(middleBall1);
-                balls.add(middleBall2);
+                switch (toDestroyBall.getColor()) {
+                    case BLUE:
+                        Ball middleBallBlue = new Ball(toDestroyBall.position.x, toDestroyBall.position.y+toDestroyBall.getRadius(), Ball.sizeDef.MIDDLE, Ball.colorDef.BLUE, -10f);
+                        Ball middleBallBlue2 = new Ball(toDestroyBall.position.x, toDestroyBall.position.y+toDestroyBall.getRadius(), Ball.sizeDef.MIDDLE, Ball.colorDef.BLUE, 10f);
+                        middleBallBlue.setyVector(25);
+                        middleBallBlue2.setyVector(25);
+                        balls.add(middleBallBlue);
+                        balls.add(middleBallBlue2);
+                        break;
+                    case RED:
+                        Ball middleBall1 = new Ball(toDestroyBall.position.x, toDestroyBall.position.y+toDestroyBall.getRadius(), Ball.sizeDef.MIDDLE, Ball.colorDef.BLUE, -10f);
+                        Ball middleBall2 = new Ball(toDestroyBall.position.x, toDestroyBall.position.y+toDestroyBall.getRadius(), Ball.sizeDef.MIDDLE, Ball.colorDef.BLUE, 6f);
+                        Ball middleBall3 = new Ball(toDestroyBall.position.x, toDestroyBall.position.y+toDestroyBall.getRadius(), Ball.sizeDef.MIDDLE, Ball.colorDef.BLUE, -6f);
+                        Ball middleBall4 = new Ball(toDestroyBall.position.x, toDestroyBall.position.y+toDestroyBall.getRadius(), Ball.sizeDef.MIDDLE, Ball.colorDef.BLUE, 10f);
+                        middleBall1.setyVector(25);
+                        middleBall2.setyVector(25);
+                        middleBall3.setyVector(25);
+                        middleBall4.setyVector(25);
+                        balls.add(middleBall1);
+                        balls.add(middleBall2);
+                        balls.add(middleBall3);
+                        balls.add(middleBall4);
+                        break;
+                }
                 break;
             case MIDDLE:
-                Ball smallBall1 = new Ball(toDestroyBall.position.x, toDestroyBall.position.y+toDestroyBall.getRadius(), Ball.sizeDef.SMALL, Ball.colorDef.BLUE, -10f);
-                Ball smallBall2 = new Ball(toDestroyBall.position.x, toDestroyBall.position.y+toDestroyBall.getRadius(), Ball.sizeDef.SMALL, Ball.colorDef.BLUE, 10f);
-                smallBall1.setyVector(25);
-                smallBall2.setyVector(25);
-                balls.add(smallBall1);
-                balls.add(smallBall2);
+                switch (toDestroyBall.getColor()) {
+                    case BLUE:
+                        Ball middleBallBlue = new Ball(toDestroyBall.position.x, toDestroyBall.position.y+toDestroyBall.getRadius(), Ball.sizeDef.SMALL, Ball.colorDef.BLUE, -10f);
+                        Ball middleBallBlue2 = new Ball(toDestroyBall.position.x, toDestroyBall.position.y+toDestroyBall.getRadius(), Ball.sizeDef.SMALL, Ball.colorDef.BLUE, 10f);
+                        middleBallBlue.setyVector(25);
+                        middleBallBlue2.setyVector(25);
+                        balls.add(middleBallBlue);
+                        balls.add(middleBallBlue2);
+                        break;
+                    case RED:
+                        Ball middleBall1 = new Ball(toDestroyBall.position.x, toDestroyBall.position.y+toDestroyBall.getRadius(), Ball.sizeDef.SMALL, Ball.colorDef.BLUE, -10f);
+                        Ball middleBall2 = new Ball(toDestroyBall.position.x, toDestroyBall.position.y+toDestroyBall.getRadius(), Ball.sizeDef.SMALL, Ball.colorDef.BLUE, 6f);
+                        Ball middleBall3 = new Ball(toDestroyBall.position.x, toDestroyBall.position.y+toDestroyBall.getRadius(), Ball.sizeDef.SMALL, Ball.colorDef.BLUE, -6f);
+                        Ball middleBall4 = new Ball(toDestroyBall.position.x, toDestroyBall.position.y+toDestroyBall.getRadius(), Ball.sizeDef.SMALL, Ball.colorDef.BLUE, 10f);
+                        middleBall1.setyVector(25);
+                        middleBall2.setyVector(25);
+                        middleBall3.setyVector(25);
+                        middleBall4.setyVector(25);
+                        balls.add(middleBall1);
+                        balls.add(middleBall2);
+                        balls.add(middleBall3);
+                        balls.add(middleBall4);
+                        break;
+                }
                 break;
             case SMALL:
-                Ball smallerBall1 = new Ball(toDestroyBall.position.x, toDestroyBall.position.y+toDestroyBall.getRadius(), Ball.sizeDef.SMALLER, Ball.colorDef.BLUE,-10f);
-                Ball smallerBall2 = new Ball(toDestroyBall.position.x, toDestroyBall.position.y+toDestroyBall.getRadius(), Ball.sizeDef.SMALLER, Ball.colorDef.BLUE, 10f);
-                smallerBall1.setyVector(25);
-                smallerBall2.setyVector(25);
-                balls.add(smallerBall1);
-                balls.add(smallerBall2);
+                switch (toDestroyBall.getColor()) {
+                    case BLUE:
+                        Ball middleBallBlue = new Ball(toDestroyBall.position.x, toDestroyBall.position.y+toDestroyBall.getRadius(), Ball.sizeDef.SMALLER, Ball.colorDef.BLUE, -10f);
+                        Ball middleBallBlue2 = new Ball(toDestroyBall.position.x, toDestroyBall.position.y+toDestroyBall.getRadius(), Ball.sizeDef.SMALLER, Ball.colorDef.BLUE, 10f);
+                        middleBallBlue.setyVector(25);
+                        middleBallBlue2.setyVector(25);
+                        balls.add(middleBallBlue);
+                        balls.add(middleBallBlue2);
+                        break;
+                    case RED:
+                        Ball middleBall1 = new Ball(toDestroyBall.position.x, toDestroyBall.position.y+toDestroyBall.getRadius(), Ball.sizeDef.SMALLER, Ball.colorDef.BLUE, -10f);
+                        Ball middleBall2 = new Ball(toDestroyBall.position.x, toDestroyBall.position.y+toDestroyBall.getRadius(), Ball.sizeDef.SMALLER, Ball.colorDef.BLUE, 6f);
+                        Ball middleBall3 = new Ball(toDestroyBall.position.x, toDestroyBall.position.y+toDestroyBall.getRadius(), Ball.sizeDef.SMALLER, Ball.colorDef.BLUE, -6f);
+                        Ball middleBall4 = new Ball(toDestroyBall.position.x, toDestroyBall.position.y+toDestroyBall.getRadius(), Ball.sizeDef.SMALLER, Ball.colorDef.BLUE, 10f);
+                        middleBall1.setyVector(25);
+                        middleBall2.setyVector(25);
+                        middleBall3.setyVector(25);
+                        middleBall4.setyVector(25);
+                        balls.add(middleBall1);
+                        balls.add(middleBall2);
+                        balls.add(middleBall3);
+                        balls.add(middleBall4);
+                        break;
+                }
                 break;
         }
     }

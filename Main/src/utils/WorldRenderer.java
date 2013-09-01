@@ -154,16 +154,44 @@ public class WorldRenderer {
             diameter = ball.getRadius()*2;
             switch (ball.getSize()) {
                 case SMALL:
-                    batch.draw(Assets.ball_small_blue, ball.position.x, ball.position.y, diameter, diameter);
+                    switch (ball.getColor()) {
+                        case BLUE:
+                            batch.draw(Assets.ball_small_blue, ball.position.x, ball.position.y, diameter, diameter);
+                            break;
+                        case RED:
+                            batch.draw(Assets.ball_small_red, ball.position.x, ball.position.y, diameter, diameter);
+                            break;
+                    }
                     break;
                 case MIDDLE:
-                    batch.draw(Assets.ball_middle_blue, ball.position.x, ball.position.y, diameter, diameter);
+                    switch (ball.getColor()) {
+                        case BLUE:
+                            batch.draw(Assets.ball_middle_blue, ball.position.x, ball.position.y, diameter, diameter);
+                            break;
+                        case RED:
+                            batch.draw(Assets.ball_middle_red, ball.position.x, ball.position.y, diameter, diameter);
+                            break;
+                    }
                     break;
                 case BIG:
-                    batch.draw(Assets.ball_big_blue, ball.position.x, ball.position.y, diameter, diameter);
+                    switch (ball.getColor()) {
+                        case BLUE:
+                            batch.draw(Assets.ball_big_blue, ball.position.x, ball.position.y, diameter, diameter);
+                            break;
+                        case RED:
+                            batch.draw(Assets.ball_big_red, ball.position.x, ball.position.y, diameter, diameter);
+                            break;
+                    }
                     break;
                 case SMALLER:
-                    batch.draw(Assets.ball_smaller_blue, ball.position.x, ball.position.y, diameter, diameter);
+                    switch (ball.getColor()) {
+                        case BLUE:
+                            batch.draw(Assets.ball_smaller_blue, ball.position.x, ball.position.y, diameter, diameter);
+                            break;
+                        case RED:
+                            batch.draw(Assets.ball_smaller_red, ball.position.x, ball.position.y, diameter, diameter);
+                            break;
+                    }
                     break;
             }
             ball.particleEffect.draw(batch, GameManager.delta());

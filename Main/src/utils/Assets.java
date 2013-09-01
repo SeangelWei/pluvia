@@ -82,6 +82,10 @@ public class Assets {
         ball_middle_blue = new Texture(Gdx.files.internal("objects/ball_blue.png"));
         ball_big_blue = new Texture(Gdx.files.internal("objects/ball_blue.png"));
         ball_big_red = new Texture(Gdx.files.internal("objects/ball_red.png"));
+        ball_smaller_red = new Texture(Gdx.files.internal("objects/ball_red.png"));
+        ball_small_red = new Texture(Gdx.files.internal("objects/ball_red.png"));
+        ball_middle_red = new Texture(Gdx.files.internal("objects/ball_red.png"));
+        ball_big_red = new Texture(Gdx.files.internal("objects/ball_red.png"));
         TextureRegion[] walkLeftFrames = new TextureRegion[5];
         for (int i = 0; i < 5; i++) {
             walkLeftFrames[i] = new TextureRegion(new Texture(Gdx.files.internal("animationExample/bob_0" + i + ".png")));
