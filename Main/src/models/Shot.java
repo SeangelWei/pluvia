@@ -12,7 +12,7 @@ public class Shot extends GameObject {
 
     public Shot(float x) {
         super(x, -280);
-        speed = 320;
+        speed = 350;
         bounds.setWidth(Assets.shot.getWidth());
         bounds.setHeight(380);
         particleEffect = new ParticleEffect();

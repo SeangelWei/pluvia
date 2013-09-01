@@ -31,7 +31,7 @@ public class Pluvia {
         screenManager.add("TestScreen", new TestScreen(this));
         screenManager.add("IntroScreen", new IntroScreen(this));
         screenManager.add("CreditScreen", new CreditScreen(this));
-        screenManager.changeTo("LevelScreen");
+        screenManager.changeTo("TestScreen");
         levelManager = new LevelManager(this);
     }
 

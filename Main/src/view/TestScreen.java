@@ -5,14 +5,22 @@ import com.badlogic.gdx.graphics.GL10;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.ParticleEffect;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.badlogic.gdx.scenes.scene2d.Action;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
+import com.badlogic.gdx.scenes.scene2d.ui.Image;
+import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
+import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
+import com.badlogic.gdx.utils.Scaling;
 import utils.Assets;
 import managers.GameManager;
 import utils.MyScreen;
 import utils.Pluvia;
+
+import static com.badlogic.gdx.scenes.scene2d.actions.Actions.*;
 
 /**
  * This screen is just for testing
@@ -38,19 +46,19 @@ public class TestScreen extends MyScreen {
     @Override
     public void render() {
         batch.begin();
-        batch.draw(Assets.gs_bar, 0, 0);
         walkParticle.setPosition(Gdx.input.getX(), Gdx.graphics.getHeight() - Gdx.input.getY());
         walkParticle.draw(batch, GameManager.delta());
-        font.draw(batch, "Points", Gdx.input.getX(),  Gdx.graphics.getHeight() - Gdx.input.getY());
         batch.end();
 
         Gdx.gl.glEnable(GL20.GL_BLEND);
         Gdx.gl.glBlendFunc(GL10.GL_SRC_ALPHA, GL10.GL_ONE_MINUS_SRC_ALPHA);
         shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
-        shapeRenderer.setColor(0, 0, 0, opaque);
-        shapeRenderer.rect(0, 0, 50, 50);
+        shapeRenderer.setColor(1, 1, 1, opaque);
+        shapeRenderer.rect(0, 50, 50, 50);
         shapeRenderer.end();
         opaque-=0.01;
+        stage.act(GameManager.delta());
+        stage.draw();
     }
 
     @Override
@@ -62,6 +70,19 @@ public class TestScreen extends MyScreen {
                 return false;
             }
         });
+        Drawable splashDrawable = new TextureRegionDrawable(new TextureRegion(Assets.arrow_up));
+        Image star = new Image(splashDrawable, Scaling.none);
+        star.setPosition(100, 100);
+        star.setOrigin(40, 40);
+        star.addAction(forever(sequence(rotateBy(360, 1),
+                new Action() {
+                    @Override
+                    public boolean act(
+                            float delta) {
+                        return true;
+                    }
+                })));
+        stage.addActor(star);
     }
 
     @Override

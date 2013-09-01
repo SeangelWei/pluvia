@@ -50,6 +50,10 @@ public class GamescreenController {
 
     public void update(){
         updateInput();
+        updatePlaying();
+    }
+
+    private void updatePlaying() {
         if(gameState == playing) {
             pluvia.getLevelManager().currentLevel.update();
             if(getBalls().size() == 0){
@@ -196,7 +200,6 @@ public class GamescreenController {
                 restart.setBounds(300, 240, 80, 50);
                 exitGame.setBounds(350, 180, 80, 50);
                 getPlayer().particleEffect.setPosition(100000, 1000000); //hack
-
                 break;
             case gameover:
                 resume.setVisible(false);
