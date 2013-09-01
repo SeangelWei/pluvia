@@ -238,14 +238,14 @@ public class GamescreenController {
             star.getColor().a = 0f;
             star.setRotation(MathUtils.random(360));
             star.setName("star" + i);
-            star.addAction(sequence(delay(0.3f * i), parallel(fadeIn(1), moveTo(340 + (i * 45), 305, 0.5f), rotateTo(360, 0.5f)),
+            star.addAction(parallel(sequence(delay(0.3f * i), parallel(fadeIn(0.7f), moveTo(340 + (i * 45), 305, 0.5f), rotateTo(360, 0.5f)),
                     new Action() {
                         @Override
                         public boolean act(
                                 float delta) {
                             return true;
                         }
-                    }));
+                    })));
             gameScreen.stage.addActor(star);
         }
     }
