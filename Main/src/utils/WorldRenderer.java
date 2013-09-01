@@ -234,10 +234,7 @@ public class WorldRenderer {
                 batch.draw(Assets.transparent, 0, 0);
                 batch.draw(Assets.winState, 250, 160);
                 for (int i = 0; i < 3; i++) {
-                    batch.draw(Assets.starEmpty, 340+(i*40), 305, 40, 40);
-                }
-                for (int i = 0; i < gsController.getLevel().gainedStars; i++) {
-                    batch.draw(Assets.starFilled, 340+(i*40), 305, 40, 40);
+                    batch.draw(Assets.starEmpty, 340+(i*45), 305, 40, 40);
                 }
                 break;
             case gameover:

@@ -70,18 +70,19 @@ public class TestScreen extends MyScreen {
                 return false;
             }
         });
-        Drawable splashDrawable = new TextureRegionDrawable(new TextureRegion(Assets.arrow_up));
-        Image star = new Image(splashDrawable, Scaling.none);
+        Drawable splashDrawable = new TextureRegionDrawable(new TextureRegion(Assets.menu_exit));
+        Image star = new Image(splashDrawable);
         star.setPosition(100, 100);
-        star.setOrigin(40, 40);
-        star.addAction(forever(sequence(rotateBy(360, 1),
+        star.setOrigin(80, 80);
+        star.getColor().a = 0f;
+        star.addAction(sequence(parallel(fadeIn(1), moveTo(300, 300, 1), rotateBy(360, 1)),
                 new Action() {
                     @Override
                     public boolean act(
                             float delta) {
                         return true;
                     }
-                })));
+                }));
         stage.addActor(star);
     }
 

@@ -119,7 +119,7 @@ public class LevelScreen extends MyScreen {
                 int reachedStars = pluvia.getProgressManager().getReachedStars(levelIcon.level);
                 if (reachedStars != 0) {
                     for (int i = 0; i < reachedStars; i++) {
-                        batch.draw(Assets.starFilled, (levelIcon.x+(levelIcon.blockWidth/2)-45)+i*30, levelIcon.y+(levelIcon.blockWidth/2)-50, 35, 35); // well, this is ugly
+                        batch.draw(Assets.starFilled, levelIcon.x-10+(i*30), levelIcon.y-20, 25, 25);
                     }
                 }
             } else {

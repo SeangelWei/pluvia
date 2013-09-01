@@ -1,6 +1,7 @@
 package view;
 
 import controllers.GamescreenController;
+import managers.GameManager;
 import managers.InputManager;
 import models.Player;
 import utils.*;
@@ -42,6 +43,7 @@ public class GameScreen extends MyScreen {
             gsController.getPlayer().shot();
         }
         if(gsController.getGameState() != playing) {
+            stage.act(GameManager.delta());
             stage.draw();
         }
         inputManager.clear();

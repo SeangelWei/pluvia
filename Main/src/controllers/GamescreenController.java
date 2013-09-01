@@ -3,9 +3,15 @@ package controllers;
 import com.badlogic.gdx.Application;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Rectangle;
+import com.badlogic.gdx.math.MathUtils;
+import com.badlogic.gdx.scenes.scene2d.Action;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
+import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import models.Ball;
 import models.Level;
 import models.Player;
@@ -17,7 +23,10 @@ import utils.Pluvia;
 import view.GameScreen;
 
 import java.util.List;
+import java.util.Random;
 
+import static com.badlogic.gdx.scenes.scene2d.actions.Actions.*;
+import static com.badlogic.gdx.scenes.scene2d.actions.Actions.rotateBy;
 import static controllers.GamescreenController.gameStateDef.paused;
 import static controllers.GamescreenController.gameStateDef.playing;
 import static controllers.GamescreenController.gameStateDef.win;
@@ -172,6 +181,7 @@ public class GamescreenController {
         setGameState(playing);
     }
 
+    //will be called up when changing states
     private void repositionButtons() {
         switch (gameState) {
             case playing:
@@ -200,6 +210,12 @@ public class GamescreenController {
                 restart.setBounds(300, 240, 80, 50);
                 exitGame.setBounds(350, 180, 80, 50);
                 getPlayer().particleEffect.setPosition(100000, 1000000); //hack
+                if(gameScreen.stage.getActors().size > 4) {
+                    gameScreen.stage.getRoot().findActor("star0").remove();
+                    gameScreen.stage.getRoot().findActor("star1").remove();
+                    gameScreen.stage.getRoot().findActor("star2").remove();
+                }
+                startStarAction();
                 break;
             case gameover:
                 resume.setVisible(false);
@@ -210,6 +226,27 @@ public class GamescreenController {
                 restart.setBounds(420, 240, 80, 50);
                 exitGame.setBounds(300, 240, 80, 50);
                 break;
+        }
+    }
+
+    private void startStarAction() {
+        Drawable splashDrawable = new TextureRegionDrawable(new TextureRegion(Assets.starFilled));
+        for (int i = 0; i < getCalculatedPoints(); i++) {
+            Image star = new Image(splashDrawable);
+            star.setPosition(MathUtils.random(200, 600), MathUtils.random(120, 380));
+            star.setOrigin(20, 20);
+            star.getColor().a = 0f;
+            star.setRotation(MathUtils.random(360));
+            star.setName("star" + i);
+            star.addAction(sequence(delay(0.3f * i), parallel(fadeIn(1), moveTo(340 + (i * 45), 305, 0.5f), rotateTo(360, 0.5f)),
+                    new Action() {
+                        @Override
+                        public boolean act(
+                                float delta) {
+                            return true;
+                        }
+                    }));
+            gameScreen.stage.addActor(star);
         }
     }
 
