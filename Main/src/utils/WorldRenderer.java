@@ -93,7 +93,7 @@ public class WorldRenderer {
         batch.draw(gsController.getLevel().background, 0, 0, 800, 480);
         if (gsController.getShot() != null) {
             batch.draw(Assets.shot, gsController.getShot().position.x, gsController.getShot().position.y);
-            player.getShot().particleEffect.draw(batch, GameManager.delta());
+            Assets.shotEffect.draw(batch, GameManager.delta());
         }
         batch.draw(Assets.gs_bar, 0, 0);
         batch.draw(Assets.arrow_left, gsController.arrow_left.x, gsController.arrow_left.y);
@@ -124,7 +124,7 @@ public class WorldRenderer {
                     break;
             }
         }
-        player.particleEffect.draw(batch, GameManager.delta());
+        Assets.playerEffect.draw(batch, GameManager.delta());
     }
 
     private void drawPlayer() {
@@ -195,12 +195,13 @@ public class WorldRenderer {
                     }
                     break;
             }
-            ball.particleEffect.draw(batch, GameManager.delta());
+            Assets.ballEffect.draw(batch, GameManager.delta());
+
         }
 //        for (AnimationHelper currentAnimation : gsController.getLevel().currentAnimations) {
 //            batch.draw(Assets.ballPoppingAnimation.getKeyFrame(currentAnimation.stateTime), currentAnimation.vector2.x, currentAnimation.vector2.y);
 //        }
-        gsController.getLevel().explosionParticle.draw(batch, GameManager.delta());
+        Assets.explosionEffect.draw(batch, GameManager.delta());
     }
 
     private void drawTimeBar() {
@@ -223,6 +224,9 @@ public class WorldRenderer {
         shapeRenderer.rect(width * timeBar.gold + timebar_x, timeBar.position.y - 10, 3, 35);
         shapeRenderer.rect(width * timeBar.silver + timebar_x, timeBar.position.y - 10, 3, 35);
         shapeRenderer.end();
+        batch.begin();
+        Assets.timeBarEffect.draw(batch, GameManager.delta());
+        batch.end();
     }
 
     private void drawStates() {

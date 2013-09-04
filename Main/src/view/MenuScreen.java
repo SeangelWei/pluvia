@@ -23,7 +23,7 @@ public class MenuScreen extends MyScreen {
         startButton = new Button(70, 180, Assets.menu_play);
         exitButton = new Button(620, 280, Assets.menu_exit);
         soundButton = new Actor();
-        soundButton.setBounds(470, 140, Assets.soundOff.getWidth(), Assets.soundOff.getHeight());
+        soundButton.setBounds(20, 20, Assets.soundOff.getWidth(), Assets.soundOff.getHeight());
         sound = true;
         exitButton.addListener(new ClickListener() {
             @Override

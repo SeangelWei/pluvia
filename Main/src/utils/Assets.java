@@ -5,6 +5,7 @@ import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
+import com.badlogic.gdx.graphics.g2d.ParticleEffect;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
 import java.util.ArrayList;
@@ -73,6 +74,12 @@ public class Assets {
     public static Sound starSound;
     // ---- Music ----
     public static Music music;
+    // ---- Particle Effects ----
+    public static ParticleEffect shotEffect;
+    public static ParticleEffect playerEffect;
+    public static ParticleEffect ballEffect;
+    public static ParticleEffect timeBarEffect;
+    public static ParticleEffect explosionEffect;
 
     public static void loadObjects() {
         powerUp_immortal = new Texture(Gdx.files.internal("objects/power_immortal.png"));
@@ -166,8 +173,27 @@ public class Assets {
         explosion1 = Gdx.audio.newSound(Gdx.files.internal("sounds/explosion/explosion1.wav"));
         explosion2 = Gdx.audio.newSound(Gdx.files.internal("sounds/explosion/explosion2.wav"));
         explosion3 = Gdx.audio.newSound(Gdx.files.internal("sounds/explosion/explosion3.wav"));
-        music = Gdx.audio.newMusic(Gdx.files.internal("sounds/music.mp3"));
+        music = Gdx.audio.newMusic(Gdx.files.internal("sounds/music1.mp3"));
         click = Gdx.audio.newSound(Gdx.files.internal("sounds/click.wav"));
         starSound = Gdx.audio.newSound(Gdx.files.internal("sounds/star.wav"));
+    }
+
+    public static void loadEffects() {
+        shotEffect = new ParticleEffect();
+        playerEffect = new ParticleEffect();
+        ballEffect = new ParticleEffect();
+        timeBarEffect = new ParticleEffect();
+        explosionEffect = new ParticleEffect();
+
+        shotEffect.load(Gdx.files.internal("effects/shot.p"),
+                Gdx.files.internal("effects"));
+        playerEffect.load(Gdx.files.internal("effects/smoke.p"),
+                Gdx.files.internal("effects"));
+        ballEffect.load(Gdx.files.internal("effects/ballJump.p"),
+                Gdx.files.internal("effects"));
+        timeBarEffect.load(Gdx.files.internal("effects/burnUp.p"),
+                Gdx.files.internal("effects"));
+        explosionEffect.load(Gdx.files.internal("effects/explosion.p"),
+                Gdx.files.internal("effects"));
     }
 }

@@ -15,7 +15,6 @@ public class Player extends GameObject {
     public boolean isTouched;
     public boolean isInvincible;
     public PowerUp currentPowerUp;
-    public ParticleEffect particleEffect;
 
     public enum State {
         IDLE, WALKING
@@ -27,9 +26,6 @@ public class Player extends GameObject {
         super(x, 100); // Y is always the same
         bounds.setWidth(Assets.playerIdleRight.getRegionWidth()-5);
         bounds.setHeight(Assets.playerIdleLeft.getRegionHeight()-5);
-        particleEffect = new ParticleEffect();
-        particleEffect.load(Gdx.files.internal("effects/smoke.p"),
-                Gdx.files.internal("effects"));
         init();
     }
 
@@ -46,7 +42,7 @@ public class Player extends GameObject {
     public void shot() {
         if (shot == null) {
             shot = new Shot(position.x + bounds.width / 2);
-            shot.particleEffect.start();
+            Assets.shotEffect.start();
         }
     }
 
@@ -102,15 +98,15 @@ public class Player extends GameObject {
             }
         }
         if (state == State.WALKING) {
-            particleEffect.getEmitters().get(0).setContinuous(true);
+            Assets.playerEffect.getEmitters().get(0).setContinuous(true);
             if (isFacingLeft) {
-                particleEffect.setPosition(position.x + 15, position.y);
+                Assets.playerEffect.setPosition(position.x + 15, position.y);
             } else {
-                particleEffect.setPosition(position.x, position.y);
+                Assets.playerEffect.setPosition(position.x, position.y);
 
             }
         } else {
-            particleEffect.getEmitters().get(0).setContinuous(false);
+            Assets.playerEffect.getEmitters().get(0).setContinuous(false);
         }
     }
 }

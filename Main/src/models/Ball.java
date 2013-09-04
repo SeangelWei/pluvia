@@ -3,6 +3,7 @@ package models;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.ParticleEffect;
 import managers.GameManager;
+import utils.Assets;
 import utils.GameObject;
 
 public class Ball extends GameObject {
@@ -12,7 +13,6 @@ public class Ball extends GameObject {
     private final int groundPosition = 100;
     private static final double gravity = 1;
     private float speed;
-    public ParticleEffect particleEffect;
 
     public static enum sizeDef {SMALLER, SMALL, MIDDLE, BIG}
 
@@ -42,17 +42,14 @@ public class Ball extends GameObject {
                 radius = 10;
                 break;
         }
-        particleEffect = new ParticleEffect();
-        particleEffect.load(Gdx.files.internal("effects/ballJump.p"),
-                Gdx.files.internal("effects"));
     }
 
     @Override
     public void update() {
         if (position.y - 1 <= groundPosition) {
             YVelocity *= -1;
-            particleEffect.setPosition(position.x + radius, position.y);
-            particleEffect.start();
+            Assets.ballEffect.setPosition(position.x + radius, position.y);
+            Assets.ballEffect.start();
         } else {
             YVelocity -= gravity;
         }

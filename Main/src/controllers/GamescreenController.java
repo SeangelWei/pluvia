@@ -73,6 +73,7 @@ public class GamescreenController {
             }
             if (getShot() != null && getShot().position.y > 100) {
                 getPlayer().setShot(null);
+                Assets.shotEffect.dispose();
             }
             if (getLevel().timeBar.finished) {
                 setGameState(gameStateDef.gameover);
@@ -218,7 +219,10 @@ public class GamescreenController {
                 nextLevel.setBounds(420, 240, 80, 50);
                 restart.setBounds(300, 240, 80, 50);
                 exitGame.setBounds(350, 180, 80, 50);
-                getPlayer().particleEffect.setPosition(100000, 1000000); //hack
+                Assets.playerEffect.setPosition(100000, 1000000); //hack
+                if (getShot() != null) {
+                    Assets.shotEffect.setPosition(100000, 1000000); //hack
+                }
                 startStarAction();
                 break;
             case gameover:

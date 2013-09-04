@@ -18,7 +18,7 @@ public class GameManager implements ApplicationListener {
     public static final float ASPECT_RATIO = (float) VIRTUAL_WIDTH / (float) VIRTUAL_HEIGHT;
     private Rectangle viewport;
     public static float scale;
-    public static float standardMusicVolume = 0.0f;
+    public static float standardMusicVolume = 0.3f;
     public static float standardSoundVolume = 0.3f;
     public static float musicVolume = standardMusicVolume;
     public static float soundVolume = standardSoundVolume;

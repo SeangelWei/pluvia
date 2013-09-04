@@ -24,7 +24,6 @@ public class Level extends GameObject {
     public TimeBar timeBar;
     public Texture background;
     public List<AnimationHelper> currentAnimations = new ArrayList<AnimationHelper>();
-    public ParticleEffect explosionParticle;
     public int gainedStars;
 
     public Level(float x, float y) {
@@ -41,9 +40,6 @@ public class Level extends GameObject {
             this.balls.add(new Ball(ball.position.x, ball.position.y, ball.getSize(), ball.getColor(), ball.getXVelocity()));
         }
         timeBar = new TimeBar(100, 445, timeLeftSpeed, medals);
-        explosionParticle = new ParticleEffect();
-        explosionParticle.load(Gdx.files.internal("effects/explosion.p"),
-                Gdx.files.internal("effects"));
     }
 
     @Override
@@ -122,8 +118,8 @@ public class Level extends GameObject {
     }
 
     private void startExplosionEffect(float x, float y) {
-        explosionParticle.setPosition(x, y);
-        explosionParticle.start();
+        Assets.explosionEffect.setPosition(x, y);
+        Assets.explosionEffect.start();
     }
 
     private void generatePowerUp(Vector2 position) {
