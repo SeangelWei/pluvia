@@ -206,27 +206,26 @@ public class WorldRenderer {
 
     private void drawTimeBar() {
         TimeBar timeBar = gsController.getLevel().timeBar;
-        shapeRenderer.setProjectionMatrix(GameManager.getCamera().combined);
-        shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
-        shapeRenderer.setColor(Color.LIGHT_GRAY);
-        shapeRenderer.rect(timeBar.position.x, timeBar.position.y, timeBar.timeLeft_x, 15);
-        shapeRenderer.end();
-
-        shapeRenderer.begin(ShapeRenderer.ShapeType.Line);
-        shapeRenderer.setColor(1, 1, 1, 1);
-        shapeRenderer.rect(timeBar.position.x, timeBar.position.y, timeBar.bounds.width, 15);
-        shapeRenderer.end();
-
         float width = timeBar.bounds.width;
         float timebar_x = timeBar.position.x;
+        shapeRenderer.setProjectionMatrix(GameManager.getCamera().combined);
+        shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
+        shapeRenderer.setColor(Color.DARK_GRAY);
+        shapeRenderer.rect(timeBar.position.x, timeBar.position.y, width+15, 16);
+        shapeRenderer.end();
+        shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
+        shapeRenderer.setColor(Color.LIGHT_GRAY);
+        shapeRenderer.rect(timeBar.position.x, timeBar.position.y, timeBar.timeLeft_x, 16);
+        shapeRenderer.end();
+        batch.begin();
+        Assets.timeBarEffect.draw(batch, GameManager.delta());
+        batch.draw(Assets.timeBar, timeBar.position.x-7, timeBar.position.y-7);
+        batch.end();
         shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
         shapeRenderer.setColor(Color.DARK_GRAY);
         shapeRenderer.rect(width * timeBar.gold + timebar_x, timeBar.position.y - 10, 3, 35);
         shapeRenderer.rect(width * timeBar.silver + timebar_x, timeBar.position.y - 10, 3, 35);
         shapeRenderer.end();
-        batch.begin();
-        Assets.timeBarEffect.draw(batch, GameManager.delta());
-        batch.end();
     }
 
     private void drawStates() {

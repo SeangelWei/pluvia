@@ -8,19 +8,19 @@ lowMax: 500.0
 min: 0
 max: 200
 - Emission - 
-lowMin: 85.0
-lowMax: 85.0
-highMin: 200.0
-highMax: 200.0
+lowMin: 300.0
+lowMax: 300.0
+highMin: 400.0
+highMax: 400.0
 relative: false
 scalingCount: 1
 scaling0: 1.0
 timelineCount: 1
 timeline0: 0.0
 - Life - 
-lowMin: 0.0
-lowMax: 0.0
-highMin: 50.0
+lowMin: 100.0
+lowMax: 100.0
+highMin: 100.0
 highMax: 100.0
 relative: false
 scalingCount: 3
@@ -52,8 +52,8 @@ timeline0: 0.0
 - Spawn Height - 
 lowMin: 0.0
 lowMax: 0.0
-highMin: 14.0
-highMax: 14.0
+highMin: 15.0
+highMax: 15.0
 relative: false
 scalingCount: 1
 scaling0: 1.0
@@ -62,8 +62,8 @@ timeline0: 0.0
 - Scale - 
 lowMin: 0.0
 lowMax: 0.0
-highMin: 25.0
-highMax: 25.0
+highMin: 18.0
+highMax: 18.0
 relative: false
 scalingCount: 1
 scaling0: 1.0
@@ -73,8 +73,8 @@ timeline0: 0.0
 active: true
 lowMin: 0.0
 lowMax: 0.0
-highMin: 30.0
-highMax: 300.0
+highMin: 100.0
+highMax: 200.0
 relative: false
 scalingCount: 1
 scaling0: 1.0
@@ -85,7 +85,7 @@ active: true
 lowMin: 0.0
 lowMax: 0.0
 highMin: 0.0
-highMax: 135.0
+highMax: 0.0
 relative: false
 scalingCount: 3
 scaling0: 1.0
@@ -103,9 +103,9 @@ active: false
 active: false
 - Tint - 
 colorsCount: 3
-colors0: 0.8117647
-colors1: 0.39215687
-colors2: 0.29803923
+colors0: 0.9529412
+colors1: 0.6666667
+colors2: 0.011764706
 timelineCount: 1
 timeline0: 0.0
 - Transparency - 

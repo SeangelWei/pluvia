@@ -54,6 +54,7 @@ public class Assets {
     public static Texture logo;
     public static Texture soundOn;
     public static Texture soundOff;
+    public static Texture timeBar;
     // ---- Levels ----
     public static Texture levelIcon;
     public static List<Texture> levelBackgrounds = new ArrayList<Texture>();
@@ -164,6 +165,7 @@ public class Assets {
         logo = new Texture(Gdx.files.internal("gui/logo.png"));
         soundOn = new Texture(Gdx.files.internal("gui/soundOn.png"));
         soundOff = new Texture(Gdx.files.internal("gui/soundOff.png"));
+        timeBar = new Texture(Gdx.files.internal("gui/timebar.png"));
     }
 
     public static void loadSounds() {

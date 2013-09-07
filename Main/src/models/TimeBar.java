@@ -1,7 +1,5 @@
 package models;
 
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.g2d.ParticleEffect;
 import managers.GameManager;
 import utils.Assets;
 import utils.GameObject;
@@ -28,7 +26,7 @@ public class TimeBar extends GameObject {
         } else {
             finished = true;
         }
-        Assets.timeBarEffect.setPosition(timeLeft_x + 100, 445);
+        Assets.timeBarEffect.setPosition(timeLeft_x + 97, 445);
         Assets.timeBarEffect.start();
     }
 }
