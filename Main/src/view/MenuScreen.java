@@ -1,7 +1,7 @@
 package view;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Preferences;
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
@@ -12,17 +12,29 @@ import utils.Button;
 import utils.MyScreen;
 import utils.Pluvia;
 
+import static com.badlogic.gdx.math.MathUtils.*;
+
 public class MenuScreen extends MyScreen {
     Button startButton;
     Button exitButton;
     Actor soundButton;
     boolean sound;
+    Vector2 startPosition;
+    Vector2 startVelocity;
+    float startSin = 0;
+    Vector2 exitPosition;
+    Vector2 exitVelocity;
+    float exitSin = 0;
 
     public MenuScreen(final Pluvia pluvia) {
         super(pluvia);
         stage.setViewport(GameManager.VIRTUAL_WIDTH, GameManager.VIRTUAL_HEIGHT, false);
-        startButton = new Button(70, 180, Assets.menu_play);
-        exitButton = new Button(620, 280, Assets.menu_exit);
+        startPosition = new Vector2(70, 180);
+        exitPosition = new Vector2(620, 280);
+        startVelocity = new Vector2();
+        exitVelocity = new Vector2();
+        startButton = new Button(startPosition.x, startPosition.y, Assets.menu_play);
+        exitButton = new Button(exitPosition.x, exitPosition.y, Assets.menu_exit);
         soundButton = new Actor();
         soundButton.setBounds(20, 20, Assets.soundOff.getWidth(), Assets.soundOff.getHeight());
         sound = GameManager.prefs.getBoolean("sound");
@@ -86,6 +98,16 @@ public class MenuScreen extends MyScreen {
         }
         GameManager.prefs.putBoolean("sound", sound);
         batch.end();
+        startSin -=0.06;
+        exitSin +=0.06;
+        exitVelocity.set(sin(exitSin), sin(exitSin+5));
+        startVelocity.set(sin(startSin), sin(startSin+5));
+        exitVelocity.limit(0.4f);
+        startVelocity.limit(0.8f);
+        exitPosition.add(exitVelocity);
+        startPosition.add(startVelocity);
+        exitButton.setPosition(exitPosition.x, exitPosition.y);
+        startButton.setPosition(startPosition.x, startPosition.y);
         stage.draw();
     }
 

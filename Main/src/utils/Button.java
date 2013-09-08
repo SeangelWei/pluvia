@@ -7,7 +7,7 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 public class Button extends Actor {
     Texture texture;
 
-    public Button(int x, int y, Texture texture) {
+    public Button(float x, float y, Texture texture) {
         super.setBounds(x, y, texture.getWidth(), texture.getHeight());
         this.texture = texture;
     }
