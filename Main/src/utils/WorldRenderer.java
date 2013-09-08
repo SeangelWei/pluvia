@@ -211,15 +211,15 @@ public class WorldRenderer {
         shapeRenderer.setProjectionMatrix(GameManager.getCamera().combined);
         shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
         shapeRenderer.setColor(Color.DARK_GRAY);
-        shapeRenderer.rect(timeBar.position.x, timeBar.position.y, width+15, 17);
+        shapeRenderer.rect(timeBar.position.x - 1, timeBar.position.y, width + 15, 17);
         shapeRenderer.end();
         shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
         shapeRenderer.setColor(new Color(0.9f, 0.2f, 0.1f, 1));
-        shapeRenderer.rect(timeBar.position.x-1, timeBar.position.y, timeBar.timeLeft_x, 17);
+        shapeRenderer.rect(timeBar.position.x - 1, timeBar.position.y, timeBar.timeLeft_x + 15, 17);
         shapeRenderer.end();
         batch.begin();
         Assets.timeBarEffect.draw(batch, GameManager.delta());
-        batch.draw(Assets.timeBar, timeBar.position.x-5, timeBar.position.y-7);
+        batch.draw(Assets.timeBar, timeBar.position.x - 5, timeBar.position.y - 7);
         batch.end();
         shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
         shapeRenderer.setColor(Color.ORANGE);
