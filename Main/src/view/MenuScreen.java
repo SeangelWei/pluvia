@@ -1,6 +1,7 @@
 package view;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Preferences;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
@@ -24,7 +25,7 @@ public class MenuScreen extends MyScreen {
         exitButton = new Button(620, 280, Assets.menu_exit);
         soundButton = new Actor();
         soundButton.setBounds(20, 20, Assets.soundOff.getWidth(), Assets.soundOff.getHeight());
-        sound = true;
+        sound = GameManager.prefs.getBoolean("sound");
         exitButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
@@ -73,10 +74,17 @@ public class MenuScreen extends MyScreen {
         batch.begin();
         batch.draw(Assets.menu_bg, 0, 0);
         if (sound) {
+            GameManager.musicVolume = GameManager.standardMusicVolume;
+            GameManager.soundVolume = GameManager.standardSoundVolume;
+            Assets.music.setVolume(GameManager.musicVolume);
             batch.draw(Assets.soundOn, soundButton.getX(), soundButton.getY());
         } else {
+            GameManager.musicVolume = 0;
+            GameManager.soundVolume = 0;
+            Assets.music.setVolume(GameManager.musicVolume);
             batch.draw(Assets.soundOff, soundButton.getX(), soundButton.getY());
         }
+        GameManager.prefs.putBoolean("sound", sound);
         batch.end();
         stage.draw();
     }

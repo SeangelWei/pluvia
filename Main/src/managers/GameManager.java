@@ -2,6 +2,7 @@ package managers;
 
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Preferences;
 import com.badlogic.gdx.graphics.GL10;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.math.Rectangle;
@@ -12,6 +13,7 @@ import utils.Pluvia;
 public class GameManager implements ApplicationListener {
     Pluvia pluvia;
     static OrthographicCamera camera;
+    public static Preferences prefs;
     static float delta;
     public static final int VIRTUAL_WIDTH = 800;
     public static final int VIRTUAL_HEIGHT = 480;
@@ -27,6 +29,7 @@ public class GameManager implements ApplicationListener {
     public void create() {
         camera = new OrthographicCamera();
         camera.setToOrtho(false, VIRTUAL_WIDTH, VIRTUAL_HEIGHT);
+        prefs = Gdx.app.getPreferences("PluviaPreferences");
         pluvia = new Pluvia(camera);
         Assets.music.setVolume(musicVolume);
         Assets.music.setLooping(true);
@@ -73,7 +76,7 @@ public class GameManager implements ApplicationListener {
 
     @Override
     public void dispose() {
-
+        prefs.flush();
     }
 
     public static float delta() {

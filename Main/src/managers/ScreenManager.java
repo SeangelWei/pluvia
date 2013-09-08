@@ -39,6 +39,9 @@ public class ScreenManager {
 
     public void beginScreenChange(String screenName) {
         if (screens.get(screenName) != null && screens.containsKey(screenName)) {
+            if (currScreen != null) {
+                currScreen.hide();
+            }
             setCurrScreen(screens.get(screenName));
             currScreen.init();
             Gdx.input.setInputProcessor(currScreen.stage);
