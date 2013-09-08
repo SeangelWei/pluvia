@@ -66,7 +66,7 @@ public class GameManager implements ApplicationListener {
 
     @Override
     public void pause() {
-
+        pluvia.pause();
     }
 
     @Override
@@ -76,6 +76,7 @@ public class GameManager implements ApplicationListener {
 
     @Override
     public void dispose() {
+        pluvia.dispose();
         prefs.flush();
     }
 

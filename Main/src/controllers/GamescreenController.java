@@ -180,7 +180,9 @@ public class GamescreenController {
         setGameState(playing);
     }
 
-    //will be called up when changing states
+    /**
+     * will be called up when changing states
+     */
     private void repositionButtons() {
         if (gameScreen.stage.getActors().size > 4) {
             if (gameScreen.stage.getRoot().findActor("star0") != null) {
@@ -205,7 +207,10 @@ public class GamescreenController {
                 resume.setVisible(true);
                 restart.setVisible(true);
                 exitGame.setVisible(true);
-
+                Assets.playerEffect.setPosition(100000, 1000000); //hack
+                if (getShot() != null) {
+                    Assets.shotEffect.setPosition(100000, 1000000); //hack
+                }
                 resume.setBounds(300, 240, 80, 50);
                 restart.setBounds(420, 240, 80, 50);
                 exitGame.setBounds(350, 180, 80, 50);
@@ -230,9 +235,19 @@ public class GamescreenController {
                 nextLevel.setVisible(false);
                 restart.setVisible(true);
                 exitGame.setVisible(true);
-
+                Assets.playerEffect.setPosition(100000, 1000000); //hack
+                if (getShot() != null) {
+                    Assets.shotEffect.setPosition(100000, 1000000); //hack
+                }
                 restart.setBounds(420, 240, 80, 50);
                 exitGame.setBounds(300, 240, 80, 50);
+                break;
+            case ready:
+                nextLevel.setVisible(false);
+                resume.setVisible(false);
+                restart.setVisible(false);
+                exitGame.setVisible(false);
+                Assets.timeBarEffect.setPosition(10000, 10000);
                 break;
         }
     }

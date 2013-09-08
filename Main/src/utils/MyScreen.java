@@ -16,17 +16,19 @@ public abstract class MyScreen {
 
     public abstract void render();
 
-    public abstract void resize(int width, int height);
-
-    public abstract void show();
-
+    /**
+     * will be called when changing to another screen
+     */
     public abstract void hide();
 
+    /**
+     * will be called when the application will be pushed to background.
+     * for example an incoming call
+     */
     public abstract void pause();
 
-    public abstract void resume();
-
-    public abstract void dispose();
-
+    /**
+     * will be called when changed to this screen
+     */
     public abstract void init();
 }

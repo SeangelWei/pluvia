@@ -12,7 +12,7 @@ import utils.Button;
 import utils.MyScreen;
 import utils.Pluvia;
 
-import static com.badlogic.gdx.math.MathUtils.*;
+import static com.badlogic.gdx.math.MathUtils.sin;
 
 public class MenuScreen extends MyScreen {
     Button startButton;
@@ -98,10 +98,10 @@ public class MenuScreen extends MyScreen {
         }
         GameManager.prefs.putBoolean("sound", sound);
         batch.end();
-        startSin -=0.06;
-        exitSin +=0.06;
-        exitVelocity.set(sin(exitSin), sin(exitSin+5));
-        startVelocity.set(sin(startSin), sin(startSin+5));
+        startSin -= 0.06;
+        exitSin += 0.06;
+        exitVelocity.set(sin(exitSin), sin(exitSin + 5));
+        startVelocity.set(sin(startSin), sin(startSin + 5));
         exitVelocity.limit(0.4f);
         startVelocity.limit(0.6f);
         exitPosition.add(exitVelocity);
@@ -112,27 +112,11 @@ public class MenuScreen extends MyScreen {
     }
 
     @Override
-    public void resize(int width, int height) {
-    }
-
-    @Override
-    public void show() {
-    }
-
-    @Override
     public void hide() {
     }
 
     @Override
     public void pause() {
-    }
-
-    @Override
-    public void resume() {
-    }
-
-    @Override
-    public void dispose() {
     }
 
     @Override

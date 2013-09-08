@@ -8,6 +8,7 @@ import utils.MyScreen;
 import utils.Pluvia;
 import utils.WorldRenderer;
 
+import static controllers.GamescreenController.gameStateDef.paused;
 import static controllers.GamescreenController.gameStateDef.playing;
 
 
@@ -55,29 +56,12 @@ public class GameScreen extends MyScreen {
     }
 
     @Override
-    public void resume() {
-    }
-
-    @Override
-    public void resize(int width, int height) {
-    }
-
-    @Override
-    public void show() {
-    }
-
-    @Override
     public void hide() {
-        pluvia.getProgressManager().saveProgress();
+
     }
 
     @Override
     public void pause() {
-        pluvia.getProgressManager().saveProgress();
-    }
-
-    @Override
-    public void dispose() {
-        pluvia.getProgressManager().saveProgress();
+        gsController.setGameState(paused);
     }
 }

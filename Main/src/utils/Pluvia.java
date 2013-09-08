@@ -1,11 +1,8 @@
 package utils;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.GL10;
-import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import managers.LevelManager;
 import managers.ProgressManager;
 import managers.ScreenManager;
@@ -61,5 +58,13 @@ public class Pluvia {
 
     public ScreenManager getScreenManager() {
         return screenManager;
+    }
+
+    public void dispose() {
+        progressManager.saveProgress();
+    }
+
+    public void pause() {
+        screenManager.getCurrScreen().pause();
     }
 }

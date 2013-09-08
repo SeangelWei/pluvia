@@ -136,7 +136,7 @@ public class LevelScreen extends MyScreen {
                     }
                 }
             } else {
-                levelIcon.disabledSin-=0.1;
+                levelIcon.disabledSin -= 0.1;
                 levelIcon.disabledVelocity.set(0, sin(levelIcon.disabledSin + 5));
                 levelIcon.disabledVelocity.limit(0.12f);
                 levelIcon.disabledPosition.add(levelIcon.disabledVelocity);
@@ -148,26 +148,10 @@ public class LevelScreen extends MyScreen {
     }
 
     @Override
-    public void resize(int width, int height) {
-    }
-
-    @Override
-    public void show() {
-    }
-
-    @Override
     public void hide() {
     }
 
     @Override
     public void pause() {
-    }
-
-    @Override
-    public void resume() {
-    }
-
-    @Override
-    public void dispose() {
     }
 }
