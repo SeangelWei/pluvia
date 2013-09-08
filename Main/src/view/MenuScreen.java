@@ -103,7 +103,7 @@ public class MenuScreen extends MyScreen {
         exitVelocity.set(sin(exitSin), sin(exitSin+5));
         startVelocity.set(sin(startSin), sin(startSin+5));
         exitVelocity.limit(0.4f);
-        startVelocity.limit(0.8f);
+        startVelocity.limit(0.6f);
         exitPosition.add(exitVelocity);
         startPosition.add(startVelocity);
         exitButton.setPosition(exitPosition.x, exitPosition.y);

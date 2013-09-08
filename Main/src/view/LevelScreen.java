@@ -19,19 +19,17 @@ public class LevelScreen extends MyScreen {
     List<LevelIcon> levelIcons = new ArrayList<LevelIcon>();
     Button backButton;
     BitmapFont font;
+    Vector2 backPosition;
+    Vector2 backVelocity;
+    float backSin = 0;
 
-    public LevelScreen(Pluvia pluvia) {
+    public LevelScreen(final Pluvia pluvia) {
         super(pluvia);
         FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal("fonts/PipeDream.ttf"));
         font = generator.generateFont(20);
         generator.dispose();
-    }
-
-    @Override
-    public void init() {
         stage.setViewport(GameManager.VIRTUAL_WIDTH, GameManager.VIRTUAL_HEIGHT, false);
         Gdx.input.setInputProcessor(stage);
-        levelIcons.clear();
         initialBlocks();
         synchronize();
         for (final LevelIcon levelIcon : levelIcons) {
@@ -47,7 +45,9 @@ public class LevelScreen extends MyScreen {
             });
             stage.addActor(levelIcon);
         }
-        backButton = new Button(60, 380, Assets.arrow_left);
+        backPosition = new Vector2(60, 380);
+        backVelocity = new Vector2();
+        backButton = new Button(backPosition.x, backPosition.y, Assets.arrow_left);
         backButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
@@ -69,6 +69,11 @@ public class LevelScreen extends MyScreen {
         levelIcons.get(0).isEnabled = true; // first level is always enabled
     }
 
+    @Override
+    public void init() {
+
+    }
+
     private void synchronize() {
         int reachedLevels = pluvia.getProgressManager().completedLevels.size();
         for (int i = 0; i < reachedLevels; i++) {
@@ -81,6 +86,11 @@ public class LevelScreen extends MyScreen {
 
     @Override
     public void render() {
+        backSin -= 0.2;
+        backVelocity.set(sin(backSin), 0);
+        backVelocity.limit(0.4f);
+        backPosition.add(backVelocity);
+        backButton.setPosition(backPosition.x, backPosition.y);
         draw();
         stage.draw();
     }
