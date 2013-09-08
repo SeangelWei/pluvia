@@ -3,6 +3,7 @@ package view;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
@@ -11,6 +12,8 @@ import utils.*;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static com.badlogic.gdx.math.MathUtils.sin;
 
 public class LevelScreen extends MyScreen {
     List<LevelIcon> levelIcons = new ArrayList<LevelIcon>();
@@ -113,7 +116,7 @@ public class LevelScreen extends MyScreen {
             if (level < 10) {
                 font.draw(batch, level.toString(), levelIcon.x + (levelIcon.blockWidth / 2 - 5), levelIcon.y + (levelIcon.blockWidth / 2 + 5));
             } else {
-                font.draw(batch, level.toString(), levelIcon.x + (levelIcon.blockWidth / 2 - 10), levelIcon.y + (levelIcon.blockWidth / 2 + 10));
+                font.draw(batch, level.toString(), levelIcon.x + (levelIcon.blockWidth / 2 - 10), levelIcon.y + (levelIcon.blockWidth / 2 + 6));
             }
             if (levelIcon.isEnabled) {
                 int reachedStars = pluvia.getProgressManager().getReachedStars(levelIcon.level);
@@ -123,7 +126,12 @@ public class LevelScreen extends MyScreen {
                     }
                 }
             } else {
-                batch.draw(Assets.levelDisabled, levelIcon.x, levelIcon.y);
+                levelIcon.disabledSin-=0.1;
+                levelIcon.disabledVelocity.set(0, sin(levelIcon.disabledSin + 5));
+                levelIcon.disabledVelocity.limit(0.12f);
+                levelIcon.disabledPosition.add(levelIcon.disabledVelocity);
+                levelIcon.setPosition(levelIcon.disabledPosition.x, levelIcon.disabledPosition.y);
+                batch.draw(Assets.levelDisabled, levelIcon.disabledPosition.x, levelIcon.disabledPosition.y);
             }
         }
         batch.end();
