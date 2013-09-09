@@ -175,7 +175,7 @@ public class Assets {
         explosion1 = Gdx.audio.newSound(Gdx.files.internal("sounds/explosion/explosion1.wav"));
         explosion2 = Gdx.audio.newSound(Gdx.files.internal("sounds/explosion/explosion2.wav"));
         explosion3 = Gdx.audio.newSound(Gdx.files.internal("sounds/explosion/explosion3.wav"));
-        music = Gdx.audio.newMusic(Gdx.files.internal("sounds/music1.mp3"));
+        music = Gdx.audio.newMusic(Gdx.files.internal("sounds/music2.mp3"));
         click = Gdx.audio.newSound(Gdx.files.internal("sounds/click.wav"));
         starSound = Gdx.audio.newSound(Gdx.files.internal("sounds/star.wav"));
     }
