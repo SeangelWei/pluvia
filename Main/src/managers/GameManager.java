@@ -31,9 +31,17 @@ public class GameManager implements ApplicationListener {
         camera.setToOrtho(false, VIRTUAL_WIDTH, VIRTUAL_HEIGHT);
         prefs = Gdx.app.getPreferences("PluviaPreferences");
         pluvia = new Pluvia(camera);
+        if (GameManager.prefs.getBoolean("sound")) {
+            GameManager.musicVolume = GameManager.standardMusicVolume;
+            GameManager.soundVolume = GameManager.standardSoundVolume;
+            Assets.music.setVolume(GameManager.musicVolume);
+        } else {
+            GameManager.musicVolume = 0;
+            GameManager.soundVolume = 0;
+            Assets.music.setVolume(GameManager.musicVolume);
+        }
         Assets.music.setVolume(musicVolume);
         Assets.music.setLooping(true);
-        Assets.music.play();
     }
 
     @Override

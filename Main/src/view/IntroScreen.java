@@ -45,13 +45,14 @@ public class IntroScreen extends MyScreen {
         logo.getColor().a = 0f;
 
         // configure the fade-in/out effect on the splash image
-        logo.addAction(sequence(fadeIn(0.75f), delay(1.75f), fadeOut(0.75f),
+        logo.addAction(sequence(fadeIn(0.3f), delay(0.7f), fadeOut(0.3f),
                 new Action() {
                     @Override
                     public boolean act(
                             float delta) {
                         // the last action will move to the next screen
                         pluvia.getScreenManager().changeTo("MenuScreen");
+                        Assets.music.play();
                         return true;
                     }
                 }));
