@@ -25,12 +25,12 @@ public class ScreenManager {
         screens.put(screenName, screenToAdd);
     }
 
-    public void changeTo(String screenName){
-        if(!fadeOutCompleted){
+    public void changeTo(String screenName) {
+        if (!fadeOutCompleted) {
             finished = false;
             this.screenName = screenName;
             changeTransition = true;
-        }else{
+        } else {
             beginScreenChange(screenName);
             hasChanged = true;
             changeTransition = false;
@@ -59,7 +59,7 @@ public class ScreenManager {
     }
 
     public void updateTransition() {
-        if(!finished) {
+        if (!finished) {
             if (changeTransition) {
                 if (brightness < 1) {
                     brightness += changeSpeed;

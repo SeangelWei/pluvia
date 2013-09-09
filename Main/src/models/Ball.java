@@ -1,7 +1,5 @@
 package models;
 
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.g2d.ParticleEffect;
 import managers.GameManager;
 import utils.Assets;
 import utils.GameObject;
