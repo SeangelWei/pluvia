@@ -34,14 +34,19 @@ public class GameManager implements ApplicationListener {
         if (GameManager.prefs.getBoolean("sound")) {
             GameManager.musicVolume = GameManager.standardMusicVolume;
             GameManager.soundVolume = GameManager.standardSoundVolume;
-            Assets.music.setVolume(GameManager.musicVolume);
+            Assets.gameMusic.setVolume(GameManager.musicVolume);
+            Assets.menuMusic.setVolume(GameManager.musicVolume);
         } else {
             GameManager.musicVolume = 0;
             GameManager.soundVolume = 0;
-            Assets.music.setVolume(GameManager.musicVolume);
+            Assets.gameMusic.setVolume(GameManager.musicVolume);
+            Assets.menuMusic.setVolume(GameManager.musicVolume);
+
         }
-        Assets.music.setVolume(musicVolume);
-        Assets.music.setLooping(true);
+        Assets.gameMusic.setVolume(musicVolume);
+        Assets.menuMusic.setVolume(GameManager.musicVolume);
+        Assets.gameMusic.setLooping(true);
+        Assets.menuMusic.setLooping(true);
     }
 
     @Override

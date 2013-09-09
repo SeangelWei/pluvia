@@ -58,12 +58,12 @@ public class MenuScreen extends MyScreen {
                     sound = false;
                     GameManager.musicVolume = 0;
                     GameManager.soundVolume = 0;
-                    Assets.music.setVolume(GameManager.musicVolume);
+                    Assets.gameMusic.setVolume(GameManager.musicVolume);
                 } else {
                     sound = true;
                     GameManager.musicVolume = GameManager.standardMusicVolume;
                     GameManager.soundVolume = GameManager.standardSoundVolume;
-                    Assets.music.setVolume(GameManager.musicVolume);
+                    Assets.gameMusic.setVolume(GameManager.musicVolume);
                 }
             }
         });
@@ -88,12 +88,12 @@ public class MenuScreen extends MyScreen {
         if (sound) {
             GameManager.musicVolume = GameManager.standardMusicVolume;
             GameManager.soundVolume = GameManager.standardSoundVolume;
-            Assets.music.setVolume(GameManager.musicVolume);
+            Assets.gameMusic.setVolume(GameManager.musicVolume);
             batch.draw(Assets.soundOn, soundButton.getX(), soundButton.getY());
         } else {
             GameManager.musicVolume = 0;
             GameManager.soundVolume = 0;
-            Assets.music.setVolume(GameManager.musicVolume);
+            Assets.gameMusic.setVolume(GameManager.musicVolume);
             batch.draw(Assets.soundOff, soundButton.getX(), soundButton.getY());
         }
         GameManager.prefs.putBoolean("sound", sound);

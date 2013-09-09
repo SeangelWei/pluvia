@@ -135,6 +135,8 @@ public class GamescreenController {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 pluvia.getScreenManager().changeTo("LevelScreen");
+                Assets.gameMusic.pause();
+                Assets.menuMusic.play();
             }
         });
         nextLevel.addListener(new ClickListener() {

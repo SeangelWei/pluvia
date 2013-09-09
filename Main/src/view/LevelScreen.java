@@ -39,6 +39,8 @@ public class LevelScreen extends MyScreen {
                     if (levelIcon.isEnabled) {
                         Assets.click.play(GameManager.soundVolume);
                         pluvia.getLevelManager().loadLevel(levelIcon.level, levelIcon.fileName);
+                        Assets.menuMusic.pause();
+                        Assets.gameMusic.play();
                         pluvia.getScreenManager().changeTo("GameScreen");
                     }
                 }

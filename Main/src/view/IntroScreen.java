@@ -52,7 +52,7 @@ public class IntroScreen extends MyScreen {
                             float delta) {
                         // the last action will move to the next screen
                         pluvia.getScreenManager().changeTo("MenuScreen");
-                        Assets.music.play();
+                        Assets.menuMusic.play();
                         return true;
                     }
                 }));
