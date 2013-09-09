@@ -136,9 +136,9 @@ public class LevelScreen extends MyScreen {
                     }
                 }
             } else {
-                levelIcon.disabledSin -= 0.1;
+                levelIcon.disabledSin -= 0.12;
                 levelIcon.disabledVelocity.set(0, sin(levelIcon.disabledSin + 5));
-                levelIcon.disabledVelocity.limit(0.12f);
+                levelIcon.disabledVelocity.limit(0.19f);
                 levelIcon.disabledPosition.add(levelIcon.disabledVelocity);
                 levelIcon.setPosition(levelIcon.disabledPosition.x, levelIcon.disabledPosition.y);
                 batch.draw(Assets.levelDisabled, levelIcon.disabledPosition.x, levelIcon.disabledPosition.y);

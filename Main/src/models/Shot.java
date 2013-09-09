@@ -9,7 +9,7 @@ public class Shot extends GameObject {
     int speed;
 
     public Shot(float x) {
-        super(x, -280);
+        super(x, -240);
         speed = 350;
         bounds.setWidth(Assets.shot.getWidth());
         bounds.setHeight(380);

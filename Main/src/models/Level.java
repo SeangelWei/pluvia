@@ -1,8 +1,6 @@
 package models;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.ParticleEffect;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import managers.GameManager;
@@ -125,7 +123,7 @@ public class Level extends GameObject {
     private void generatePowerUp(Vector2 position) {
         Random generator = new Random();
         double value = generator.nextInt(10);
-        if (value >= 0) {
+        if (value >= 7) {
             powerUps.add(new PowerUp(position.x, position.y));
         }
     }
@@ -179,7 +177,7 @@ public class Level extends GameObject {
                         break;
                     case RED:
                         create2Balls(toDestroyBall, sizeDef.MIDDLE, colorDef.BLUE, 10);
-                        create2Balls(toDestroyBall, sizeDef.MIDDLE, colorDef.BLUE, 6);
+                        create2Balls(toDestroyBall, sizeDef.MIDDLE, colorDef.BLUE, 8);
                         break;
                 }
                 break;
@@ -190,7 +188,7 @@ public class Level extends GameObject {
                         break;
                     case RED:
                         create2Balls(toDestroyBall, sizeDef.SMALL, colorDef.BLUE, 10);
-                        create2Balls(toDestroyBall, sizeDef.SMALL, colorDef.BLUE, 6);
+                        create2Balls(toDestroyBall, sizeDef.SMALL, colorDef.BLUE, 8);
                         break;
                 }
                 break;
@@ -201,7 +199,7 @@ public class Level extends GameObject {
                         break;
                     case RED:
                         create2Balls(toDestroyBall, sizeDef.SMALLER, colorDef.BLUE, 10);
-                        create2Balls(toDestroyBall, sizeDef.SMALLER, colorDef.BLUE, 6);
+                        create2Balls(toDestroyBall, sizeDef.SMALLER, colorDef.BLUE, 8);
                         break;
                 }
                 break;

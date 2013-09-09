@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <level number="1">
-    <player x="500"/>
+    <player x="400"/>
     <balls>
         <!-- SMALLER, SMALL, MIDDLE, BIG -->
-        <ball x="50" y="300" size="MIDDLE" color="BLUE" xVector="6"/>
-        <ball x="300" y="300" size="MIDDLE" color="BLUE" xVector="-5"/>
+        <ball x="50" y="300" size="MIDDLE" color="BLUE" xVector="10"/>
+        <ball x="400" y="300" size="SMALL" color="RED" xVector="-10"/>
     </balls>
-    <levelSpeed speed="25"/>
-    <silver value="0.5"/>
-    <gold value="0.7"/>
+    <levelSpeed speed="23"/>
+    <silver value="0.3"/>
+    <gold value="0.55"/>
 </level>

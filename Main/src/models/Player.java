@@ -1,7 +1,5 @@
 package models;
 
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.g2d.ParticleEffect;
 import managers.GameManager;
 import utils.Assets;
 import utils.GameObject;
@@ -24,8 +22,8 @@ public class Player extends GameObject {
 
     public Player(float x) {
         super(x, 100); // Y is always the same
-        bounds.setWidth(Assets.playerIdleRight.getRegionWidth()-5);
-        bounds.setHeight(Assets.playerIdleLeft.getRegionHeight()-5);
+        bounds.setWidth(Assets.playerIdleRight.getRegionWidth() - 5);
+        bounds.setHeight(Assets.playerIdleLeft.getRegionHeight() - 45);
         init();
     }
 
@@ -41,7 +39,7 @@ public class Player extends GameObject {
 
     public void shot() {
         if (shot == null) {
-            shot = new Shot(position.x + bounds.width / 2);
+            shot = new Shot(position.x + bounds.width / 2 - 17);
             Assets.shotEffect.start();
         }
     }
@@ -55,7 +53,7 @@ public class Player extends GameObject {
     }
 
     public void moveRight() {
-        if (position.x + bounds.getWidth() + 1 < 800) {
+        if (position.x + bounds.getWidth() - 20 < 800) {
             position.x += GameManager.delta() * speed;
             isFacingLeft = false;
             state = State.WALKING;
