@@ -45,6 +45,7 @@ public class Ball extends GameObject {
     @Override
     public void update() {
         if (position.y - 1 <= groundPosition) {
+            position.y = groundPosition;
             YVelocity *= -1;
             Assets.ballEffect.setPosition(position.x + radius, position.y);
             Assets.ballEffect.start();
